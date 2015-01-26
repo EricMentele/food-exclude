@@ -10,7 +10,7 @@ import Foundation
 
 class FoodCategory: NSObject, NSCoding {
   var name: String
-  var derivatives: [String]
+  var derivatives = [String]()
   
   //MARK: Initialize class
   

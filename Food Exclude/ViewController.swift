@@ -53,7 +53,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     
     //dismissButton
-    self.dismissButton.addTarget(self, action: "dismissButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+//    self.dismissButton.addTarget(self, action: "dismissButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
     
     
     
