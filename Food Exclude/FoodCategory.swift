@@ -35,5 +35,4 @@ class FoodCategory: NSObject, NSCoding {
     aCoder.encodeObject(self.name, forKey: "name")
     aCoder.encodeObject(self.derivatives, forKey: "derivatives")
   } //end func
-  
-  }
+}
