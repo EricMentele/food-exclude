@@ -139,9 +139,17 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		40A438981A76D69800A24AA0 /* Allergens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Allergens;
+			sourceTree = "<group>";
+		};
 		BA2E53501A76B45A0055D11F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				40A438981A76D69800A24AA0 /* Allergens */,
 				BA2E53511A76B4920055D11F /* UserProfile.swift */,
 				BA2E53531A76B5480055D11F /* FoodCategory.swift */,
 			);
