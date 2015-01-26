@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Food_Exclude" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,8 +16,54 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UbO-uA-Kq1">
+                                <rect key="frame" x="0.0" y="400" width="600" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barcode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZl-Fp-d63" userLabel="Barcode">
+                                        <rect key="frame" x="16" y="8" width="200" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="u8T-xi-rRl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.79705693060000005" blue="0.99725871779999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="JC9-ZM-xPi"/>
+                                    <constraint firstAttribute="height" constant="200" id="dOr-wS-LDZ"/>
+                                    <constraint firstAttribute="width" constant="200" id="dui-R8-71D"/>
+                                    <constraint firstItem="JZl-Fp-d63" firstAttribute="leading" secondItem="UbO-uA-Kq1" secondAttribute="leading" constant="16" id="iW3-0M-TiV"/>
+                                    <constraint firstItem="JZl-Fp-d63" firstAttribute="top" secondItem="UbO-uA-Kq1" secondAttribute="top" constant="8" id="vj4-aw-3U9"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="JC9-ZM-xPi"/>
+                                        <exclude reference="dui-R8-71D"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UbO-uA-Kq1" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="380" id="2bK-yJ-gIQ"/>
+                            <constraint firstItem="UbO-uA-Kq1" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="Q9Q-jD-M1y"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="UbO-uA-Kq1" secondAttribute="bottom" id="Qtm-89-oiw"/>
+                            <constraint firstItem="UbO-uA-Kq1" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="123" id="RdN-p9-znf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UbO-uA-Kq1" secondAttribute="trailing" constant="-16" id="nvl-VR-TKW"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2bK-yJ-gIQ"/>
+                                <exclude reference="RdN-p9-znf"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="barcode" destination="JZl-Fp-d63" id="xuX-Uq-8NB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
