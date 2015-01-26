@@ -12,7 +12,7 @@ class UserProfile: NSObject, NSCoding {
   var name: String
   var avatar: UIImage?
   var includeProfile: Bool
-  var allergens = [FoodCategory]()
+  //var allergens = [FoodCategory]()
   
   //MARK: Initialize class
   
@@ -31,9 +31,9 @@ class UserProfile: NSObject, NSCoding {
       self.avatar = avatar
     } //end if
     self.includeProfile = aDecoder.decodeBoolForKey("includeProfile") as Bool
-    if let allergens = aDecoder.decodeObjectForKey("allergens") as? [FoodCategory] {
-      self.allergens = allergens
-    } //end if
+//    if let allergens = aDecoder.decodeObjectForKey("allergens") as? [FoodCategory] {
+//      self.allergens = allergens
+//    } //end if
   } //end init
   
   //Function: Save to archive.
@@ -41,6 +41,6 @@ class UserProfile: NSObject, NSCoding {
     aCoder.encodeObject(self.name, forKey: "name")
     aCoder.encodeObject(self.avatar, forKey: "avatar")
     aCoder.encodeBool(self.includeProfile, forKey: "includeProfile")
-    aCoder.encodeObject(self.allergens, forKey: "allergens")
+//    aCoder.encodeObject(self.allergens, forKey: "allergens")
   } //end func
 }
