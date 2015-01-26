@@ -14,6 +14,7 @@
 		40A438771A75973B00A24AA0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40A438751A75973B00A24AA0 /* LaunchScreen.xib */; };
 		40A438831A75973B00A24AA0 /* Food_ExcludeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A438821A75973B00A24AA0 /* Food_ExcludeTests.swift */; };
 		40A4388F1A75A6BD00A24AA0 /* gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 40A4388E1A75A6BD00A24AA0 /* gitignore */; };
+		40A438931A7692F100A24AA0 /* readme in Resources */ = {isa = PBXBuildFile; fileRef = 40A438921A7692F100A24AA0 /* readme */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		40A438811A75973B00A24AA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40A438821A75973B00A24AA0 /* Food_ExcludeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food_ExcludeTests.swift; sourceTree = "<group>"; };
 		40A4388E1A75A6BD00A24AA0 /* gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gitignore; sourceTree = "<group>"; };
+		40A438921A7692F100A24AA0 /* readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			children = (
 				40A4388E1A75A6BD00A24AA0 /* gitignore */,
 				40A4386B1A75973B00A24AA0 /* Info.plist */,
+				40A438921A7692F100A24AA0 /* readme */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40A438931A7692F100A24AA0 /* readme in Resources */,
 				40A438721A75973B00A24AA0 /* Main.storyboard in Resources */,
 				40A4388F1A75A6BD00A24AA0 /* gitignore in Resources */,
 				40A438771A75973B00A24AA0 /* LaunchScreen.xib in Resources */,
@@ -409,6 +413,7 @@
 				40A438881A75973B00A24AA0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		40A438891A75973B00A24AA0 /* Build configuration list for PBXNativeTarget "Food ExcludeTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +422,7 @@
 				40A4388B1A75973B00A24AA0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
