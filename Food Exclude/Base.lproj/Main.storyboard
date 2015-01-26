@@ -226,7 +226,7 @@
         <!--Main Menu-->
         <scene sceneID="YYf-cL-hmM">
             <objects>
-                <viewController title="Main Menu" id="ESI-9W-WNx" customClass="ViewController" customModule="Food_Exclude" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Main Menu" id="ESI-9W-WNx" customClass="MainMenuViewController" customModule="Food_Exclude" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Hpw-7g-Drk"/>
                         <viewControllerLayoutGuide type="bottom" id="bUc-Eg-mxp"/>
