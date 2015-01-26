@@ -27,7 +27,9 @@ import AVFoundation
 class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
   
   @IBOutlet weak var barcode: UILabel!
+  @IBOutlet weak var dismissButton: UIButton!
   
+  //this is adapted from http://www.bowst.com/mobile/simple-barcode-scanning-with-swift/
   let session : AVCaptureSession = AVCaptureSession()
   var previewLayer : AVCaptureVideoPreviewLayer!
   var highlightView = UIView()
@@ -38,7 +40,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //view formatting
+    //formatting so that the barcode reader line resizes automatically
     self.highlightView.autoresizingMask =   UIViewAutoresizing.FlexibleTopMargin |
       UIViewAutoresizing.FlexibleBottomMargin |
       UIViewAutoresizing.FlexibleLeftMargin |
@@ -48,6 +50,12 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     self.highlightView.layer.borderColor = UIColor.greenColor().CGColor
     self.highlightView.layer.borderWidth = 3
     self.view.addSubview(highlightView)
+    
+    
+    //dismissButton
+    self.dismissButton.addTarget(self, action: "dismissButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+    
+    
     
     let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
     
@@ -59,30 +67,40 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
       session.addInput(input)
     }
     else {
-      //add a pop-up alert to indicate something went wrong 
-      println("Meow mix: something went wrong")
+      
+//      //add a pop-up alert to indicate something went wrong 
+//      
+//      let networkIssueAlert = UIAlertController(title: "Error", message: "Unable to access camera", preferredStyle: .Alert)
+//      //adds a cancell button to dismiss alert
+//      let cancelButton = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+//      networkIssueAlert.addAction(cancelButton)
+//      //presents alert controller
+//      self.presentViewController(networkIssueAlert, animated: true, completion: nil)
     }
-    
+
+
     let output = AVCaptureMetadataOutput()
     output.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
     self.session.addOutput(output)
     output.metadataObjectTypes = output.availableMetadataObjectTypes
     
+    //this is the scanning scene, setting the frame to the view.bounds will cover up other views
     previewLayer = AVCaptureVideoPreviewLayer.layerWithSession(session) as AVCaptureVideoPreviewLayer
-    previewLayer.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height * 0.7)
+    previewLayer.frame = CGRect(x: 0, y: 40, width: self.view.bounds.width, height: self.view.bounds.height * 0.6)
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
     self.view.layer.addSublayer(previewLayer)
     
     self.session.startRunning()
+    
   }
   
-  func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
     
-    var highlightViewRect = CGRect(x: 0, y: 0, width: 600, height: 300)
+    var highlightViewRect = CGRectZero
     
     var barCodeObject : AVMetadataObject!
     
-    //these are the types of objects supported within Apple's AVMetaData
+    //these are the allowed object types within Apple's AVMetaData, we probably only need the first one and the EANs
     let barCodeTypes = [AVMetadataObjectTypeUPCECode,
       AVMetadataObjectTypeCode39Code,
       AVMetadataObjectTypeCode39Mod43Code,
@@ -96,7 +114,6 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     ]
     
     
-    //scanner can read multiple barcodes at once
     for metadata in metadataObjects {
       
       for barcodeType in barCodeTypes {
@@ -114,19 +131,32 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         
       }
     }
-    
-    self.barcode.text = "Barcode scanned: \(self.detectionString)"
-    println("\(self.detectionString)")
-    self.barcodeScanned = self.detectionString
-    self.highlightView.frame = highlightViewRect
-    self.view.bringSubviewToFront(self.highlightView)
-  }
+  self.barcode.text = "Barcode scanned: \(self.detectionString)"
+      self.barcodeScanned = self.detectionString
+      self.highlightView.frame = highlightViewRect
+      var butter = "0767707001067"
+      var stamp = "1564568900"
+      if self.barcodeScanned != nil {
   
-  func checkForAllergy(barcode: String) {
-    let barcode = self.barcodeScanned
-    
-  }
-
+      if self.barcodeScanned == butter {
+        self.view.layer.borderWidth = 10
+        self.barcode.backgroundColor = UIColor.greenColor()
+        self.view.layer.borderColor = UIColor.greenColor().CGColor
+        
+      }
+      else {
+        self.view.layer.borderWidth = 10
+        self.barcode.backgroundColor = UIColor.redColor()
+        self.view.layer.borderColor = UIColor.redColor().CGColor
+        }
+      }
+      else {
+        
+      }
+      
+      self.view.bringSubviewToFront(self.highlightView)
+      
+    }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
