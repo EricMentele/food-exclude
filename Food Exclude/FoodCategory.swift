@@ -10,7 +10,7 @@ import Foundation
 
 class FoodCategory: NSObject, NSCoding {
   var name: String
-  var derivatives: [String]?
+  var derivatives: [String]
   
   //MARK: Initialize class
   
@@ -36,14 +36,4 @@ class FoodCategory: NSObject, NSCoding {
     aCoder.encodeObject(self.derivatives, forKey: "derivatives")
   } //end func
   
-  //Function: Determine if ingredient is a derivative of the food category.
-  func isDerivative(ingredient: String) -> Bool {
-    let ingredientLC = ingredient.lowercaseString
-    for derivative in self.derivatives {
-      if derivative.lowercaseString == ingredientLC {
-        return true
-      } //end if
-    } //end for
-    return false
-  } //end func
-}
+  }
