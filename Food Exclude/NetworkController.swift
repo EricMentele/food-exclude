@@ -65,7 +65,7 @@ class NetworkController {
             if let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary {
               println(jsonDict)
               let newIngredient = Ingredients(jsonDictionary: jsonDict)
-                
+              println(newIngredient)
               
               
 
@@ -73,10 +73,11 @@ class NetworkController {
                 completionHandler(newIngredient, nil)
                 }) //end block
 
-              
+            
               
             }//end if
           case 300...599:
+            println(httpResponse.statusCode)
             println("This is bad - it's an error that may or may not be your fault")
             completionHandler(nil, "this is bad!")
           default:

@@ -11,7 +11,7 @@
 //Eric Mentele. All rights reserved.
 //
 /*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* THE SOFTWARE IS PROVIDED " AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
@@ -30,17 +30,18 @@ class Ingredients {
   var itemName : String
   var brandID : String
   var itemID : String
-  var itemDescription : String
-  var ingredientsList : String
-  var allergenMilk : String
-  var allergenEggs : String
-  var allergenFish : String
-  var allergenShellfish : String
-  var allergenTreeNuts : String
-  var allergenPeanuts : String
-  var allergenWheat : String
-  var allergenSoy : String
-  var allergenGluten : String
+  var itemDescription : String?
+  var ingredientsList : String?
+  var allergenMilk : String?
+  var allergenEggs : String?
+  var allergenFish : String?
+  var allergenShellfish : String?
+  var allergenTreeNuts : String?
+  var allergenPeanuts : String?
+  var allergenWheat : String?
+  var allergenSoy : String?
+  var allergenGluten : String?
+  var allergenList = [String?]()
   
   
   init(jsonDictionary : NSDictionary) {
@@ -48,18 +49,38 @@ class Ingredients {
     self.itemName = jsonDictionary["item_name"] as String
     self.brandID = jsonDictionary["brand_id"] as String
     self.itemID = jsonDictionary["item_id"] as String
-    self.itemDescription = jsonDictionary["item_description"] as String
-    self.ingredientsList = jsonDictionary["nf_ingredient_statement"] as String
-    self.allergenMilk = jsonDictionary["allergen_contains_milk"] as String
-    self.allergenEggs = jsonDictionary["allergen_contains_eggs"] as String
-    self.allergenFish = jsonDictionary["allergen_contains_fish"] as String
-    self.allergenShellfish = jsonDictionary["allergen_contains_shellfish"] as String
-    self.allergenTreeNuts = jsonDictionary["allergen_contains_tree_nuts"] as String
-    self.allergenPeanuts = jsonDictionary["allergen_contains_peanuts"] as String
-    self.allergenWheat = jsonDictionary["allergen_contains_wheat"] as String
-    self.allergenSoy = jsonDictionary["allergen_contains_soybeans"] as String
-    self.allergenGluten = jsonDictionary["allergen_contains_gluten"] as String
+
+    self.itemDescription = jsonDictionary["item_description"] as? String
+    self.ingredientsList = jsonDictionary["nf_ingredient_statement"]  as? String
+    self.allergenMilk = jsonDictionary["allergen_contains_milk"]  as? String
+    if self.allergenMilk !=  nil {
+      self.allergenList.append("Milk")
+    }
+    self.allergenEggs = jsonDictionary["allergen_contains_eggs"]  as? String
+    if self.allergenEggs !=  nil {
+      self.allergenList.append("Eggs")
+    }
+    self.allergenFish = jsonDictionary["allergen_contains_fish"]  as? String
+    if self.allergenFish !=  nil {
+      self.allergenList.append("Fish")
+    }
+    self.allergenShellfish = jsonDictionary["allergen_contains_shellfish"]  as? String
+    if self.allergenShellfish !=  nil {
+      self.allergenList.append("Shellfish")
+    }
+    self.allergenTreeNuts = jsonDictionary["allergen_contains_tree_nuts"]  as? String
+    if self.allergenTreeNuts !=  nil {
+      self.allergenList.append("Tree Nuts")
+    }
+    self.allergenPeanuts = jsonDictionary["allergen_contains_peanuts"]  as? String
+    self.allergenWheat = jsonDictionary["allergen_contains_wheat"]  as?  String
+    self.allergenSoy = jsonDictionary["allergen_contains_soybeans"]  as?  String
+    self.allergenGluten = jsonDictionary["allergen_contains_gluten"]  as?  String
+    if self.allergenGluten !=  nil {
+      self.allergenList.append("Gluten")
+    }
   }
+  
 
 }
 
