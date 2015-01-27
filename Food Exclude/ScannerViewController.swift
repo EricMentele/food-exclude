@@ -40,8 +40,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var detectionString : String!
   var barcodeScanned : String!
   var networkController = NetworkController()
-  var ingredients : [Ingredients]!
-  var list : Ingredients!
+  var ingredients : [Ingredients]?
+  var list : Ingredients?
+  var allergenList : [String]?
+  var itemName : String!
 
   
   //used for custom alert
@@ -154,26 +156,32 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.barcode.text = "Barcode scanned: \(self.detectionString)"
     self.barcodeScanned = self.detectionString
     self.highlightView.frame = highlightViewRect
-   // var butter = "0767707001067"
-  //  var stamp = "1564568900"
+    // var butter = "0767707001067"
+    //  var stamp = "1564568900"
     if self.barcodeScanned != nil {
       self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         self.list = ingredients
-//        self.foodIngredients.text = "Ingredients: \(self.list.ingredientsList)"      if self.barcodeScanned == butter {
-////        self.view.layer.borderWidth = 10
-////        self.barcode.backgroundColor = UIColor.greenColor()
-////        self.view.layer.borderColor = UIColor.greenColor().CGColor
-//        ])
-//      }
-//      else {
-//        self.view.layer.borderWidth = 10
-//        self.barcode.backgroundColor = UIColor.redColor()
-//        self.view.layer.borderColor = UIColor.redColor().CGColor
-//      }
-//    }
-//    else {
       
+        println(self.list!.allergenList)
+        //self.itemName = self.list.itemName
+        println(self.itemName)
+        
+        
+        //        self.foodIngredients.text = "Ingredients: \(self.list.ingredientsList)"      if self.barcodeScanned == butter {
+        ////        self.view.layer.borderWidth = 10
+        ////        self.barcode.backgroundColor = UIColor.greenColor()
+        ////        self.view.layer.borderColor = UIColor.greenColor().CGColor
+        //        ])
+        //      }
+        //      else {
+        //        self.view.layer.borderWidth = 10
+        //        self.barcode.backgroundColor = UIColor.redColor()
+        //        self.view.layer.borderColor = UIColor.redColor().CGColor
+        //      }
+        //    }
+        //    else {
+        
       })
       
     } else {
@@ -189,7 +197,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   @IBAction func newScan(sender: UIButton) {
     self.session.startRunning()
   }
-
+  
   
   
   override func didReceiveMemoryWarning() {
