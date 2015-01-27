@@ -176,7 +176,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.alertView.transform =  CGAffineTransformMakeScale(1.0, 1.0)
       }) { (finished) -> Void in
         
-       let removeTimer = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: "removeAlertView", userInfo: nil, repeats: false)
+       let removeTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "removeAlertView", userInfo: nil, repeats: false)
     }
   }
   

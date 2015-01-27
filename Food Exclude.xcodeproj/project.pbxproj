@@ -157,10 +157,10 @@
 				40A438731A75973B00A24AA0 /* Images.xcassets */,
 				40A438751A75973B00A24AA0 /* LaunchScreen.xib */,
 				ABE71A451A771426002F0515 /* AlertView.xib */,
-				BA37ECFE1A77FFF900408187 /* UserProfileCell.xib */,
-				BA37ED001A78163100408187 /* UserProfileCell.swift */,
 				BA37ED041A78238A00408187 /* AllergenCell.xib */,
 				BA37ED061A7824C900408187 /* AllergenCell.swift */,
+				BA37ECFE1A77FFF900408187 /* UserProfileCell.xib */,
+				BA37ED001A78163100408187 /* UserProfileCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
