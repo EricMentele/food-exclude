@@ -15,6 +15,7 @@
 		40A4388F1A75A6BD00A24AA0 /* gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 40A4388E1A75A6BD00A24AA0 /* gitignore */; };
 		40A438931A7692F100A24AA0 /* readme in Resources */ = {isa = PBXBuildFile; fileRef = 40A438921A7692F100A24AA0 /* readme */; };
 		40A4389E1A76F04400A24AA0 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A4389D1A76F04300A24AA0 /* MainMenuViewController.swift */; };
+		ABE71A461A771426002F0515 /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABE71A451A771426002F0515 /* AlertView.xib */; };
 		BA2E53521A76B4920055D11F /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E53511A76B4920055D11F /* UserProfile.swift */; };
 		BA2E53541A76B5480055D11F /* FoodCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E53531A76B5480055D11F /* FoodCategory.swift */; };
 		BAB735BE1A770BEF00E8C76D /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB735BD1A770BEF00E8C76D /* ScannerViewController.swift */; };
@@ -43,6 +44,7 @@
 		40A4388E1A75A6BD00A24AA0 /* gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gitignore; sourceTree = "<group>"; };
 		40A438921A7692F100A24AA0 /* readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme; sourceTree = "<group>"; };
 		40A4389D1A76F04300A24AA0 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		ABE71A451A771426002F0515 /* AlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
 		BA2E53511A76B4920055D11F /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		BA2E53531A76B5480055D11F /* FoodCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodCategory.swift; sourceTree = "<group>"; };
 		BAB735BD1A770BEF00E8C76D /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				40A438701A75973B00A24AA0 /* Main.storyboard */,
 				40A438731A75973B00A24AA0 /* Images.xcassets */,
 				40A438751A75973B00A24AA0 /* LaunchScreen.xib */,
+				ABE71A451A771426002F0515 /* AlertView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				40A438931A7692F100A24AA0 /* readme in Resources */,
 				40A438721A75973B00A24AA0 /* Main.storyboard in Resources */,
 				40A4388F1A75A6BD00A24AA0 /* gitignore in Resources */,
+				ABE71A461A771426002F0515 /* AlertView.xib in Resources */,
 				40A438771A75973B00A24AA0 /* LaunchScreen.xib in Resources */,
 				40A438741A75973B00A24AA0 /* Images.xcassets in Resources */,
 			);
