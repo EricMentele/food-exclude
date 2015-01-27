@@ -39,8 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
     if let userProfilesFromArchive = loadUserProfilesFromArchive() as [UserProfile]? {
       if !userProfilesFromArchive.isEmpty { //users exist: direct to scanner
-//        let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILES") as UserProfilesViewController
-//        rootViewController.userProfiles = userProfilesFromArchive
         let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
         let navigationController = UINavigationController(rootViewController: rootViewController)
         window?.rootViewController = navigationController
@@ -68,9 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if let userProfiles = NSKeyedUnarchiver.unarchiveObjectWithFile(pathArchive) as? [UserProfile] {
       return userProfiles
     } else {
-//      var userProfiles = [UserProfile]()
-//      userProfiles.append(UserProfile(name: "Alex", includeProfile: true))
-//      return userProfiles
       return nil
     } //end if
   } //end func
