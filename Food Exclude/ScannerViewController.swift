@@ -1,9 +1,9 @@
 //
-//  ViewController.swift
+//  ScannerViewController.swift
 //  Food Exclude
 //
 //  Created on 1/25/15.
-//  Copyright (c) 2015 
+//  Copyright (c) 2015
 //David Rogers,
 //Vania Kurniawati,
 //Clint Atkins,
@@ -24,7 +24,7 @@ import UIKit
 
 import AVFoundation
 
-class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
   
   @IBOutlet weak var barcode: UILabel!
   @IBOutlet weak var dismissButton: UIButton!
@@ -53,7 +53,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     
     //dismissButton
-//    self.dismissButton.addTarget(self, action: "dismissButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+    //    self.dismissButton.addTarget(self, action: "dismissButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
     
     
     
@@ -68,17 +68,17 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     }
     else {
       
-//      //add a pop-up alert to indicate something went wrong 
-//      
-//      let networkIssueAlert = UIAlertController(title: "Error", message: "Unable to access camera", preferredStyle: .Alert)
-//      //adds a cancell button to dismiss alert
-//      let cancelButton = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
-//      networkIssueAlert.addAction(cancelButton)
-//      //presents alert controller
-//      self.presentViewController(networkIssueAlert, animated: true, completion: nil)
+      //      //add a pop-up alert to indicate something went wrong
+      //
+      //      let networkIssueAlert = UIAlertController(title: "Error", message: "Unable to access camera", preferredStyle: .Alert)
+      //      //adds a cancell button to dismiss alert
+      //      let cancelButton = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+      //      networkIssueAlert.addAction(cancelButton)
+      //      //presents alert controller
+      //      self.presentViewController(networkIssueAlert, animated: true, completion: nil)
     }
-
-
+    
+    
     let output = AVCaptureMetadataOutput()
     output.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
     self.session.addOutput(output)
@@ -94,7 +94,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
   }
   
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+  func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
     
     var highlightViewRect = CGRectZero
     
@@ -131,13 +131,13 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         
       }
     }
-  self.barcode.text = "Barcode scanned: \(self.detectionString)"
-      self.barcodeScanned = self.detectionString
-      self.highlightView.frame = highlightViewRect
-      var butter = "0767707001067"
-      var stamp = "1564568900"
-      if self.barcodeScanned != nil {
-  
+    self.barcode.text = "Barcode scanned: \(self.detectionString)"
+    self.barcodeScanned = self.detectionString
+    self.highlightView.frame = highlightViewRect
+    var butter = "0767707001067"
+    var stamp = "1564568900"
+    if self.barcodeScanned != nil {
+      
       if self.barcodeScanned == butter {
         self.view.layer.borderWidth = 10
         self.barcode.backgroundColor = UIColor.greenColor()
@@ -148,21 +148,20 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         self.view.layer.borderWidth = 10
         self.barcode.backgroundColor = UIColor.redColor()
         self.view.layer.borderColor = UIColor.redColor().CGColor
-        }
       }
-      else {
-        
-      }
-      
-      self.view.bringSubviewToFront(self.highlightView)
+    }
+    else {
       
     }
-
+    
+    self.view.bringSubviewToFront(self.highlightView)
+    
+  }
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-
-
+  
+  
 }
-

@@ -36,21 +36,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
     if let userProfilesFromArchive = loadUserProfilesFromArchive() as [UserProfile]? {
       if !userProfilesFromArchive.isEmpty { //users exist: direct to scanner
-        let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_SCANNER") as MainMenuViewController
+        let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
         let navigationController = UINavigationController(rootViewController: rootViewController)
         window?.rootViewController = navigationController
       } else { //no users: direct to default profile
-        let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UIViewController
+        let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as MainMenuViewController
         let navigationController = UINavigationController(rootViewController: rootViewController)
         window?.rootViewController = navigationController
       } //end if
     } else { //no users: direct to default profile
-      let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UIViewController
+      let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as MainMenuViewController
       let navigationController = UINavigationController(rootViewController: rootViewController)
       window?.rootViewController = navigationController
     } //end if
+    
     return true
-  }
+  } //end func
   
   //Function: Load user profile data from archive.
   func loadUserProfilesFromArchive() -> [UserProfile]? {

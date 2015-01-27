@@ -8,7 +8,7 @@
         <!--Scanner Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="VC_SCANNER" title="Scanner Controller" id="vXZ-lx-hvc" customClass="ViewController" customModule="Food_Exclude" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VC_SCANNER" title="Scanner Controller" id="vXZ-lx-hvc" customClass="ScannerViewController" customModule="Food_Exclude" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -81,7 +81,7 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="barcode" destination="JZl-Fp-d63" id="xuX-Uq-8NB"/>
+                        <outlet property="barcode" destination="JZl-Fp-d63" id="She-CE-8NX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
