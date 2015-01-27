@@ -179,7 +179,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   @IBAction func newScan(sender: UIButton) {
     self.session.startRunning()
   }
-
+  
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
