@@ -42,7 +42,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var networkController = NetworkController()
   var ingredients : [Ingredients]!
   var list : Ingredients!
-
+  
   
   //used for custom alert
   var timer = NSTimer()
@@ -154,29 +154,35 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.barcode.text = "Barcode scanned: \(self.detectionString)"
     self.barcodeScanned = self.detectionString
     self.highlightView.frame = highlightViewRect
-   // var butter = "0767707001067"
-  //  var stamp = "1564568900"
+    // var butter = "0767707001067"
+    //  var stamp = "1564568900"
     if self.barcodeScanned != nil {
       self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         self.list = ingredients
-//        self.foodIngredients.text = "Ingredients: \(self.list.ingredientsList)"      if self.barcodeScanned == butter {
-////        self.view.layer.borderWidth = 10
-////        self.barcode.backgroundColor = UIColor.greenColor()
-////        self.view.layer.borderColor = UIColor.greenColor().CGColor
-//        ])
-//      }
-//      else {
-//        self.view.layer.borderWidth = 10
-//        self.barcode.backgroundColor = UIColor.redColor()
-//        self.view.layer.borderColor = UIColor.redColor().CGColor
-//      }
-//    }
-//    else {
-      
+        //        self.foodIngredients.text = "Ingredients: \(self.list.ingredientsList)"      if self.barcodeScanned == butter {
+        ////        self.view.layer.borderWidth = 10
+        ////        self.barcode.backgroundColor = UIColor.greenColor()
+        ////        self.view.layer.borderColor = UIColor.greenColor().CGColor
+        //        ])
+        //      }
+        //      else {
+        //        self.view.layer.borderWidth = 10
+        //        self.barcode.backgroundColor = UIColor.redColor()
+        //        self.view.layer.borderColor = UIColor.redColor().CGColor
+        //      }
+        //    }
+        //    else {
+        
       })
       
     } else {
+      
+      //MARK: Network connection alert.
+      let networkIssueAlert = UIAlertController(title: "Error", message: "Connectivity error! Please try again later", preferredStyle: .Alert)
+      let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+      networkIssueAlert.addAction(cancelButton)
+      self.presentViewController(networkIssueAlert, animated: true, completion: nil)
       println("fail")
     }
     
@@ -189,7 +195,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   @IBAction func newScan(sender: UIButton) {
     self.session.startRunning()
   }
-
+  
   
   
   override func didReceiveMemoryWarning() {

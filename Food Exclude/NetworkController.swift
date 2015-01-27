@@ -77,6 +77,7 @@ class NetworkController {
               
             }//end if
           case 300...599:
+            
             println("This is bad - it's an error that may or may not be your fault")
             completionHandler(nil, "this is bad!")
           default:
