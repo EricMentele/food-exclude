@@ -54,9 +54,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     //dismissButton
     //    self.dismissButton.addTarget(self, action: "dismissButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
-    
-    
-    
     let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
     
     var error : NSError? = nil
@@ -94,6 +91,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
   }
   
+  
   func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
     
     var highlightViewRect = CGRectZero
@@ -111,7 +109,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       AVMetadataObjectTypePDF417Code,
       AVMetadataObjectTypeQRCode,
       AVMetadataObjectTypeAztecCode
-    ]
+      ]
     
     
     for metadata in metadataObjects {
@@ -155,6 +153,20 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     self.view.bringSubviewToFront(self.highlightView)
+    
+    
+      let scanDoneController = UIAlertController(title: "Scan Complete", message: "Scan next item.", preferredStyle: .Alert)
+      //adds a cancell button to dismiss alert
+//    let okButton = UIAlertAction(title: "OK", style: .Cancel, handler: ((UIAlertAction!) -> Void)!)
+    
+    
+    let okButton = UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) -> Void in
+      
+      self.session.startRunning()
+    })//cameraOption
+      scanDoneController.addAction(okButton)
+      //presents alert controller
+    self.presentViewController(scanDoneController, animated: true, completion: nil)
     
   }
   
