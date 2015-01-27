@@ -32,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
     
+    //Fonts:
+    UILabel.appearance().font = UIFont(name: "Avenir", size: 17.0)
+    
     //Load data from archive; and direct user accordingly.
     let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
     if let userProfilesFromArchive = loadUserProfilesFromArchive() as [UserProfile]? {
