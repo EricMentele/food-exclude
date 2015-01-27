@@ -58,9 +58,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     //dismissButton
     //    self.dismissButton.addTarget(self, action: "dismissButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
-    
-    
-    
     let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
     
     var error : NSError? = nil
@@ -75,7 +72,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       if timer.timeInterval == 5 {
         self.setupAlertView()
       }
-
+      
     }
     
     
@@ -172,7 +169,16 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     self.view.bringSubviewToFront(self.highlightView)
     
-  }
+    //MARK:  Start new scan (alert controller).
+    let scanDoneController = UIAlertController(title: "Scan Complete", message: "Scan next item.", preferredStyle: .Alert)
+    
+    let okButton = UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) -> Void in
+      
+      self.session.startRunning()
+    })//ok button action
+    scanDoneController.addAction(okButton)
+    self.presentViewController(scanDoneController, animated: true, completion: nil)
+  }//func captureOutput
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
