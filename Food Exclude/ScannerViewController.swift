@@ -30,6 +30,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   @IBOutlet weak var nextItem: UIButton!
   
+  var alertView : UIView!
+  
   
   
   //this is adapted from http://www.bowst.com/mobile/simple-barcode-scanning-with-swift/
@@ -42,11 +44,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var networkController = NetworkController()
   var ingredients : [Ingredients]!
   var list : Ingredients!
-
+  
   
   //used for custom alert
-//  var timer = NSTimer()
-//  var counter = 0
+  //  var timer = NSTimer()
+  //  var counter = 0
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -75,7 +77,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       session.addInput(input)
     }
     else {
-
+      
     }
     
     
@@ -93,28 +95,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.session.startRunning()
   }
   
-  
-  
-  func displayAlertView() {
-    let alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as UIView
-    alertView.center = self.view.center
-    alertView.alpha = 0
-    alertView.transform = CGAffineTransformMakeScale(0.4, 0.4)
-    self.view.addSubview(alertView)
-    
-    UIView.animateWithDuration(0.4, delay: 0.5, options: nil, animations: { () -> Void in
-      alertView.alpha = 1
-      alertView.transform =  CGAffineTransformMakeScale(1.0, 1.0)
-      }) { (finished) -> Void in
-        self.session.startRunning()
-    }
-  }
-  
-  func removeAlertView() {
-    let alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as UIView
-    alertView.removeFromSuperview()
-  }
-
   
   func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
     
@@ -156,39 +136,44 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.barcode.text = "Barcode scanned: \(self.detectionString)"
     self.barcodeScanned = self.detectionString
     self.highlightView.frame = highlightViewRect
-   // var butter = "0767707001067"
-  //  var stamp = "1564568900"
+    // var butter = "0767707001067"
+    //  var stamp = "1564568900"
     if self.barcodeScanned != nil {
       self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
-        
-      }
-      else {
         self.view.layer.borderWidth = 10
         self.barcode.backgroundColor = UIColor.redColor()
         self.view.layer.borderColor = UIColor.redColor().CGColor
-      }
-    }
-    else {
+      })
+    } else {
       self.session.stopRunning()
       let displayTimer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
-      
-      let removeTimer = NSTimer.scheduledTimerWithTimeInterval(8, target: self, selector: "removeAlertView", userInfo: nil, repeats: false)
     }
-
-    
     self.view.bringSubviewToFront(self.highlightView)
     
-    //MARK:  Start new scan (alert controller).
-//    let scanDoneController = UIAlertController(title: "Scan Complete", message: "Scan next item.", preferredStyle: .Alert)
-//    
-//    let okButton = UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) -> Void in
-//      
-//      self.session.startRunning()
-//    })//ok button action
-//    scanDoneController.addAction(okButton)
-//    self.presentViewController(scanDoneController, animated: true, completion: nil)
   }//func captureOutput
   
+  
+  //MARK: Scanned-item-nil AlertView
+  
+  func displayAlertView() {
+    self.alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as UIView
+    alertView.center = self.view.center
+    alertView.alpha = 0
+    alertView.transform = CGAffineTransformMakeScale(0.4, 0.4)
+    self.view.addSubview(alertView)
+    
+    UIView.animateWithDuration(0.4, delay: 0.5, options: nil, animations: { () -> Void in
+      self.alertView.alpha = 1
+      self.alertView.transform =  CGAffineTransformMakeScale(1.0, 1.0)
+      }) { (finished) -> Void in
+        
+       let removeTimer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "removeAlertView", userInfo: nil, repeats: false)
+    }
+  }
+  
+  func removeAlertView() {
+    self.alertView.removeFromSuperview()
+  }
   
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {
@@ -196,15 +181,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   }
 
   
-  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
   
-//  func updateCounter() {
-//    self.counter++
-//  }
+  //  func updateCounter() {
+  //    self.counter++
+  //  }
   
   
 }
