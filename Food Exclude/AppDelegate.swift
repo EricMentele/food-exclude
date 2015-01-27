@@ -43,12 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController(rootViewController: rootViewController)
         window?.rootViewController = navigationController
       } else { //no users: direct to default profile
-        let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as MainMenuViewController
+        let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
         let navigationController = UINavigationController(rootViewController: rootViewController)
         window?.rootViewController = navigationController
       } //end if
     } else { //no users: direct to default profile
-      let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as MainMenuViewController
+      let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
       let navigationController = UINavigationController(rootViewController: rootViewController)
       window?.rootViewController = navigationController
     } //end if
