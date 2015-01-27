@@ -8,7 +8,8 @@
 
 import UIKit
 
-class UserProfilesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class UserProfilesViewController: UIViewController {
+//  , UITableViewDelegate, UITableViewDataSource
   //Table: to display user profiles
   @IBOutlet weak var tableUserProfiles: UITableView!
   var userProfiles: [UserProfile]!
@@ -19,8 +20,8 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     super.viewDidLoad()
 
     //Table:
-    tableUserProfiles.delegate = self
-    tableUserProfiles.dataSource = self
+//    tableUserProfiles.delegate = self
+//    tableUserProfiles.dataSource = self
   } //end func
   
   //Function: Set table count.
@@ -29,11 +30,11 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
   } //end func
   
   //Function: Set table cell content.
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//    let cell = d
-    //Return cell.
-//    return cell
-  } //end func
+//  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+////    let cell = d
+//    //Return cell.
+////    return cell
+//  } //end func
   
   override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
