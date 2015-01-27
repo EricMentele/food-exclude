@@ -173,10 +173,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       networkIssueAlert.addAction(cancelButton)
       self.presentViewController(networkIssueAlert, animated: true, completion: nil)
       println("fail")
-      return 
-      self.session.stopRunning()
-      let displayTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
+      
+     
+      return
     }
+    self.session.stopRunning()
+    let displayTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
     self.view.bringSubviewToFront(self.highlightView)
     
   }//func captureOutput
