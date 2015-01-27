@@ -38,8 +38,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var barcodeScanned : String!
   
   //used for custom alert
-  // var timer = NSTimer()
-//  var counter = 0
+  var timer = NSTimer()
+  var counter = 0
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -71,12 +71,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       session.addInput(input)
     }
     else {
-      var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
-      //var counter = 0
-      if timer.timeInterval == 10 {
+      self.timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "setupAlertView", userInfo: nil, repeats: false)
+      if timer.timeInterval == 5 {
         self.setupAlertView()
       }
-      
 
     }
     
@@ -93,22 +91,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.view.layer.addSublayer(previewLayer)
     
     self.session.startRunning()
-    
   }
   
   
-  
-//  override func viewDidAppear(animated: Bool) {
-//    timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "update", userInfo: nil, repeats: true)
-//
-//    if timer.timeInterval == 10 {
-//      self.setupAlertView()
-//    }
-//    
-//    func update() {
-//      self.timer = self.counter++
-//    }
-//  }
   
   func setupAlertView() {
     let alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as UIView
