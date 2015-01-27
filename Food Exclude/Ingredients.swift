@@ -26,39 +26,39 @@ import UIKit
 
 class Ingredients {
   
-  var brandName : String
-  var itemName : String
-  var brandID : String
-  var itemID : String
-  var itemDescription : String
-  var ingredientsList : String!
-  var allergenMilk : Bool
-  var allergenEggs : Bool
-  var allergenFish : Bool
-  var allergenShellfish : Bool
-  var allergenTreeNuts : Bool
-  var allergenPeanuts : Bool
-  var allergenWheat : Bool
-  var allergenSoy : Bool
-  var allergenGluten : Bool
+  var brandName : String?
+  var itemName : String?
+  var brandID : String?
+  var itemID : String?
+  var itemDescription : String?
+  var ingredientsList : String?
+  var allergenMilk : String?
+  var allergenEggs : String?
+  var allergenFish : String?
+  var allergenShellfish : String?
+  var allergenTreeNuts : String?
+  var allergenPeanuts : String?
+  var allergenWheat : String?
+  var allergenSoy : String?
+  var allergenGluten : String?
   
   
   init(jsonDictionary : NSDictionary) {
-    self.brandName = jsonDictionary["brand_name"] as String
-    self.itemName = jsonDictionary["item_name"] as String
-    self.brandID = jsonDictionary["brand_id"] as String
-    self.itemID = jsonDictionary["item_id"] as String
-    self.itemDescription = jsonDictionary["item_description"] as String
-    self.ingredientsList = jsonDictionary["nf_ingredient_statement"] as String
-    self.allergenMilk = jsonDictionary["allergen_contains_milk"] as Bool
-    self.allergenEggs = jsonDictionary["allergen_contains_eggs"] as Bool
-    self.allergenFish = jsonDictionary["allergen_contains_fish"] as Bool
-    self.allergenShellfish = jsonDictionary["allergen_contains_shellfish"] as Bool
-    self.allergenTreeNuts = jsonDictionary["allergen_contains_tree_nuts"] as Bool
-    self.allergenPeanuts = jsonDictionary["allergen_contains_peanuts"] as Bool
-    self.allergenWheat = jsonDictionary["allergen_contains_wheat"] as Bool
-    self.allergenSoy = jsonDictionary["allergen_contains_soybeans"] as Bool
-    self.allergenGluten = jsonDictionary["allergen_contains_gluten"] as Bool
+    self.brandName = jsonDictionary["brand_name"] as? String
+    self.itemName = jsonDictionary["item_name"] as? String
+    self.brandID = jsonDictionary["brand_id"] as? String
+    self.itemID = jsonDictionary["item_id"] as? String
+    self.itemDescription = jsonDictionary["item_description"] as? String
+    self.ingredientsList = jsonDictionary["nf_ingredient_statement"] as? String
+    self.allergenMilk = jsonDictionary["allergen_contains_milk"] as? String
+    self.allergenEggs = jsonDictionary["allergen_contains_eggs"] as? String
+    self.allergenFish = jsonDictionary["allergen_contains_fish"] as? String
+    self.allergenShellfish = jsonDictionary["allergen_contains_shellfish"] as? String
+    self.allergenTreeNuts = jsonDictionary["allergen_contains_tree_nuts"] as? String
+    self.allergenPeanuts = jsonDictionary["allergen_contains_peanuts"] as? String
+    self.allergenWheat = jsonDictionary["allergen_contains_wheat"] as? String
+    self.allergenSoy = jsonDictionary["allergen_contains_soybeans"] as? String
+    self.allergenGluten = jsonDictionary["allergen_contains_gluten"] as? String
   }
 
 }

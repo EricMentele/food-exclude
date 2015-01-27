@@ -43,7 +43,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var ingredients : [Ingredients]!
   var list : Ingredients!
   
-  
   //used for custom alert
   var timer = NSTimer()
   var counter = 0
@@ -160,19 +159,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         self.list = ingredients
-        //        self.foodIngredients.text = "Ingredients: \(self.list.ingredientsList)"      if self.barcodeScanned == butter {
-        ////        self.view.layer.borderWidth = 10
-        ////        self.barcode.backgroundColor = UIColor.greenColor()
-        ////        self.view.layer.borderColor = UIColor.greenColor().CGColor
-        //        ])
-        //      }
-        //      else {
-        //        self.view.layer.borderWidth = 10
-        //        self.barcode.backgroundColor = UIColor.redColor()
-        //        self.view.layer.borderColor = UIColor.redColor().CGColor
-        //      }
-        //    }
-        //    else {
+        println("Does this have the product name? \(self.list)")
+        
+        if self.networkController.statusCode as NSObject == 404  {
+          
+          let itemNotFoundAlert = UIAlertController(title: "Item", message: "This item is not in the database", preferredStyle: .Alert)
+          let okButton = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+          itemNotFoundAlert.addAction(okButton)
+          self.presentViewController(itemNotFoundAlert, animated: true, completion: nil)
+        }//if
         
       })
       
@@ -184,6 +179,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       networkIssueAlert.addAction(cancelButton)
       self.presentViewController(networkIssueAlert, animated: true, completion: nil)
       println("fail")
+      return 
     }
     
     self.view.bringSubviewToFront(self.highlightView)
@@ -193,7 +189,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {
+    
     self.session.startRunning()
+    self.barcodeScanned = ""
+    
+   
   }
   
   
