@@ -37,6 +37,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var detectionString : String!
   var barcodeScanned : String!
   
+  //used for custom alert
+  var timer = NSTimer()
+  var counter = 0
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -67,15 +71,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       session.addInput(input)
     }
     else {
-      
-      //      //add a pop-up alert to indicate something went wrong
-      //
-      //      let networkIssueAlert = UIAlertController(title: "Error", message: "Unable to access camera", preferredStyle: .Alert)
-      //      //adds a cancell button to dismiss alert
-      //      let cancelButton = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
-      //      networkIssueAlert.addAction(cancelButton)
-      //      //presents alert controller
-      //      self.presentViewController(networkIssueAlert, animated: true, completion: nil)
+      self.timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "setupAlertView", userInfo: nil, repeats: false)
+      if timer.timeInterval == 5 {
+        self.setupAlertView()
+      }
+
     }
     
     
@@ -91,8 +91,24 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.view.layer.addSublayer(previewLayer)
     
     self.session.startRunning()
-    
   }
+  
+  
+  
+  func setupAlertView() {
+    let alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as UIView
+    alertView.center = self.view.center
+    alertView.alpha = 0
+    alertView.transform = CGAffineTransformMakeScale(0.4, 0.4)
+    self.view.addSubview(alertView)
+    
+    UIView.animateWithDuration(0.4, delay: 0.5, options: nil, animations: { () -> Void in
+      alertView.alpha = 1
+      alertView.transform =  CGAffineTransformMakeScale(1.0, 1.0)
+      }) { (finished) -> Void in
+    }
+  }
+  
   
   func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
     
