@@ -73,6 +73,7 @@ class NetworkController {
             if let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary {
               println(jsonDict)
               let newIngredient = Ingredients(jsonDictionary: jsonDict)
+              println(newIngredient)
               
               
               

@@ -42,8 +42,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var detectionString : String!
   var barcodeScanned : String!
   var networkController = NetworkController()
-  var ingredients : [Ingredients]!
-  var list : Ingredients!
+  var ingredients : [Ingredients]?
+  var list : Ingredients?
+  var allergenList : [String]?
+  var itemName : String!
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -147,6 +150,20 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           self.presentViewController(itemNotFoundAlert, animated: true, completion: nil)
         }//if
         
+        //        self.foodIngredients.text = "Ingredients: \(self.list.ingredientsList)"      if self.barcodeScanned == butter {
+        ////        self.view.layer.borderWidth = 10
+        ////        self.barcode.backgroundColor = UIColor.greenColor()
+        ////        self.view.layer.borderColor = UIColor.greenColor().CGColor
+        //        ])
+        //      }
+        //      else {
+        //        self.view.layer.borderWidth = 10
+        //        self.barcode.backgroundColor = UIColor.redColor()
+        //        self.view.layer.borderColor = UIColor.redColor().CGColor
+        //      }
+        //    }
+        //    else {
+        
       })
     } else {
       
@@ -157,6 +174,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.presentViewController(networkIssueAlert, animated: true, completion: nil)
       println("fail")
       return 
+      self.session.stopRunning()
+      let displayTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
     }
     self.view.bringSubviewToFront(self.highlightView)
     
@@ -189,9 +208,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   @IBAction func newScan(sender: UIButton) {
     
     self.session.startRunning()
-    self.barcodeScanned = ""
-    
-   
+    self.removeAlertView()
   }
   
   
