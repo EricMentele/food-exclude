@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="FOOD_DETAIL" id="Ytt-pz-alj" customClass="ViewController" customModule="Food_Exclude" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brand Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgy-31-Bcq">
+                    <rect key="frame" x="8" y="58" width="304" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="6Pg-Jp-JZU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Item Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c66-S2-Mc4">
+                    <rect key="frame" x="8" y="104" width="304" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="hNr-7C-8pt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obG-32-3IS">
+                    <rect key="frame" x="8" y="196" width="304" height="176"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="176" id="Duj-Ao-602"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJu-2J-cW7">
+                    <rect key="frame" x="8" y="150" width="304" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="hA3-rl-lUV"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="zgy-31-Bcq" firstAttribute="top" secondItem="Ytt-pz-alj" secondAttribute="top" constant="58" id="6Gq-5f-4G1"/>
+                <constraint firstItem="iJu-2J-cW7" firstAttribute="trailing" secondItem="obG-32-3IS" secondAttribute="trailing" id="6UR-gh-7ea"/>
+                <constraint firstItem="zgy-31-Bcq" firstAttribute="trailing" secondItem="Ytt-pz-alj" secondAttribute="trailingMargin" id="AaV-pl-NIC"/>
+                <constraint firstItem="obG-32-3IS" firstAttribute="leading" secondItem="Ytt-pz-alj" secondAttribute="leadingMargin" id="Fxp-JP-VxU"/>
+                <constraint firstItem="c66-S2-Mc4" firstAttribute="leading" secondItem="iJu-2J-cW7" secondAttribute="leading" id="TbB-pz-dGo"/>
+                <constraint firstItem="iJu-2J-cW7" firstAttribute="top" secondItem="c66-S2-Mc4" secondAttribute="bottom" constant="8" symbolic="YES" id="UT2-c6-Oaa"/>
+                <constraint firstItem="iJu-2J-cW7" firstAttribute="trailing" secondItem="c66-S2-Mc4" secondAttribute="trailing" id="hNE-LH-3kF"/>
+                <constraint firstItem="obG-32-3IS" firstAttribute="top" secondItem="iJu-2J-cW7" secondAttribute="bottom" constant="8" symbolic="YES" id="iuf-ju-d4l"/>
+                <constraint firstItem="iJu-2J-cW7" firstAttribute="leading" secondItem="obG-32-3IS" secondAttribute="leading" id="jC4-Zz-jbb"/>
+                <constraint firstItem="zgy-31-Bcq" firstAttribute="leading" secondItem="c66-S2-Mc4" secondAttribute="leading" id="poh-WQ-CQi"/>
+                <constraint firstItem="c66-S2-Mc4" firstAttribute="trailing" secondItem="zgy-31-Bcq" secondAttribute="trailing" id="t3y-0A-cAT"/>
+                <constraint firstItem="c66-S2-Mc4" firstAttribute="top" secondItem="zgy-31-Bcq" secondAttribute="bottom" constant="8" symbolic="YES" id="z8f-SJ-FfN"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="brandName" destination="zgy-31-Bcq" id="CYl-8f-Kmh"/>
+                <outlet property="foodDescription" destination="iJu-2J-cW7" id="Ne9-qf-IAX"/>
+                <outlet property="foodIngredients" destination="obG-32-3IS" id="V0b-ms-4ml"/>
+                <outlet property="foodName" destination="c66-S2-Mc4" id="xHa-Dy-gOH"/>
+            </connections>
+            <point key="canvasLocation" x="341" y="337"/>
+        </view>
+    </objects>
+</document>
