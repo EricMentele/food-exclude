@@ -27,7 +27,10 @@ import AVFoundation
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
   
   @IBOutlet weak var barcode: UILabel!
-  @IBOutlet weak var dismissButton: UIButton!
+  
+  @IBOutlet weak var nextItem: UIButton!
+  
+  
   
   //this is adapted from http://www.bowst.com/mobile/simple-barcode-scanning-with-swift/
   let session : AVCaptureSession = AVCaptureSession()
@@ -36,6 +39,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var resultView = UIView()
   var detectionString : String!
   var barcodeScanned : String!
+  var networkController = NetworkController()
+  var ingredients : [Ingredients]!
+  var list : Ingredients!
+
   
   //used for custom alert
   var timer = NSTimer()
@@ -147,38 +154,43 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.barcode.text = "Barcode scanned: \(self.detectionString)"
     self.barcodeScanned = self.detectionString
     self.highlightView.frame = highlightViewRect
-    var butter = "0767707001067"
-    var stamp = "1564568900"
+   // var butter = "0767707001067"
+  //  var stamp = "1564568900"
     if self.barcodeScanned != nil {
-      
-      if self.barcodeScanned == butter {
-        self.view.layer.borderWidth = 10
-        self.barcode.backgroundColor = UIColor.greenColor()
-        self.view.layer.borderColor = UIColor.greenColor().CGColor
+      self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
-      }
-      else {
-        self.view.layer.borderWidth = 10
-        self.barcode.backgroundColor = UIColor.redColor()
-        self.view.layer.borderColor = UIColor.redColor().CGColor
-      }
-    }
-    else {
+        self.list = ingredients
+//        self.foodIngredients.text = "Ingredients: \(self.list.ingredientsList)"      if self.barcodeScanned == butter {
+////        self.view.layer.borderWidth = 10
+////        self.barcode.backgroundColor = UIColor.greenColor()
+////        self.view.layer.borderColor = UIColor.greenColor().CGColor
+//        ])
+//      }
+//      else {
+//        self.view.layer.borderWidth = 10
+//        self.barcode.backgroundColor = UIColor.redColor()
+//        self.view.layer.borderColor = UIColor.redColor().CGColor
+//      }
+//    }
+//    else {
       
+      })
+      
+    } else {
+      println("fail")
     }
     
     self.view.bringSubviewToFront(self.highlightView)
     
-    //MARK:  Start new scan (alert controller).
-    let scanDoneController = UIAlertController(title: "Scan Complete", message: "Scan next item.", preferredStyle: .Alert)
-    
-    let okButton = UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) -> Void in
-      
-      self.session.startRunning()
-    })//ok button action
-    scanDoneController.addAction(okButton)
-    self.presentViewController(scanDoneController, animated: true, completion: nil)
   }//func captureOutput
+  
+  
+  //MARK:  Start new scan.
+  @IBAction func newScan(sender: UIButton) {
+    self.session.startRunning()
+  }
+
+  
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
