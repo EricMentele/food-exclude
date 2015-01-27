@@ -46,10 +46,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var list : Ingredients!
   
   
-  //used for custom alert
-  //  var timer = NSTimer()
-  //  var counter = 0
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -140,13 +136,26 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     //  var stamp = "1564568900"
     if self.barcodeScanned != nil {
       self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
-        self.view.layer.borderWidth = 10
-        self.barcode.backgroundColor = UIColor.redColor()
-        self.view.layer.borderColor = UIColor.redColor().CGColor
+        
+        self.list = ingredients
+        //        self.foodIngredients.text = "Ingredients: \(self.list.ingredientsList)"      if self.barcodeScanned == butter {
+        ////        self.view.layer.borderWidth = 10
+        ////        self.barcode.backgroundColor = UIColor.greenColor()
+        ////        self.view.layer.borderColor = UIColor.greenColor().CGColor
+        //        ])
+        //      }
+        //      else {
+        //        self.view.layer.borderWidth = 10
+        //        self.barcode.backgroundColor = UIColor.redColor()
+        //        self.view.layer.borderColor = UIColor.redColor().CGColor
+        //      }
+        //    }
+        //    else {
+        
       })
     } else {
       self.session.stopRunning()
-      let displayTimer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
+      let displayTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
     }
     self.view.bringSubviewToFront(self.highlightView)
     
@@ -167,7 +176,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.alertView.transform =  CGAffineTransformMakeScale(1.0, 1.0)
       }) { (finished) -> Void in
         
-       let removeTimer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "removeAlertView", userInfo: nil, repeats: false)
+       let removeTimer = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: "removeAlertView", userInfo: nil, repeats: false)
     }
   }
   
@@ -178,17 +187,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {
     self.session.startRunning()
+    self.removeAlertView()
   }
+  
   
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  
-  //  func updateCounter() {
-  //    self.counter++
-  //  }
   
   
 }
