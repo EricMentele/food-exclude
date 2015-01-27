@@ -1,15 +1,15 @@
 //
-//  MainMenuViewController.swift
+//  UserProfileViewController.swift
 //  Food Exclude
 //
-//  Created by Eric Mentele on 1/26/15.
+//  Created by Alexandra Norcross on 1/27/15.
 //  Copyright (c) 2015
 //David Rogers,
 //Vania Kurniawati,
 //Clint Atkins,
 //Alexandra Norcross,
 //Eric Mentele. All rights reserved.
-//
+
 /*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -22,15 +22,23 @@
 
 import UIKit
 
-class MainMenuViewController: UIViewController {
+class UserProfileViewController: UIViewController {
+  //Outlets:
+  @IBOutlet weak var tableAllergens: UITableView!
+  @IBOutlet weak var buttonStart: UIButton!
+  
   var selectedUserProfile: UserProfile!
   
+  //Function: Set up view controller.
   override func viewDidLoad() {
-      super.viewDidLoad()
+    //Super:
+    super.viewDidLoad()
+    
+    //Table:
+    tableAllergens.registerNib(UINib(nibName: "AllergenCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CELL_ALLERGEN")
 
-      // Do any additional setup after loading the view.
-  }
-
+  } //end func
+  
   override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
       // Dispose of any resources that can be recreated.

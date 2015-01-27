@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6221" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="5hn-hZ-K33" customClass="AllergenCell" customModule="Food_Exclude" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5hn-hZ-K33" id="Szq-2p-0Oa">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="allergen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Knr-Hh-Zkw">
+                        <rect key="frame" x="28" y="11" width="60" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l97-QY-5Z5">
+                        <rect key="frame" x="243" y="6" width="51" height="31"/>
+                    </switch>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Knr-Hh-Zkw" firstAttribute="leading" secondItem="Szq-2p-0Oa" secondAttribute="leadingMargin" constant="20" id="93W-NP-OI2"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="l97-QY-5Z5" secondAttribute="trailing" constant="20" id="cMd-sE-NKA"/>
+                    <constraint firstAttribute="centerY" secondItem="Knr-Hh-Zkw" secondAttribute="centerY" id="vUL-A2-PmI"/>
+                    <constraint firstAttribute="centerY" secondItem="l97-QY-5Z5" secondAttribute="centerY" id="wjo-aG-P36"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="labelAllergen" destination="Knr-Hh-Zkw" id="2lV-pY-5rQ"/>
+                <outlet property="switchIsAllergen" destination="l97-QY-5Z5" id="cEx-Nv-hKb"/>
+            </connections>
+            <point key="canvasLocation" x="138" y="322"/>
+        </tableViewCell>
+    </objects>
+</document>
