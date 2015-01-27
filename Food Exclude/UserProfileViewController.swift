@@ -24,8 +24,9 @@ import UIKit
 
 class UserProfileViewController: UIViewController {
   //Outlets:
+  @IBOutlet weak var textUserName: UITextField!
   @IBOutlet weak var tableAllergens: UITableView!
-  @IBOutlet weak var buttonStart: UIButton!
+  @IBOutlet weak var buttonContinue: UIButton!
   
   var selectedUserProfile: UserProfile!
   
@@ -33,6 +34,13 @@ class UserProfileViewController: UIViewController {
   override func viewDidLoad() {
     //Super:
     super.viewDidLoad()
+    
+    //User profile:
+    if selectedUserProfile == nil {
+    
+    } else {
+      self.textUserName.text = selectedUserProfile.name
+    }
     
     //Table:
     tableAllergens.registerNib(UINib(nibName: "AllergenCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CELL_ALLERGEN")

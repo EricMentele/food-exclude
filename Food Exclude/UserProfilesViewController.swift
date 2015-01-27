@@ -23,7 +23,6 @@
 import UIKit
 
 class UserProfilesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
   //Table: to display user profiles
   @IBOutlet weak var tableUserProfiles: UITableView!
   var userProfiles: [UserProfile]!
