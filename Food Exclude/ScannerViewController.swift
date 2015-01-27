@@ -68,10 +68,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       session.addInput(input)
     }
     else {
-      self.timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "setupAlertView", userInfo: nil, repeats: false)
-      if timer.timeInterval == 5 {
-        self.setupAlertView()
-      }
+//      self.timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "setupAlertView", userInfo: nil, repeats: false)
+//      if timer.timeInterval == 5 {
+//        self.setupAlertView()
+//      }
       
     }
     
@@ -164,7 +164,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
     }
     else {
-      
+      self.timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "setupAlertView", userInfo: nil, repeats: false)
+      if timer.timeInterval == 5 {
+        self.setupAlertView()
+      }      
     }
     
     self.view.bringSubviewToFront(self.highlightView)
