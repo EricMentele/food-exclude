@@ -72,7 +72,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       if timer.timeInterval == 5 {
         self.setupAlertView()
       }
-
+      
     }
     
     
@@ -88,6 +88,22 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.view.layer.addSublayer(previewLayer)
     
     self.session.startRunning()
+  }
+  
+  
+  
+  func setupAlertView() {
+    let alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as UIView
+    alertView.center = self.view.center
+    alertView.alpha = 0
+    alertView.transform = CGAffineTransformMakeScale(0.4, 0.4)
+    self.view.addSubview(alertView)
+    
+    UIView.animateWithDuration(0.4, delay: 0.5, options: nil, animations: { () -> Void in
+      alertView.alpha = 1
+      alertView.transform =  CGAffineTransformMakeScale(1.0, 1.0)
+      }) { (finished) -> Void in
+    }
   }
   
   
@@ -108,7 +124,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       AVMetadataObjectTypePDF417Code,
       AVMetadataObjectTypeQRCode,
       AVMetadataObjectTypeAztecCode
-      ]
+    ]
     
     
     for metadata in metadataObjects {
@@ -153,21 +169,16 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     self.view.bringSubviewToFront(self.highlightView)
     
-    
-      let scanDoneController = UIAlertController(title: "Scan Complete", message: "Scan next item.", preferredStyle: .Alert)
-      //adds a cancell button to dismiss alert
-//    let okButton = UIAlertAction(title: "OK", style: .Cancel, handler: ((UIAlertAction!) -> Void)!)
-    
+    //MARK:  Start new scan (alert controller).
+    let scanDoneController = UIAlertController(title: "Scan Complete", message: "Scan next item.", preferredStyle: .Alert)
     
     let okButton = UIAlertAction(title: "OK", style: .Default, handler: { (UIAlertAction) -> Void in
       
       self.session.startRunning()
-    })//cameraOption
-      scanDoneController.addAction(okButton)
-      //presents alert controller
+    })//ok button action
+    scanDoneController.addAction(okButton)
     self.presentViewController(scanDoneController, animated: true, completion: nil)
-    
-  }
+  }//func captureOutput
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
