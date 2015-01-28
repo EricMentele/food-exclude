@@ -42,6 +42,7 @@ class Ingredients {
   var allergenSoy : String?
   var allergenGluten : String?
   var allergenList = [String?]()
+  let seperatedList : [String]?
   
   
   init(jsonDictionary : NSDictionary) {
@@ -52,6 +53,9 @@ class Ingredients {
     self.itemDescription = jsonDictionary["item_description"] as? String
     self.ingredientsList = jsonDictionary["nf_ingredient_statement"]  as? String
     self.allergenMilk = jsonDictionary["allergen_contains_milk"]  as? String
+    
+    self.seperatedList = self.ingredientsList?.componentsSeparatedByString(",")
+    
     if self.allergenMilk !=  nil {
       self.allergenList.append("Milk")
     }
@@ -79,6 +83,9 @@ class Ingredients {
       self.allergenList.append("Gluten")
     }
   }
+  
+  
+  
   
 
 }

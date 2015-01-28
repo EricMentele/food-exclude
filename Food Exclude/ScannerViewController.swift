@@ -42,12 +42,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var detectionString : String!
   var barcodeScanned : String!
   var networkController = NetworkController()
-  var ingredients : [Ingredients]!
   var list : Ingredients!
   var ingredientDetailVC = IngredientsViewController()
   
-
-  var ingredients = ["peanuts", "salmon", "cream cheese", "orange slices"] //replace with ingredients from barcodeScanned
+  
   var allergenDerivatives : [String : String] = ["peanuts" : "nuts", "salmon" : "fish", "koala" : "fluffy things", "sardines" : "fish"] //replace with allergenDerivatives
   var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
   
@@ -162,6 +160,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         self.list = ingredients
+        var ingredientsArray = self.list.seperatedList
         self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
         println("Does this have the product name? \(self.list)")
         
@@ -246,14 +245,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   }
   
   //MARK: Cross-search ingredients list against allergen derivatives list
-  func crossSearchForAllergens() {
-    for item in self.ingredients {
-      
-      if let c = allergenDerivatives.indexForKey(item) {
-        self.matches.append(item)
-      }}
-    println(self.matches)
-  }
+//  func crossSearchForAllergens() {
+//    for item in self.ingredients {
+//      
+//      if let c = allergenDerivatives.indexForKey(item) {
+//        self.matches.append(item)
+//      }}
+//    println(self.matches)
+//  }
   
   
   override func didReceiveMemoryWarning() {
