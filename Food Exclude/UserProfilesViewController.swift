@@ -32,10 +32,6 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     //Super:
     super.viewDidLoad()
     
-    //User profiles:
-    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-    userProfiles = appDelegate.loadUserProfilesFromArchive()
-    
     //Table:
     tableUserProfiles.registerNib(UINib(nibName: "UserProfileCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CELL_USER_PROFILE")
     tableUserProfiles.dataSource = self
@@ -82,17 +78,30 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
   //Function: Set table cell edit functionality.
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if editingStyle == UITableViewCellEditingStyle.Delete {
-      let indexOfUserProfile = indexPath.row
+      //Update & Save data.
+      userProfiles.removeAtIndex(indexPath.row)
       let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-      //Update data.
-      appDelegate.userProfiles.removeAtIndex(indexOfUserProfile)
-      userProfiles.removeAtIndex(indexOfUserProfile)
+      appDelegate.saveUserProfilesToArchive(userProfiles)
+      //Reload table.
       tableUserProfiles.reloadData()
-      //Save data.
-      appDelegate.saveUserProfilesToArchive()
     } //end if
+    
+    
+    //    if listTableView.editing{
+    //      //listTableView.editing = false;
+    //      listTableView.setEditing(false, animated: true);
+    //      //listTableView.reloadData();
+    //    }
+    //    else{
+    //      //listTableView.editing = true;
+    //      listTableView.setEditing(true, animated: true);
+    //      barButton.title = "Done";
+    //      barButton.style =  UIBarButtonItemStyle.Done;
+    //      //listTableView.reloadData();
+    //    }
+    
   } //end func
-
+  
   //MARK: Table View Delegate
   
   //Function: Handle cell selected event.
@@ -101,6 +110,7 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     var selectedRow = indexPath.row
     //User profile view controller:
     let vcUserProfile = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
+    vcUserProfile.selectedUserProfileIndex = selectedRow
     vcUserProfile.selectedUserProfile = userProfiles[selectedRow]
     //Present view controller.
     self.navigationController?.pushViewController(vcUserProfile, animated: true)
@@ -110,30 +120,27 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
   
   //Function: Handle Add User Profile button pressed.
   func pressedButtonAddUserProfile() {
-    //Update data.
-    userProfiles.append(UserProfile())
     //User profile view controller:
     let vcUserProfile = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
-    vcUserProfile.selectedUserProfile = userProfiles.last
-    vcUserProfile.addingNewUserProfile = true
+    vcUserProfile.selectedUserProfileIndex = -1
     //Present next view controller.
     self.navigationController?.pushViewController(vcUserProfile, animated: true)
   } //end func
   
   override func didReceiveMemoryWarning() {
-      super.didReceiveMemoryWarning()
-      // Dispose of any resources that can be recreated.
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
   }
   
-
+  
   /*
   // MARK: - Navigation
-
+  
   // In a storyboard-based application, you will often want to do a little preparation before navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-      // Get the new view controller using segue.destinationViewController.
-      // Pass the selected object to the new view controller.
+  // Get the new view controller using segue.destinationViewController.
+  // Pass the selected object to the new view controller.
   }
   */
-
+  
 }
