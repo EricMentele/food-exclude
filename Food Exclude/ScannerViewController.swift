@@ -158,12 +158,24 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         self.list = ingredients
         println("Does this have the product name? \(self.list)")
         
+        
+        //MARK: Item not in database alert
         if self.networkController.statusCode as NSObject == 404  {
           
-          let itemNotFoundAlert = UIAlertController(title: "Item", message: "This item is not in the database", preferredStyle: .Alert)
-          let okButton = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+          let itemNotFoundAlert = UIAlertController(title: "Item Not Found", message: "This item is not in the database", preferredStyle: .Alert)
+          let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
           itemNotFoundAlert.addAction(okButton)
           self.presentViewController(itemNotFoundAlert, animated: true, completion: nil)
+        }//if
+        
+        
+        //MARK: API calls maxed alert.
+        if self.networkController.statusCode as NSObject == 401  {
+          
+          let apiMaxed = UIAlertController(title: "API Call Limit", message: "The daily maximum for API calls has been reached", preferredStyle: .Alert)
+          let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
+          apiMaxed.addAction(okButton)
+          self.presentViewController(apiMaxed, animated: true, completion: nil)
         }//if
         
         //        self.foodIngredients.text = "Ingredients: \(self.list.ingredientsList)"      if self.barcodeScanned == butter {
