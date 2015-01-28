@@ -25,8 +25,11 @@ import UIKit
 class NetworkController {
   
   var urlSession : NSURLSession
-  let clientID = "41a64d9a"
-  let clientSecret = "5a1bdae295e1685f8676b3a9745a1a86"
+  let clientID = "48bd25da"
+  let clientSecret = "698a373a3b0e6ecda8f223451efbe070"
+  var statusCode: AnyObject?
+  var nsError: NSError?
+  
   
   class var sharedNetworkController : NetworkController {
     struct Static {
@@ -78,8 +81,6 @@ class NetworkController {
               println(jsonDict)
               let newIngredient = Ingredients(jsonDictionary: jsonDict)
               println(newIngredient)
-              
-              
               
 
               NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
