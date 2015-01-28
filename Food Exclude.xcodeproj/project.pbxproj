@@ -25,6 +25,7 @@
 		BA37ED031A78205F00408187 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37ED021A78205F00408187 /* UserProfileViewController.swift */; };
 		BA37ED051A78238A00408187 /* AllergenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA37ED041A78238A00408187 /* AllergenCell.xib */; };
 		BA37ED071A7824C900408187 /* AllergenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37ED061A7824C900408187 /* AllergenCell.swift */; };
+		BA37ED091A7844FC00408187 /* Allergen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37ED081A7844FC00408187 /* Allergen.swift */; };
 		BAB735BE1A770BEF00E8C76D /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB735BD1A770BEF00E8C76D /* ScannerViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		BA37ED021A78205F00408187 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		BA37ED041A78238A00408187 /* AllergenCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllergenCell.xib; sourceTree = "<group>"; };
 		BA37ED061A7824C900408187 /* AllergenCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergenCell.swift; sourceTree = "<group>"; };
+		BA37ED081A7844FC00408187 /* Allergen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Allergen.swift; sourceTree = "<group>"; };
 		BAB735BD1A770BEF00E8C76D /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,6 +172,7 @@
 			children = (
 				9C139F441A77FF86009C1F47 /* Ingredients.swift */,
 				BA2E53511A76B4920055D11F /* UserProfile.swift */,
+				BA37ED081A7844FC00408187 /* Allergen.swift */,
 				BA2E53531A76B5480055D11F /* FoodCategory.swift */,
 			);
 			name = Models;
@@ -282,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA37ED091A7844FC00408187 /* Allergen.swift in Sources */,
 				9C139F451A77FF86009C1F47 /* Ingredients.swift in Sources */,
 				BA37ED071A7824C900408187 /* AllergenCell.swift in Sources */,
 				BA37ED031A78205F00408187 /* UserProfileViewController.swift in Sources */,
