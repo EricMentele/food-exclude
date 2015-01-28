@@ -22,15 +22,15 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource {
+class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
+  //REQUIRED: selected user profile index - set to -1 to add a new user profile
+  var selectedUserProfileIndex: Int!
+  var selectedUserProfile: UserProfile!
+  
   //Outlets:
   @IBOutlet weak var textUserName: UITextField!
   @IBOutlet weak var tableAllergens: UITableView!
   @IBOutlet weak var buttonContinue: UIButton!
-  
-  //Selected user profile:
-  var selectedUserProfile: UserProfile!
-  var addingNewUserProfile = false
   
   //Function: Set up view controller.
   override func viewDidLoad() {
@@ -38,7 +38,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     super.viewDidLoad()
     
     //Selected user profile:
-    if addingNewUserProfile {
+    if selectedUserProfileIndex < 0 {
       selectedUserProfile = UserProfile()
     } //end if
     
@@ -49,6 +49,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     //Table:
     tableAllergens.registerNib(UINib(nibName: "AllergenCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CELL_ALLERGEN")
     tableAllergens.dataSource = self
+    tableAllergens.delegate = self
     
     //Button:
     buttonContinue.addTarget(self, action: "pressedButtonContinue", forControlEvents: UIControlEvents.TouchUpInside)
@@ -73,6 +74,18 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     return cell
   } //end func
   
+  //MARK: Table View Delegate
+  
+  //Function: Handle event when cell is selected.
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    //Edit cell.
+    let cell = tableView.cellForRowAtIndexPath(indexPath) as AllergenCell
+    cell.selected = false
+    cell.switchIsAllergen.setOn(!cell.switchIsAllergen.on, animated: true)
+    //Update user profile.
+    selectedUserProfile.allergens[indexPath.row].sensitive = cell.switchIsAllergen.on
+  } //end func
+  
   //MARK: Text Field Delegate
   
   //Function: Handle event when text field keyboard is dismissed.
@@ -90,44 +103,34 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
       println("Please enter a user name")
     } else {
       let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-      
-      //Add user profile accordingly.
-      if addingNewUserProfile {
-        appDelegate.userProfiles.append(UserProfile())
-        selectedUserProfile = appDelegate.userProfiles.last
+      //Add/Update selected user profile.
+      var userProfiles = appDelegate.loadUserProfilesFromArchive() as [UserProfile]?
+      if userProfiles != nil {
+        if !userProfiles!.isEmpty { //users exist: edit/add user profile accordingly
+          if selectedUserProfileIndex >= 0 { //edit user profile
+            userProfiles![selectedUserProfileIndex] = selectedUserProfile
+          } else { //add user profile
+            userProfiles!.append(selectedUserProfile)
+          } //end if
+        } else { //no users exist: add user
+          userProfiles!.append(selectedUserProfile)
+        } //end if
+      } else { //no users exist: add user
+        userProfiles = [selectedUserProfile]
       } //end if
-      
-      //Update selected user profile.
       selectedUserProfile.name = textUserName.text
-      let allergenCells = tableAllergens.visibleCells() as [AllergenCell]
-      for allergenCell in allergenCells {
-        let indexPath = self.tableAllergens.indexPathForCell(allergenCell)
-        let allergen = selectedUserProfile.allergens[indexPath!.row]
-        allergen.sensitive = allergenCell.switchIsAllergen.on
-      } //end for
       
       //Save data.
-      appDelegate.saveUserProfilesToArchive()
+      appDelegate.saveUserProfilesToArchive(userProfiles!)
+      
+      //Present next view controller.
+      let vcScanner = self.storyboard?.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
+      self.navigationController?.pushViewController(vcScanner, animated: true)
     } //end if
-    
-    //Present next view controller.
-    let vcScanner = self.storyboard?.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
-    self.navigationController?.pushViewController(vcScanner, animated: true)
   } //end func
   
   override func didReceiveMemoryWarning() {
-      super.didReceiveMemoryWarning()
-      // Dispose of any resources that can be recreated.
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
   }
-
-  /*
-  // MARK: - Navigation
-
-  // In a storyboard-based application, you will often want to do a little preparation before navigation
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-      // Get the new view controller using segue.destinationViewController.
-      // Pass the selected object to the new view controller.
-  }
-  */
-
 }
