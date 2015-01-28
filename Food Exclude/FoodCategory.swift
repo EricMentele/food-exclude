@@ -22,9 +22,10 @@
 
 import Foundation
 
-class FoodCategory: NSObject, NSCoding {
+struct FoodCategory {
   var name: String
   var derivatives = [String]()
+  var flag = false
   
   //MARK: Initialize class
   
@@ -32,21 +33,10 @@ class FoodCategory: NSObject, NSCoding {
   init(name: String, derivatives: [String]) {
     self.name = name
     self.derivatives = derivatives
+    self.flag = false
   } //end init
   
-  //MARK: NSKeyedArchiver
   
-  //Initialize: Load from archive.
-  required init(coder aDecoder: NSCoder) {
-    self.name = aDecoder.decodeObjectForKey("name") as String
-    if let derivatives = aDecoder.decodeObjectForKey("derivatives") as? [String] {
-      self.derivatives = derivatives
-    } //end if
-  } //end init
-
-  //Function: Save to archive.
-  func encodeWithCoder(aCoder: NSCoder) {
-    aCoder.encodeObject(self.name, forKey: "name")
-    aCoder.encodeObject(self.derivatives, forKey: "derivatives")
-  } //end func
+  
+  
 }
