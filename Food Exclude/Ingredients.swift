@@ -26,10 +26,10 @@ import UIKit
 
 class Ingredients {
   
-  var brandName : String
-  var itemName : String
-  var brandID : String
-  var itemID : String
+  var brandName : String?
+  var itemName : String?
+  var brandID : String?
+  var itemID : String?
   var itemDescription : String?
   var ingredientsList : String?
   var allergenMilk : String?
@@ -45,11 +45,10 @@ class Ingredients {
   
   
   init(jsonDictionary : NSDictionary) {
-    self.brandName = jsonDictionary["brand_name"] as String
-    self.itemName = jsonDictionary["item_name"] as String
-    self.brandID = jsonDictionary["brand_id"] as String
-    self.itemID = jsonDictionary["item_id"] as String
-
+    self.brandName = jsonDictionary["brand_name"] as? String
+    self.itemName = jsonDictionary["item_name"] as? String
+    self.brandID = jsonDictionary["brand_id"] as? String
+    self.itemID = jsonDictionary["item_id"] as? String
     self.itemDescription = jsonDictionary["item_description"] as? String
     self.ingredientsList = jsonDictionary["nf_ingredient_statement"]  as? String
     self.allergenMilk = jsonDictionary["allergen_contains_milk"]  as? String

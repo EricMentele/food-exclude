@@ -144,11 +144,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         self.list = ingredients
-      
-        println(self.list!.allergenList)
-        //self.itemName = self.list.itemName
-        println(self.itemName)
+        println("Does this have the product name? \(self.list)")
         
+        if self.networkController.statusCode as NSObject == 404  {
+          
+          let itemNotFoundAlert = UIAlertController(title: "Item", message: "This item is not in the database", preferredStyle: .Alert)
+          let okButton = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+          itemNotFoundAlert.addAction(okButton)
+          self.presentViewController(itemNotFoundAlert, animated: true, completion: nil)
+        }//if
         
         //        self.foodIngredients.text = "Ingredients: \(self.list.ingredientsList)"      if self.barcodeScanned == butter {
         ////        self.view.layer.borderWidth = 10
@@ -168,8 +172,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     } else {
 
     }
+    self.session.stopRunning()
+    let displayTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
     self.view.bringSubviewToFront(self.highlightView)
-    
+    return 
   }//func captureOutput
   
   
@@ -197,6 +203,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {
+    
     self.session.startRunning()
     let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
     self.removeAlertView()

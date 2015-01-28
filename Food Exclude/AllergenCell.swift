@@ -25,5 +25,5 @@ import UIKit
 class AllergenCell: UITableViewCell {
   //Outlets:
   @IBOutlet weak var labelAllergen: UILabel!
-  @IBOutlet weak var switchIsAllergen: UISwitch!
+  @IBOutlet weak var switchIsAllergen: UISwitch!    
 }
