@@ -52,6 +52,18 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    //populating allergenDerivatives with data
+    if let jsonData = NSData(contentsOfFile: "/Users/koala/Desktop/F2/food-exclude/Food Exclude/allergens.json") {
+      var error : NSError?
+      if let jsonDictionary = NSJSONSerialization.JSONObjectWithData(jsonData, options: nil, error:&error) as? NSDictionary {
+        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+          self.allergenDerivatives = jsonDictionary as [String : String]
+        })
+        
+      }
+    }
+    
+    
     //formatting so that the barcode reader line resizes automatically
     self.highlightView.autoresizingMask =   UIViewAutoresizing.FlexibleTopMargin |
       UIViewAutoresizing.FlexibleBottomMargin |
@@ -183,20 +195,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           apiMaxed.addAction(okButton)
           self.presentViewController(apiMaxed, animated: true, completion: nil)
         }//if
-        
-        //        self.foodIngredients.text = "Ingredients: \(self.list.ingredientsList)"      if self.barcodeScanned == butter {
-        ////        self.view.layer.borderWidth = 10
-        ////        self.barcode.backgroundColor = UIColor.greenColor()
-        ////        self.view.layer.borderColor = UIColor.greenColor().CGColor
-        //        ])
-        //      }
-        //      else {
-        //        self.view.layer.borderWidth = 10
-        //        self.barcode.backgroundColor = UIColor.redColor()
-        //        self.view.layer.borderColor = UIColor.redColor().CGColor
-        //      }
-        //    }
-        //    else {
         
       })
     } else {

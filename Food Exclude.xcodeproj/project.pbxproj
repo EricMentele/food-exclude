@@ -13,6 +13,7 @@
 		40A438771A75973B00A24AA0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40A438751A75973B00A24AA0 /* LaunchScreen.xib */; };
 		40A438831A75973B00A24AA0 /* Food_ExcludeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A438821A75973B00A24AA0 /* Food_ExcludeTests.swift */; };
 		40A438931A7692F100A24AA0 /* readme in Resources */ = {isa = PBXBuildFile; fileRef = 40A438921A7692F100A24AA0 /* readme */; };
+		4EE95FB81A799D8B00C642AE /* allergens.json in Resources */ = {isa = PBXBuildFile; fileRef = 4EE95FB71A799D8B00C642AE /* allergens.json */; };
 		9C139F431A77FF79009C1F47 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C139F421A77FF79009C1F47 /* NetworkController.swift */; };
 		9C139F451A77FF86009C1F47 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C139F441A77FF86009C1F47 /* Ingredients.swift */; };
 		9C563DB31A78BEBD00EAC832 /* purr.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C563DB21A78BEBD00EAC832 /* purr.wav */; };
@@ -52,6 +53,7 @@
 		40A438811A75973B00A24AA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40A438821A75973B00A24AA0 /* Food_ExcludeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food_ExcludeTests.swift; sourceTree = "<group>"; };
 		40A438921A7692F100A24AA0 /* readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme; sourceTree = "<group>"; };
+		4EE95FB71A799D8B00C642AE /* allergens.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allergens.json; sourceTree = "<group>"; };
 		9C139F421A77FF79009C1F47 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		9C139F441A77FF86009C1F47 /* Ingredients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
 		9C563DB21A78BEBD00EAC832 /* purr.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = purr.wav; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		40A4386A1A75973B00A24AA0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4EE95FB71A799D8B00C642AE /* allergens.json */,
 				9CCF777B1A79583B00C532F3 /* icons/images */,
 				9CCF777C1A79584B00C532F3 /* Sounds */,
 				40A4386B1A75973B00A24AA0 /* Info.plist */,
@@ -287,6 +290,7 @@
 				40A438721A75973B00A24AA0 /* Main.storyboard in Resources */,
 				ABE71A461A771426002F0515 /* AlertView.xib in Resources */,
 				BA37ECFF1A77FFF900408187 /* UserProfileCell.xib in Resources */,
+				4EE95FB81A799D8B00C642AE /* allergens.json in Resources */,
 				40A438771A75973B00A24AA0 /* LaunchScreen.xib in Resources */,
 				9C563DB31A78BEBD00EAC832 /* purr.wav in Resources */,
 				40A438741A75973B00A24AA0 /* Images.xcassets in Resources */,
