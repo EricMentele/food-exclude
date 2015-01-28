@@ -166,15 +166,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
       })
     } else {
-      self.session.stopRunning()
-      let displayTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
+
     }
     self.view.bringSubviewToFront(self.highlightView)
     
   }//func captureOutput
   
   
-  //MARK: Scanned-item-nil AlertView
+  //MARK: Timed AlertView
   
   func displayAlertView() {
     self.alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as UIView
