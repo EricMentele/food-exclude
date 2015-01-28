@@ -28,6 +28,7 @@ class NetworkController {
   let clientID = "41a64d9a"
   let clientSecret = "5a1bdae295e1685f8676b3a9745a1a86"
   var statusCode: AnyObject?
+  var nsError: NSError?
   
   
   class var sharedNetworkController : NetworkController {
@@ -58,9 +59,15 @@ class NetworkController {
     let getRequest = NSMutableURLRequest(URL: NSURL(string: requestURL)!)
     
     let dataTask = self.urlSession.dataTaskWithRequest(getRequest, completionHandler: { (data, response, error) -> Void in
+      
+      self.nsError = error?
+      println(self.nsError)
+      println(error)
       if error == nil {
+        
+         println(response)
+        
         if let httpResponse = response as? NSHTTPURLResponse {
-          println(response)
          
           var status = httpResponse.statusCode
           self.statusCode = status
