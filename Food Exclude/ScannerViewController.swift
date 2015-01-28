@@ -217,6 +217,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {
     
+    detectionString = nil
     self.session.startRunning()
 //    self.removeAlertView()
   }
