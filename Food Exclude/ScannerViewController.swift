@@ -137,6 +137,22 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     // var butter = "0767707001067"
     //  var stamp = "1564568900"
     if self.barcodeScanned != nil {
+      
+      
+      //MARK: Network connection alert.
+      
+      if NetworkController.sharedNetworkController.nsError != nil {
+        
+        let networkIssueAlert = UIAlertController(title: "Network Error", message: "Please make sure you have an internet connecton and try again later", preferredStyle: .Alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        networkIssueAlert.addAction(cancelButton)
+        self.presentViewController(networkIssueAlert, animated: true, completion: nil)
+        println("fail")
+        
+        //self.session.stopRunning()
+      }
+      
+      
       self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         self.list = ingredients
@@ -167,19 +183,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       })
     } else {
       
-      //MARK: Network connection alert.
-      let networkIssueAlert = UIAlertController(title: "Error", message: "Connectivity error! Please try again later", preferredStyle: .Alert)
-      let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-      networkIssueAlert.addAction(cancelButton)
-      self.presentViewController(networkIssueAlert, animated: true, completion: nil)
-      println("fail")
       
      
       return
-    }
-    self.session.stopRunning()
-    let displayTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
-    self.view.bringSubviewToFront(self.highlightView)
+    }//else in if barcode != nil
+    
     return 
   }//func captureOutput
   
@@ -210,7 +218,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   @IBAction func newScan(sender: UIButton) {
     
     self.session.startRunning()
-    self.removeAlertView()
+//    self.removeAlertView()
   }
   
   
