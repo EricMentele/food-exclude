@@ -90,7 +90,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
     self.view.layer.addSublayer(previewLayer)
     
+    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
+    
     self.session.startRunning()
+    
+
   }
   
   
@@ -195,6 +199,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {
     self.session.startRunning()
+    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
     self.removeAlertView()
   }
   
