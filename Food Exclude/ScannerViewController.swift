@@ -42,6 +42,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var networkController = NetworkController()
   var ingredients : [Ingredients]!
   var list : Ingredients!
+  var ingredientDetailVC = IngredientsViewController()
   
   
   //used for custom alert
@@ -160,6 +161,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         self.list = ingredients
+        self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
         //        self.foodIngredients.text = "Ingredients: \(self.list.ingredientsList)"      if self.barcodeScanned == butter {
         ////        self.view.layer.borderWidth = 10
         ////        self.barcode.backgroundColor = UIColor.greenColor()

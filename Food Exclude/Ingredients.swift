@@ -32,15 +32,15 @@ class Ingredients {
   var itemID : String
   var itemDescription : String
   var ingredientsList : String
-  var allergenMilk : String
-  var allergenEggs : String
-  var allergenFish : String
-  var allergenShellfish : String
-  var allergenTreeNuts : String
-  var allergenPeanuts : String
-  var allergenWheat : String
-  var allergenSoy : String
-  var allergenGluten : String
+//  var allergenMilk : String
+//  var allergenEggs : String
+//  var allergenFish : String
+//  var allergenShellfish : String
+//  var allergenTreeNuts : String
+//  var allergenPeanuts : String
+//  var allergenWheat : String
+//  var allergenSoy : String
+//  var allergenGluten : String
   
   
   init(jsonDictionary : NSDictionary) {
@@ -50,15 +50,15 @@ class Ingredients {
     self.itemID = jsonDictionary["item_id"] as String
     self.itemDescription = jsonDictionary["item_description"] as String
     self.ingredientsList = jsonDictionary["nf_ingredient_statement"] as String
-    self.allergenMilk = jsonDictionary["allergen_contains_milk"] as String
-    self.allergenEggs = jsonDictionary["allergen_contains_eggs"] as String
-    self.allergenFish = jsonDictionary["allergen_contains_fish"] as String
-    self.allergenShellfish = jsonDictionary["allergen_contains_shellfish"] as String
-    self.allergenTreeNuts = jsonDictionary["allergen_contains_tree_nuts"] as String
-    self.allergenPeanuts = jsonDictionary["allergen_contains_peanuts"] as String
-    self.allergenWheat = jsonDictionary["allergen_contains_wheat"] as String
-    self.allergenSoy = jsonDictionary["allergen_contains_soybeans"] as String
-    self.allergenGluten = jsonDictionary["allergen_contains_gluten"] as String
+//    self.allergenMilk = jsonDictionary["allergen_contains_milk"] as String
+//    self.allergenEggs = jsonDictionary["allergen_contains_eggs"] as String
+//    self.allergenFish = jsonDictionary["allergen_contains_fish"] as String
+//    self.allergenShellfish = jsonDictionary["allergen_contains_shellfish"] as String
+//    self.allergenTreeNuts = jsonDictionary["allergen_contains_tree_nuts"] as String
+//    self.allergenPeanuts = jsonDictionary["allergen_contains_peanuts"] as String
+//    self.allergenWheat = jsonDictionary["allergen_contains_wheat"] as String
+//    self.allergenSoy = jsonDictionary["allergen_contains_soybeans"] as String
+//    self.allergenGluten = jsonDictionary["allergen_contains_gluten"] as String
   }
 
 }

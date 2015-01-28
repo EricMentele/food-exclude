@@ -25,8 +25,8 @@ import UIKit
 class NetworkController {
   
   var urlSession : NSURLSession
-  let clientID = "48bd25da"
-  let clientSecret = "698a373a3b0e6ecda8f223451efbe070"
+  let clientID = "41a64d9a"
+  let clientSecret = "5a1bdae295e1685f8676b3a9745a1a86"
   
   class var sharedNetworkController : NetworkController {
     struct Static {
@@ -67,7 +67,6 @@ class NetworkController {
               let newIngredient = Ingredients(jsonDictionary: jsonDict)
                 
               
-              
 
               NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 completionHandler(newIngredient, nil)
@@ -76,7 +75,12 @@ class NetworkController {
               
               
             }//end if
+          case 404:
+            println("404")
+            
+          
           case 300...599:
+            
             println("This is bad - it's an error that may or may not be your fault")
             completionHandler(nil, "this is bad!")
           default:
