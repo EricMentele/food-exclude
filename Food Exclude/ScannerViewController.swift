@@ -47,6 +47,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var ingredientDetailVC = IngredientsViewController()
   
 
+  var ingredients = ["peanuts", "salmon", "cream cheese", "orange slices"] //replace with ingredients from barcodeScanned
+  var allergenDerivatives : [String : String] = ["peanuts" : "nuts", "salmon" : "fish", "koala" : "fluffy things", "sardines" : "fish"] //replace with allergenDerivatives
+  var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -243,6 +246,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.removeAlertView()
   }
   
+  
+  func crossSearchForAllergens() {
+    for item in self.ingredients {
+      
+      if let c = allergenDerivatives.indexForKey(item) {
+        self.matches.append(item)
+      }}
+    println(self.matches)
+  }
   
   
   override func didReceiveMemoryWarning() {
