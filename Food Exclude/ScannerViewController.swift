@@ -46,6 +46,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var list : Ingredients?
   var allergenList : [String]?
   var itemName : String!
+  
 
   
   override func viewDidLoad() {
@@ -90,11 +91,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
     self.view.layer.addSublayer(previewLayer)
     
-    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
-    
     self.session.startRunning()
-    
-
+    }
+  
+  override func viewWillAppear(animated: Bool) {
+    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
   }
   
   
@@ -198,11 +199,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
       })
     } else {
-
-    }
-//    self.session.stopRunning()
-//    let displayTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
-    self.view.bringSubviewToFront(self.highlightView)
+      
+      
+     
+      return
+    }//else in if barcode != nil
+    
     return 
   }//func captureOutput
   
@@ -210,18 +212,22 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   //MARK: Timed AlertView
   
   func displayAlertView() {
-    self.alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as UIView
-    alertView.center = self.view.center
-    alertView.alpha = 0
-    alertView.transform = CGAffineTransformMakeScale(0.4, 0.4)
-    self.view.addSubview(alertView)
-    
-    UIView.animateWithDuration(0.4, delay: 0.5, options: nil, animations: { () -> Void in
-      self.alertView.alpha = 1
-      self.alertView.transform =  CGAffineTransformMakeScale(1.0, 1.0)
-      }) { (finished) -> Void in
-        
-       let removeTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "removeAlertView", userInfo: nil, repeats: false)
+    if detectionString == nil {
+      self.alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as UIView
+      alertView.center = self.view.center
+      alertView.alpha = 0
+      alertView.transform = CGAffineTransformMakeScale(0.4, 0.4)
+      self.view.addSubview(alertView)
+      
+      UIView.animateWithDuration(0.4, delay: 0.5, options: nil, animations: { () -> Void in
+        self.alertView.alpha = 1
+        self.alertView.transform =  CGAffineTransformMakeScale(1.0, 1.0)
+        }) { (finished) -> Void in
+          
+          let removeTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "removeAlertView", userInfo: nil, repeats: false)
+      }
+    } else {
+      
     }
   }
   
@@ -234,7 +240,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     detectionString = nil
     self.session.startRunning()
-//    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
     self.removeAlertView()
   }
   
