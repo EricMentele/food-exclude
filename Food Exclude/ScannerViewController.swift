@@ -180,7 +180,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.session.stopRunning()
     let displayTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
     self.view.bringSubviewToFront(self.highlightView)
-    
+    return 
   }//func captureOutput
   
   
