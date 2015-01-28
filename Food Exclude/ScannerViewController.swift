@@ -141,8 +141,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.barcode.text = "Barcode scanned: \(self.detectionString)"
     self.barcodeScanned = self.detectionString
     self.highlightView.frame = highlightViewRect
-    // var butter = "0767707001067"
-    //  var stamp = "1564568900"
+ 
     if self.barcodeScanned != nil {
       
       
@@ -246,7 +245,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.removeAlertView()
   }
   
-  
+  //MARK: Cross-search ingredients list against allergen derivatives list
   func crossSearchForAllergens() {
     for item in self.ingredients {
       
