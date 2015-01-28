@@ -37,31 +37,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UILabel.appearance().font = UIFont(name: "Avenir", size: 17.0)
     
     //Load data from archive; and direct user accordingly.
-    let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
     if let userProfilesFromArchive = loadUserProfilesFromArchive() as [UserProfile]? {
       self.userProfiles = userProfilesFromArchive
       if !userProfilesFromArchive.isEmpty { //users exist: direct to scanner
-//        let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILES") as UserProfilesViewController
-//        rootViewController.userProfiles = self.userProfiles
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        //let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILES") as UserProfilesViewController
         let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
         let navigationController = UINavigationController(rootViewController: rootViewController)
         window?.rootViewController = navigationController
       } else { //no users: direct to default profile
-        let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
-        self.userProfiles.append(UserProfile())
-        rootViewController.selectedUserProfile = self.userProfiles[0]
-        let navigationController = UINavigationController(rootViewController: rootViewController)
-        window?.rootViewController = navigationController
+        gotoUserProfileViewController()
       } //end if
     } else { //no users: direct to default profile
-      let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
-      self.userProfiles.append(UserProfile())
-      rootViewController.selectedUserProfile = self.userProfiles[0]
-      let navigationController = UINavigationController(rootViewController: rootViewController)
-      window?.rootViewController = navigationController
+      gotoUserProfileViewController()
     } //end if
     
     return true
+  } //end func
+  
+  //Function: Go to default user profile view controller.
+  func gotoUserProfileViewController() {
+    //View controller:
+    let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+    let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
+    rootViewController.addingNewUserProfile = true
+    //Navigation controller:
+    let navigationController = UINavigationController(rootViewController: rootViewController)
+    window?.rootViewController = navigationController
   } //end func
   
   //Function: Load user profile data from archive.

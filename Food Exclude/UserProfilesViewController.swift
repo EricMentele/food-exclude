@@ -31,11 +31,28 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
   override func viewDidLoad() {
     //Super:
     super.viewDidLoad()
-
+    
+    //User profiles:
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    userProfiles = appDelegate.loadUserProfilesFromArchive()
+    
     //Table:
     tableUserProfiles.registerNib(UINib(nibName: "UserProfileCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CELL_USER_PROFILE")
     tableUserProfiles.dataSource = self
     tableUserProfiles.delegate = self
+    
+    //Add user profile button:
+    let buttonAddUserProfile = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "pressedButtonAddUserProfile")
+    self.navigationItem.rightBarButtonItem = buttonAddUserProfile
+  } //end func
+  
+  //Function: Set up view controller.
+  override func viewWillAppear(animated: Bool) {
+    //User profile data: latest
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    userProfiles = appDelegate.loadUserProfilesFromArchive()
+    //Reload table.
+    tableUserProfiles.reloadData()
   } //end func
   
   //MARK: Table View Data Source
@@ -56,6 +73,25 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     //Return cell.
     return cell
   } //end func
+  
+  //Function: Determine if table cell can be edited.
+  func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    return userProfiles.count > 1 //only if there are 1+ profiles
+  } //end func
+  
+  //Function: Set table cell edit functionality.
+  func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    if editingStyle == UITableViewCellEditingStyle.Delete {
+      let indexOfUserProfile = indexPath.row
+      let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+      //Update data.
+      appDelegate.userProfiles.removeAtIndex(indexOfUserProfile)
+      userProfiles.removeAtIndex(indexOfUserProfile)
+      tableUserProfiles.reloadData()
+      //Save data.
+      appDelegate.saveUserProfilesToArchive()
+    } //end if
+  } //end func
 
   //MARK: Table View Delegate
   
@@ -67,6 +103,20 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     let vcUserProfile = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
     vcUserProfile.selectedUserProfile = userProfiles[selectedRow]
     //Present view controller.
+    self.navigationController?.pushViewController(vcUserProfile, animated: true)
+  } //end func
+  
+  //MARK: Selectors
+  
+  //Function: Handle Add User Profile button pressed.
+  func pressedButtonAddUserProfile() {
+    //Update data.
+    userProfiles.append(UserProfile())
+    //User profile view controller:
+    let vcUserProfile = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
+    vcUserProfile.selectedUserProfile = userProfiles.last
+    vcUserProfile.addingNewUserProfile = true
+    //Present next view controller.
     self.navigationController?.pushViewController(vcUserProfile, animated: true)
   } //end func
   
