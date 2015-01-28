@@ -137,17 +137,45 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     // var butter = "0767707001067"
     //  var stamp = "1564568900"
     if self.barcodeScanned != nil {
+      
+      
+      //MARK: Network connection alert.
+      
+      if NetworkController.sharedNetworkController.nsError != nil {
+        
+        let networkIssueAlert = UIAlertController(title: "Network Error", message: "Please make sure you have an internet connecton and try again later", preferredStyle: .Alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        networkIssueAlert.addAction(cancelButton)
+        self.presentViewController(networkIssueAlert, animated: true, completion: nil)
+        println("fail")
+        
+        //self.session.stopRunning()
+      }
+      
+      
       self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         self.list = ingredients
         println("Does this have the product name? \(self.list)")
         
+        
+        //MARK: Item not in database alert
         if self.networkController.statusCode as NSObject == 404  {
           
-          let itemNotFoundAlert = UIAlertController(title: "Item", message: "This item is not in the database", preferredStyle: .Alert)
-          let okButton = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+          let itemNotFoundAlert = UIAlertController(title: "Item Not Found", message: "This item is not in the database", preferredStyle: .Alert)
+          let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
           itemNotFoundAlert.addAction(okButton)
           self.presentViewController(itemNotFoundAlert, animated: true, completion: nil)
+        }//if
+        
+        
+        //MARK: API calls maxed alert.
+        if self.networkController.statusCode as NSObject == 401  {
+          
+          let apiMaxed = UIAlertController(title: "API Call Limit", message: "The daily maximum for API calls has been reached", preferredStyle: .Alert)
+          let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
+          apiMaxed.addAction(okButton)
+          self.presentViewController(apiMaxed, animated: true, completion: nil)
         }//if
         
         //        self.foodIngredients.text = "Ingredients: \(self.list.ingredientsList)"      if self.barcodeScanned == butter {
@@ -167,19 +195,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       })
     } else {
       
-      //MARK: Network connection alert.
-      let networkIssueAlert = UIAlertController(title: "Error", message: "Connectivity error! Please try again later", preferredStyle: .Alert)
-      let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-      networkIssueAlert.addAction(cancelButton)
-      self.presentViewController(networkIssueAlert, animated: true, completion: nil)
-      println("fail")
       
      
       return
-    }
-    self.session.stopRunning()
-    let displayTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
-    self.view.bringSubviewToFront(self.highlightView)
+    }//else in if barcode != nil
+    
     return 
   }//func captureOutput
   
@@ -209,8 +229,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {
     
+    detectionString = nil
     self.session.startRunning()
-    self.removeAlertView()
+//    self.removeAlertView()
   }
   
   
