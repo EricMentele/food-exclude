@@ -41,7 +41,7 @@ class NetworkController {
     let ephemConfig = NSURLSessionConfiguration.ephemeralSessionConfiguration()
     
     self.urlSession = NSURLSession(configuration: ephemConfig)
-
+    
   }
   
   
@@ -56,22 +56,36 @@ class NetworkController {
     let getRequest = NSMutableURLRequest(URL: NSURL(string: requestURL)!)
     
     let dataTask = self.urlSession.dataTaskWithRequest(getRequest, completionHandler: { (data, response, error) -> Void in
+      
+      self.nsError = error?
+      println(self.nsError)
+      println(error)
       if error == nil {
+        
+         println(response)
+        
         if let httpResponse = response as? NSHTTPURLResponse {
-        //println(response)
+         
+          var status = httpResponse.statusCode
+          self.statusCode = status
+          
+          
+          
           switch httpResponse.statusCode {
           case 200...299:
             println("outside 200")
             if let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary {
               println(jsonDict)
               let newIngredient = Ingredients(jsonDictionary: jsonDict)
-                
+              println(newIngredient)
+              
+              
               
 
               NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 completionHandler(newIngredient, nil)
-                }) //end block
-
+              }) //end block
+              
               
               
             }//end if
@@ -83,21 +97,23 @@ class NetworkController {
             
             println("This is bad - it's an error that may or may not be your fault")
             completionHandler(nil, "this is bad!")
+            
+            
+            
           default:
             println("This is odd - default case fired")
           }//end Switch
-        }
-      }
-    })
+        }//httpResponse
+      }//if error
+    })//dataTask
     dataTask.resume()
-  }
-      
-}
-    
+  }//fetchIngredientListForUPC
+}//NetworkController
 
-  
-  
-  
+
+
+
+
 
 
 //https://api.nutritionix.com/v1_1/item?upc=49000036756&appId=
