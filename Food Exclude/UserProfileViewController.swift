@@ -30,15 +30,21 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   
   //Selected user profile:
   var selectedUserProfile: UserProfile!
+  var addingNewUserProfile = false
   
   //Function: Set up view controller.
   override func viewDidLoad() {
     //Super:
     super.viewDidLoad()
     
+    //Selected user profile:
+    if addingNewUserProfile {
+      selectedUserProfile = UserProfile()
+    } //end if
+    
     //Text field:
     textUserName.delegate = self
-      self.textUserName.text = selectedUserProfile!.name
+    self.textUserName.text = selectedUserProfile!.name
     
     //Table:
     tableAllergens.registerNib(UINib(nibName: "AllergenCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CELL_ALLERGEN")
@@ -83,6 +89,14 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     if textUserName.text == "" {
       println("Please enter a user name")
     } else {
+      let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+      
+      //Add user profile accordingly.
+      if addingNewUserProfile {
+        appDelegate.userProfiles.append(UserProfile())
+        selectedUserProfile = appDelegate.userProfiles.last
+      } //end if
+      
       //Update selected user profile.
       selectedUserProfile.name = textUserName.text
       let allergenCells = tableAllergens.visibleCells() as [AllergenCell]
@@ -91,8 +105,8 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
         let allergen = selectedUserProfile.allergens[indexPath!.row]
         allergen.sensitive = allergenCell.switchIsAllergen.on
       } //end for
+      
       //Save data.
-      let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
       appDelegate.saveUserProfilesToArchive()
     } //end if
     
