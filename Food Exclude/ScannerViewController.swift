@@ -90,7 +90,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
     self.view.layer.addSublayer(previewLayer)
     
-    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
+    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
     
     self.session.startRunning()
     
@@ -172,8 +172,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     } else {
 
     }
-    self.session.stopRunning()
-    let displayTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
+//    self.session.stopRunning()
+//    let displayTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
     self.view.bringSubviewToFront(self.highlightView)
     return 
   }//func captureOutput
@@ -205,7 +205,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   @IBAction func newScan(sender: UIButton) {
     
     self.session.startRunning()
-    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
+//    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
     self.removeAlertView()
   }
   
