@@ -10,14 +10,17 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="250"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We still haven't found anything yet. Use the full screen for a better capture." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRm-ry-UIw">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRm-ry-UIw">
                     <rect key="frame" x="5" y="5" width="290" height="240"/>
+                    <string key="text">We still haven't found anything yet. Use the full screen for a better capture.
+ 
+Tap Next Item.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.017538667930000001" green="0.017538667930000001" blue="0.017538667930000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="KRm-ry-UIw" secondAttribute="trailing" constant="5" id="6BX-Zv-AJd"/>
                 <constraint firstItem="KRm-ry-UIw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="Wwa-Fd-Xm9"/>

@@ -25,8 +25,10 @@ import UIKit
 class NetworkController {
   
   var urlSession : NSURLSession
-  let clientID = "48bd25da"
-  let clientSecret = "698a373a3b0e6ecda8f223451efbe070"
+  let clientID = "41a64d9a"
+  let clientSecret = "5a1bdae295e1685f8676b3a9745a1a86"
+  var statusCode: AnyObject?
+  
   
   class var sharedNetworkController : NetworkController {
     struct Static {
@@ -41,7 +43,7 @@ class NetworkController {
     let ephemConfig = NSURLSessionConfiguration.ephemeralSessionConfiguration()
     
     self.urlSession = NSURLSession(configuration: ephemConfig)
-
+    
   }
   
   
@@ -58,42 +60,52 @@ class NetworkController {
     let dataTask = self.urlSession.dataTaskWithRequest(getRequest, completionHandler: { (data, response, error) -> Void in
       if error == nil {
         if let httpResponse = response as? NSHTTPURLResponse {
-        //println(response)
+          println(response)
+         
+          var status = httpResponse.statusCode
+          self.statusCode = status
+          
+          
+          
           switch httpResponse.statusCode {
           case 200...299:
             println("outside 200")
             if let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary {
               println(jsonDict)
               let newIngredient = Ingredients(jsonDictionary: jsonDict)
-                
+              println(newIngredient)
               
               
-
+              
+              
               NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 completionHandler(newIngredient, nil)
-                }) //end block
-
+              }) //end block
+              
               
               
             }//end if
           case 300...599:
+            
             println("This is bad - it's an error that may or may not be your fault")
             completionHandler(nil, "this is bad!")
+            
+            
+            
           default:
             println("This is odd - default case fired")
           }//end Switch
-        }
-      }
-    })
+        }//httpResponse
+      }//if error
+    })//dataTask
     dataTask.resume()
-  }
-      
-}
-    
+  }//fetchIngredientListForUPC
+}//NetworkController
 
-  
-  
-  
+
+
+
+
 
 
 //https://api.nutritionix.com/v1_1/item?upc=49000036756&appId=
