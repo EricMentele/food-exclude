@@ -42,17 +42,27 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var detectionString : String!
   var barcodeScanned : String!
   var networkController = NetworkController()
-  var ingredients : [Ingredients]!
   var list : Ingredients!
   var ingredientDetailVC = IngredientsViewController()
   
-
-  var ingredients = ["peanuts", "salmon", "cream cheese", "orange slices"] //replace with ingredients from barcodeScanned
+  var ingredientsList : [String] = ["peanuts", "salmon", "cream cheese", "orange slices"] //replace with ingredients from barcodeScanned
   var allergenDerivatives : [String : String] = ["peanuts" : "nuts", "salmon" : "fish", "koala" : "fluffy things", "sardines" : "fish"] //replace with allergenDerivatives
   var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    //populating allergenDerivatives with data
+    if let jsonData = NSData(contentsOfFile: "/Users/koala/Desktop/F2/food-exclude/Food Exclude/allergens.json") {
+      var error : NSError?
+      if let jsonDictionary = NSJSONSerialization.JSONObjectWithData(jsonData, options: nil, error:&error) as? NSDictionary {
+        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+          self.allergenDerivatives = jsonDictionary as [String : String]
+        })
+        
+      }
+    }
+    
     
     //formatting so that the barcode reader line resizes automatically
     self.highlightView.autoresizingMask =   UIViewAutoresizing.FlexibleTopMargin |
@@ -162,7 +172,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         self.list = ingredients
-        self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
+        self.ingredientsList = self.list.ingredientsList!.componentsSeparatedByString(",")
+        self.crossSearchForAllergens()
+        
+        //self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
+      
+        
         println("Does this have the product name? \(self.list)")
         
         
@@ -184,20 +199,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           apiMaxed.addAction(okButton)
           self.presentViewController(apiMaxed, animated: true, completion: nil)
         }//if
-        
-        //        self.foodIngredients.text = "Ingredients: \(self.list.ingredientsList)"      if self.barcodeScanned == butter {
-        ////        self.view.layer.borderWidth = 10
-        ////        self.barcode.backgroundColor = UIColor.greenColor()
-        ////        self.view.layer.borderColor = UIColor.greenColor().CGColor
-        //        ])
-        //      }
-        //      else {
-        //        self.view.layer.borderWidth = 10
-        //        self.barcode.backgroundColor = UIColor.redColor()
-        //        self.view.layer.borderColor = UIColor.redColor().CGColor
-        //      }
-        //    }
-        //    else {
         
       })
     } else {
@@ -247,7 +248,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   //MARK: Cross-search ingredients list against allergen derivatives list
   func crossSearchForAllergens() {
-    for item in self.ingredients {
+    for item in self.ingredientsList {
       
       if let c = allergenDerivatives.indexForKey(item) {
         self.matches.append(item)
