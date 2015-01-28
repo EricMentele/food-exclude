@@ -52,11 +52,7 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     //Cell contents:
     let currentUserProfile = userProfiles[indexPath.row] as UserProfile
     cell.labelUserName.text = currentUserProfile.name
-    if currentUserProfile.includeProfile {
-      cell.switchIncludeProfile.on = true
-    } else {
-      cell.switchIncludeProfile.on = false
-    } //end else
+    cell.switchIncludeProfile.on = currentUserProfile.includeProfile
     //Return cell.
     return cell
   } //end func
@@ -70,7 +66,6 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     //User profile view controller:
     let vcUserProfile = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
     vcUserProfile.selectedUserProfile = userProfiles[selectedRow]
-    
     //Present view controller.
     self.navigationController?.pushViewController(vcUserProfile, animated: true)
   } //end func

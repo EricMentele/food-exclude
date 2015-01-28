@@ -27,7 +27,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
-
+  
+  var userProfiles = [UserProfile]()
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
@@ -38,17 +39,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //Load data from archive; and direct user accordingly.
     let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
     if let userProfilesFromArchive = loadUserProfilesFromArchive() as [UserProfile]? {
+      self.userProfiles = userProfilesFromArchive
       if !userProfilesFromArchive.isEmpty { //users exist: direct to scanner
+//        let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILES") as UserProfilesViewController
+//        rootViewController.userProfiles = self.userProfiles
         let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
         let navigationController = UINavigationController(rootViewController: rootViewController)
         window?.rootViewController = navigationController
       } else { //no users: direct to default profile
         let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
+        self.userProfiles.append(UserProfile())
+        rootViewController.selectedUserProfile = self.userProfiles[0]
         let navigationController = UINavigationController(rootViewController: rootViewController)
         window?.rootViewController = navigationController
       } //end if
     } else { //no users: direct to default profile
       let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
+      self.userProfiles.append(UserProfile())
+      rootViewController.selectedUserProfile = self.userProfiles[0]
       let navigationController = UINavigationController(rootViewController: rootViewController)
       window?.rootViewController = navigationController
     } //end if
@@ -71,14 +79,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   } //end func
   
   //Function: Save user profile data to archive.
-//  func saveUserProfilesToArchive(userProfiles: [UserProfile?]) {
-//    //Documents/Archive path:
-//    let pathDocuments = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-//    let pathArchive = pathDocuments + "/UserProfilesArchive"
-//    
-//    //Save data.
-//    NSKeyedArchiver.archiveRootObject(userProfiles, toFile: pathArchive)
-//  } //end func
+  func saveUserProfilesToArchive() {
+    //Documents/Archive path:
+    let pathDocuments = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+    let pathArchive = pathDocuments + "/UserProfilesArchive"
+    
+    //Save data.
+    NSKeyedArchiver.archiveRootObject(self.userProfiles, toFile: pathArchive)
+  } //end func
 
   func applicationWillResignActive(application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
