@@ -107,7 +107,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
   
   override func viewWillAppear(animated: Bool) {
-    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
+    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(13, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
   }
   
   
@@ -178,7 +178,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         //self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
       
         
-        println("Does this have the product name? \(self.list)")
+//        println("Does this have the product name? \(self.list)")
         
         
         //MARK: Item not in database alert
@@ -217,9 +217,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   func displayAlertView() {
     if detectionString == nil {
       self.alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as UIView
-      alertView.center = self.view.center
-      alertView.alpha = 0
-      alertView.transform = CGAffineTransformMakeScale(0.4, 0.4)
+      self.alertView.center = self.view.center
+      self.alertView.alpha = 0
+      self.alertView.transform = CGAffineTransformMakeScale(0.4, 0.4)
       self.view.addSubview(alertView)
       
       UIView.animateWithDuration(0.4, delay: 0.5, options: nil, animations: { () -> Void in
@@ -229,14 +229,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           
           let removeTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "removeAlertView", userInfo: nil, repeats: false)
       }
-    } else {
-      
-    }
+    } 
   }
   
   func removeAlertView() {
     self.alertView.removeFromSuperview()
   }
+  
   
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {

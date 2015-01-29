@@ -24,7 +24,7 @@ import UIKit
 
 class IngredientsViewController: UIViewController {
   
-  var scannerVC = ScannerViewController()
+  //var scannerVC = ScannerViewController()
   
   @IBOutlet weak var ingredientDetail: UITextView!
   
@@ -33,7 +33,7 @@ class IngredientsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
-      self.ingredientDetail.text = "Ingredients: \(scannerVC.list?.ingredientsList)"
+      //self.ingredientDetail.text = "Ingredients: \(scannerVC.list?.ingredientsList)"
 
 
         // Do any additional setup after loading the view.

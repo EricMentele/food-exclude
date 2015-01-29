@@ -51,8 +51,8 @@ class UserProfile: NSObject, NSCoding {
   //Initialize: Load from archive.
   required init(coder aDecoder: NSCoder) {
     self.name = aDecoder.decodeObjectForKey("name") as String
-    if let avatar = aDecoder.decodeObjectForKey("avatar") as? UIImage {
-      self.avatar = avatar
+    if let decodedAvatar = aDecoder.decodeObjectForKey("avatar") as? UIImage {
+      self.avatar = decodedAvatar
     } //end if
     self.includeProfile = aDecoder.decodeBoolForKey("includeProfile") as Bool
     self.allergens = aDecoder.decodeObjectForKey("allergens") as [Allergen]
@@ -61,7 +61,9 @@ class UserProfile: NSObject, NSCoding {
   //Function: Save to archive.
   func encodeWithCoder(aCoder: NSCoder) {
     aCoder.encodeObject(self.name, forKey: "name")
-    aCoder.encodeObject(self.avatar, forKey: "avatar")
+    if self.avatar != nil {
+      aCoder.encodeObject(self.avatar, forKey: "avatar")
+    }
     aCoder.encodeBool(self.includeProfile, forKey: "includeProfile")
     aCoder.encodeObject(self.allergens, forKey: "allergens")
   } //end func
