@@ -66,6 +66,7 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     let currentUserProfile = userProfiles[indexPath.row] as UserProfile
     cell.labelUserName.text = currentUserProfile.name
     cell.switchIncludeProfile.on = currentUserProfile.includeProfile
+    cell.avatarImageView.image = currentUserProfile.avatar
     //Return cell.
     return cell
   } //end func

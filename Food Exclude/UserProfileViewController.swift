@@ -35,6 +35,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   @IBOutlet weak var buttonContinue: UIButton!
   
   @IBOutlet weak var avatarImageView: UIImageView!
+  @IBOutlet weak var switchIncludeProfile: UISwitch!
   
   //Function: Set up view controller.
   override func viewDidLoad() {
@@ -56,6 +57,8 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     } else {
       self.avatarImageView.image = UIImage(named: "Placeholder_person.png")
     }
+    
+    switchIncludeProfile.on = selectedUserProfile!.includeProfile
     
     //Table:
     tableAllergens.registerNib(UINib(nibName: "AllergenCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CELL_ALLERGEN")
@@ -132,6 +135,10 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
         userProfiles = [selectedUserProfile]
       } //end if
       selectedUserProfile.name = textUserName.text
+      selectedUserProfile.includeProfile = switchIncludeProfile.on
+      
+      self.selectedUserProfile.avatar = avatarImageView.image
+
       
       //Save data.
       appDelegate.saveUserProfilesToArchive(userProfiles!)
@@ -172,7 +179,6 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
     let image = info[UIImagePickerControllerEditedImage] as UIImage
     self.avatarImageView.image = image
-    self.selectedUserProfile.avatar = image
     imagePickerController.dismissViewControllerAnimated(true, completion: nil)
   }
   

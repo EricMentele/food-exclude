@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6724" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,24 +12,26 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bq8-rK-zh7" id="U9Z-0J-5fF">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Crh-SE-iIg">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="user name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Crh-SE-iIg">
                         <rect key="frame" x="28" y="76" width="81" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jz0-Zg-7BW">
+                    <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jz0-Zg-7BW">
                         <rect key="frame" x="243" y="72" width="51" height="31"/>
                     </switch>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="84H-hF-eCx">
+                        <rect key="frame" x="16" y="8" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="3HW-Cv-OcA"/>
+                            <constraint firstAttribute="width" constant="60" id="aqW-5y-BEM"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
-                <constraints>
-                    <constraint firstItem="Crh-SE-iIg" firstAttribute="leading" secondItem="U9Z-0J-5fF" secondAttribute="leadingMargin" constant="20" id="4FS-kt-60h"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="jz0-Zg-7BW" secondAttribute="trailing" constant="20" id="GLi-fr-Ecy"/>
-                    <constraint firstAttribute="centerY" secondItem="Crh-SE-iIg" secondAttribute="centerY" id="XI8-dJ-wai"/>
-                    <constraint firstAttribute="centerY" secondItem="jz0-Zg-7BW" secondAttribute="centerY" id="dWR-vO-Yyr"/>
-                </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="avatarImageView" destination="84H-hF-eCx" id="VM9-AO-qiK"/>
                 <outlet property="labelUserName" destination="Crh-SE-iIg" id="G7Z-VZ-rTf"/>
                 <outlet property="switchIncludeProfile" destination="jz0-Zg-7BW" id="Hnf-Ry-wtp"/>
             </connections>

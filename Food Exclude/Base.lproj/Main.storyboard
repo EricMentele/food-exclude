@@ -214,6 +214,9 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BLl-Hr-vZA">
+                                <rect key="frame" x="527" y="100" width="51" height="31"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -251,6 +254,7 @@
                     <connections>
                         <outlet property="avatarImageView" destination="t6D-Ja-SEg" id="g41-tt-Co2"/>
                         <outlet property="buttonContinue" destination="dwd-Cf-NeW" id="PMk-vi-ZBO"/>
+                        <outlet property="switchIncludeProfile" destination="BLl-Hr-vZA" id="PoB-DL-ygm"/>
                         <outlet property="tableAllergens" destination="MGa-aB-8a4" id="gAi-Vr-JWD"/>
                         <outlet property="textUserName" destination="p37-Ik-Qpu" id="cAJ-Jx-ncd"/>
                     </connections>

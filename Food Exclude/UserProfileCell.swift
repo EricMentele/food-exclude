@@ -26,4 +26,5 @@ class UserProfileCell: UITableViewCell {
   //Outlets:
   @IBOutlet weak var labelUserName: UILabel!
   @IBOutlet weak var switchIncludeProfile: UISwitch!
+  @IBOutlet weak var avatarImageView: UIImageView!
 }
