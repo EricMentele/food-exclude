@@ -15,6 +15,7 @@
 		40A438931A7692F100A24AA0 /* readme in Resources */ = {isa = PBXBuildFile; fileRef = 40A438921A7692F100A24AA0 /* readme */; };
 		4E7B674F1A7A064B005E63F5 /* allergens.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E7B674E1A7A064B005E63F5 /* allergens.json */; };
 		4E7B67511A7A2069005E63F5 /* allergens.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E7B67501A7A2069005E63F5 /* allergens.plist */; };
+		4E7B67571A7AE30C005E63F5 /* colorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7B67561A7AE30C005E63F5 /* colorExtension.swift */; };
 		9C139F431A77FF79009C1F47 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C139F421A77FF79009C1F47 /* NetworkController.swift */; };
 		9C139F451A77FF86009C1F47 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C139F441A77FF86009C1F47 /* Ingredients.swift */; };
 		9C563DB31A78BEBD00EAC832 /* purr.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C563DB21A78BEBD00EAC832 /* purr.wav */; };
@@ -55,6 +56,7 @@
 		40A438921A7692F100A24AA0 /* readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme; sourceTree = "<group>"; };
 		4E7B674E1A7A064B005E63F5 /* allergens.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = allergens.json; path = "Food Exclude/allergens.json"; sourceTree = "<group>"; };
 		4E7B67501A7A2069005E63F5 /* allergens.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = allergens.plist; sourceTree = "<group>"; };
+		4E7B67561A7AE30C005E63F5 /* colorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = colorExtension.swift; sourceTree = "<group>"; };
 		9C139F421A77FF79009C1F47 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		9C139F441A77FF86009C1F47 /* Ingredients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
 		9C563DB21A78BEBD00EAC832 /* purr.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = purr.wav; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				BA2E53511A76B4920055D11F /* UserProfile.swift */,
 				BA37ED081A7844FC00408187 /* Allergen.swift */,
 				BA2E53531A76B5480055D11F /* FoodCategory.swift */,
+				4E7B67561A7AE30C005E63F5 /* colorExtension.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				BA37ED091A7844FC00408187 /* Allergen.swift in Sources */,
 				9C139F451A77FF86009C1F47 /* Ingredients.swift in Sources */,
 				BA37ED071A7824C900408187 /* AllergenCell.swift in Sources */,
+				4E7B67571A7AE30C005E63F5 /* colorExtension.swift in Sources */,
 				BA37ED031A78205F00408187 /* UserProfileViewController.swift in Sources */,
 				BAB735BE1A770BEF00E8C76D /* ScannerViewController.swift in Sources */,
 				BA37ECFD1A77F92600408187 /* UserProfilesViewController.swift in Sources */,

@@ -32,8 +32,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   var alertView : UIView!
   
-  
-  
   //this is adapted from http://www.bowst.com/mobile/simple-barcode-scanning-with-swift/
   let session : AVCaptureSession = AVCaptureSession()
   var previewLayer : AVCaptureVideoPreviewLayer!
@@ -49,11 +47,23 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var allergenDerivatives = [String : String]()
   var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
   var myMatches = [String]() //this stores the allergen categories triggered in the cross-search function (e.g. whey powder is in the ingredients list and is of type milk, user is allergic to milk, so myMatches will store milk)
-  var allergenCategories = [String]() //this stores allergen categories for current active user(s)
+  var allergenCategories = [String]() //this stores allergen categories detected in the scanned ingredient list
+  
+  var userProfiles = [UserProfile]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    //User profile data: latest
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    self.userProfiles = appDelegate.loadUserProfilesFromArchive()!
+    for item in userProfiles {
+      var allergens = item.allergens
+      for item in allergens {
+        var allergenBool = item.name as String
+      }
+    }
+  
     
     //Add user profile button:
     let buttonUserProfiles = UIBarButtonItem(image: UIImage(named: "three115"), style: UIBarButtonItemStyle.Plain, target: self, action: "pressedButtonUserProfiles")
@@ -251,6 +261,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       @IBAction func newScan(sender: UIButton) {
         
         detectionString = nil
+        self.view.layer.borderColor = UIColor(red: 0, green: 0, blue: 0).CGColor
+        self.matches = [String]()
+        self.myMatches = [String]()
+        self.allergenCategories = [String]()
         self.session.startRunning()
         if self.alertView != nil {
         self.removeAlertView()
