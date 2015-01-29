@@ -35,15 +35,15 @@ class UserProfile: NSObject, NSCoding {
     self.name = ""
     self.includeProfile = true
     
-    self.allergens.append(Allergen(name: "Milk", sensitive: false))
-    self.allergens.append(Allergen(name: "Eggs", sensitive: false))
-    self.allergens.append(Allergen(name: "Fish", sensitive: false))
-    self.allergens.append(Allergen(name: "Shellfish", sensitive: false))
-    self.allergens.append(Allergen(name: "Tree Nuts", sensitive: false))
-    self.allergens.append(Allergen(name: "Peanuts", sensitive: false))
-    self.allergens.append(Allergen(name: "Wheat", sensitive: false))
-    self.allergens.append(Allergen(name: "Soybeans", sensitive: false))
-    self.allergens.append(Allergen(name: "Gluten", sensitive: false))
+    self.allergens.append(Allergen(name: "milk", sensitive: false))
+    self.allergens.append(Allergen(name: "eggs", sensitive: false))
+    self.allergens.append(Allergen(name: "fish", sensitive: false))
+    self.allergens.append(Allergen(name: "shellfish", sensitive: false))
+    self.allergens.append(Allergen(name: "treenuts", sensitive: false))
+    self.allergens.append(Allergen(name: "peanuts", sensitive: false))
+    self.allergens.append(Allergen(name: "wheat", sensitive: false))
+    self.allergens.append(Allergen(name: "soy", sensitive: false))
+    self.allergens.append(Allergen(name: "gluten", sensitive: false))
   } //end init
   
   //MARK: NSKeyedArchiver

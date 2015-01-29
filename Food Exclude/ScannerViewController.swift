@@ -43,10 +43,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var barcodeScanned : String!
   var networkController = NetworkController()
   var list : Ingredients!
+  var category = [String]()
   
   var ingredientsList = [String]()
   var allergenDerivatives = [String : String]()
   var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
+  var myMatches = [String]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -257,10 +259,20 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           
           if let c = allergenDerivatives.indexForKey(item) {
             self.matches.append(item)
+            self.category.append(self.allergenDerivatives[item]!)
           }}
         println(self.matches)
-      }
-      
+        println(self.category)
+        
+        for item in self.matches {
+          var myAllergens = ["milk" : "milk", "eggs" : "eggs", "fish" : "fish", "shellfish" : "shellfish", "treenuts" : "treenuts", "peanuts" : "peanuts", "wheat" : "wheat", "soy" : "soy", "gluten" : "gluten"]
+          if let d = myAllergens.indexForKey(item) {
+            self.myMatches.append(item)
+          }
+        }
+        println("This product contains \(self.myMatches)")
+  }
+  
       
       override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -252,11 +252,11 @@
 				TargetAttributes = {
 					40A438661A75973B00A24AA0 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = K255D2573T;
+						DevelopmentTeam = V7TF53Q2C8;
 					};
 					40A4387B1A75973B00A24AA0 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = K255D2573T;
+						DevelopmentTeam = V7TF53Q2C8;
 						TestTargetID = 40A438661A75973B00A24AA0;
 					};
 				};
