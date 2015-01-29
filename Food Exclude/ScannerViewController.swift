@@ -32,8 +32,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   var alertView : UIView!
   
-  
-  
   //this is adapted from http://www.bowst.com/mobile/simple-barcode-scanning-with-swift/
   let session : AVCaptureSession = AVCaptureSession()
   var previewLayer : AVCaptureVideoPreviewLayer!
@@ -49,12 +47,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var allergenDerivatives = [String : String]()
   var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
   var myMatches = [String]() //this stores the allergen categories triggered in the cross-search function (e.g. whey powder is in the ingredients list and is of type milk, user is allergic to milk, so myMatches will store milk)
-  var allergenCategories = [String]() //this stores allergen categories for current active user(s)
+  var allergenCategories = [String]() //this stores allergen categories detected in the scanned ingredient list
+  
+  var activeProfile : UserProfile!
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    
     
     if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
     var myDict = NSDictionary(contentsOfFile: allergenData)
@@ -273,8 +272,17 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           }
         }
         println("This product contains \(self.myMatches)")
+        
+        if !self.myMatches .isEmpty {
+          self.view.layer.borderWidth = 5
+          self.view.layer.borderColor = UIColor.redColor().CGColor
+        }
+        else {
+          self.view.layer.borderWidth = 5
+          self.view.layer.borderColor = UIColor.greenColor().CGColor
+        }
   }
-  
+
       
       override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
