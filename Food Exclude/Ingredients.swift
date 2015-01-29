@@ -54,9 +54,10 @@ class Ingredients {
     self.ingredientsList = jsonDictionary["nf_ingredient_statement"]  as String
     self.allergenMilk = jsonDictionary["allergen_contains_milk"]  as? String
     
-    var clearedString = self.ingredientsList.stringByReplacingOccurrencesOfString("[\\()\\@]", withString: "", options: .RegularExpressionSearch)
+    var clearedString = self.ingredientsList.stringByReplacingOccurrencesOfString("[\\()\\[]\\@]", withString: "", options: .RegularExpressionSearch)
     //println("THIS IS THE CLEARED STRING\(clearedString)")
     self.seperatedList = clearedString.componentsSeparatedByString(",")
+    println(seperatedList)
     
     if self.allergenMilk !=  nil {
       self.allergenList.append("Milk")

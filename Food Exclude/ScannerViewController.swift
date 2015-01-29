@@ -184,7 +184,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             //self.session.stopRunning()
           }
           
-          
+          //MARK: Fetch ingredients
           self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
             
             self.list = ingredients
