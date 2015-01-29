@@ -31,7 +31,7 @@ class Ingredients {
   var brandID : String?
   var itemID : String?
   var itemDescription : String?
-  var ingredientsList : String?
+  var ingredientsList : String = ""
   var allergenMilk : String?
   var allergenEggs : String?
   var allergenFish : String?
@@ -42,7 +42,7 @@ class Ingredients {
   var allergenSoy : String?
   var allergenGluten : String?
   var allergenList = [String?]()
-  let seperatedList : [String]?
+  let seperatedList = [String]()
   
   
   init(jsonDictionary : NSDictionary) {
@@ -51,12 +51,11 @@ class Ingredients {
     self.brandID = jsonDictionary["brand_id"] as? String
     self.itemID = jsonDictionary["item_id"] as? String
     self.itemDescription = jsonDictionary["item_description"] as? String
-    self.ingredientsList = jsonDictionary["nf_ingredient_statement"]  as? String
+    self.ingredientsList = jsonDictionary["nf_ingredient_statement"]  as String
     self.allergenMilk = jsonDictionary["allergen_contains_milk"]  as? String
     
-    var clearedString = ingredientsList!.stringByReplacingOccurrencesOfString("[\\()\\@]", withString: "", options: .RegularExpressionSearch)
+    var clearedString = self.ingredientsList.stringByReplacingOccurrencesOfString("[\\()\\@]", withString: "", options: .RegularExpressionSearch)
     //println("THIS IS THE CLEARED STRING\(clearedString)")
-
     self.seperatedList = clearedString.componentsSeparatedByString(",")
     
     if self.allergenMilk !=  nil {

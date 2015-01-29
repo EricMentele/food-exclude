@@ -108,10 +108,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         self.session.startRunning()
       }
       
-      override func viewWillAppear(animated: Bool) {
-        let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
-      }
-      
       
       func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
         
@@ -174,26 +170,18 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
             
             self.list = ingredients
-            var prepList = self.list.ingredientsList!.lowercaseString
-            self.ingredientsList = prepList.componentsSeparatedByString(",")
-            for(var i=0; i<self.ingredientsList.count; i++) {
-              self.ingredientsList[i] = self.ingredientsList[i].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        //MYCODE
-//              self.list = ingredients
-//              self.barcode.text = self.list.itemName
-//              var seperatedList = self.list.seperatedList
-//              println("THIS IS THE SEPERATED LIST!!\(seperatedList)")
-//              //var prepList = self.list.ingredientsList!.lowercaseString
-//              self.crossSearchForAllergens(ingredients: seperatedList!, allergens: self.allergenDerivatives)
-            }
+            self.barcode.text = self.list.itemName
+            var seperatedList = self.list.seperatedList
+            println("THIS IS THE SEPERATED LIST!!\(seperatedList)")
+            //var prepList = self.list.ingredientsList!.lowercaseString
+            self.crossSearchForAllergens(ingredients: seperatedList, allergens: self.allergenDerivatives)
             
-            self.crossSearchForAllergens()
-            
+            //self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
             
             
             println("Does this have the product name? \(self.list)")
             
-            
+            //MARK: NETWORK ALERTS
             //MARK: Item not in database alert
             if self.networkController.statusCode as NSObject == 404  {
               
@@ -263,34 +251,34 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       
       //MARK: Cross-search ingredients list against allergen derivatives list
   //MYCODE
-//  func crossSearchForAllergens(#ingredients: [String], allergens: [String:String]) {
-//    for item in ingredients {
-//      println(ingredients)
-//      if let c = allergens.indexForKey(item) {
-//        self.matches.append(item)
-//        
-//      }}
-//    println("MATCHES!!!!!!!!!!!!!!!!!!!!!!!!\(self.matches)")
-//  }
-      func crossSearchForAllergens() {
-        for item in self.ingredientsList {
-          
-          if let c = allergenDerivatives.indexForKey(item) {
-            self.matches.append(item)
-            self.allergenCategories.append(self.allergenDerivatives[item]!)
-          }}
-        println(self.matches)
-        println(self.allergenCategories)
+  func crossSearchForAllergens(#ingredients: [String], allergens: [String:String]) {
+    for item in ingredients {
+      println(ingredients)
+      if let c = allergens.indexForKey(item) {
+        self.matches.append(item)
         
-        for item in self.allergenCategories {
-          //this is to be replaced with the actual active user profile's allergens
-          var myAllergens = ["milk" : "milk", "eggs" : "eggs", "fish" : "fish", "shellfish" : "shellfish", "treenuts" : "treenuts", "peanuts" : "peanuts", "wheat" : "wheat", "soy" : "soy", "gluten" : "gluten"]
-          if let d = myAllergens.indexForKey(item) {
-            self.myMatches.append(item)
-          }
-        }
-        println("This product contains \(self.myMatches)")
+      }}
+    println("MATCHES!!!!!!!!!!!!!!!!!!!!!!!!\(self.matches)")
   }
+//      func crossSearchForAllergens() {
+//        for item in self.ingredientsList {
+//          
+//          if let c = allergenDerivatives.indexForKey(item) {
+//            self.matches.append(item)
+//            self.allergenCategories.append(self.allergenDerivatives[item]!)
+//          }}
+//        println(self.matches)
+//        println(self.allergenCategories)
+//        
+//        for item in self.allergenCategories {
+//          //this is to be replaced with the actual active user profile's allergens
+//          var myAllergens = ["milk" : "milk", "eggs" : "eggs", "fish" : "fish", "shellfish" : "shellfish", "treenuts" : "treenuts", "peanuts" : "peanuts", "wheat" : "wheat", "soy" : "soy", "gluten" : "gluten"]
+//          if let d = myAllergens.indexForKey(item) {
+//            self.myMatches.append(item)
+//          }
+//        }
+//        println("This product contains \(self.myMatches)")
+//  }
   
       
       override func didReceiveMemoryWarning() {
