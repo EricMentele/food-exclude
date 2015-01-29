@@ -38,8 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if let userProfilesFromArchive = loadUserProfilesFromArchive() as [UserProfile]? {
       if !userProfilesFromArchive.isEmpty { //users exist: direct to scanner
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_USER_PROFILES") as UserProfilesViewController
-        //let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
+        let rootViewController = storyboard.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
         let navigationController = UINavigationController(rootViewController: rootViewController)
         window?.rootViewController = navigationController
       } else { //no users: direct to default profile

@@ -27,20 +27,29 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   var selectedUserProfileIndex: Int!
   var selectedUserProfile: UserProfile!
   
+  //Image picker:
   var imagePickerController = UIImagePickerController()
+  
+  var alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+
   
   //Outlets:
   @IBOutlet weak var textUserName: UITextField!
   @IBOutlet weak var tableAllergens: UITableView!
   @IBOutlet weak var buttonContinue: UIButton!
-  
   @IBOutlet weak var avatarImageView: UIImageView!
   @IBOutlet weak var switchIncludeProfile: UISwitch!
+  @IBOutlet weak var labelIncludeProfile: UILabel!
+  @IBOutlet weak var labelSelectFoods: UILabel!
   
   //Function: Set up view controller.
   override func viewDidLoad() {
     //Super:
     super.viewDidLoad()
+    
+    //Appearance:
+    labelIncludeProfile.font = UIFont(name: "Avenir", size: 15.0)
+    labelSelectFoods.font = UIFont(name: "Avenir", size: 15.0)
     
     //Selected user profile:
     if selectedUserProfileIndex < 0 {
@@ -71,10 +80,9 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     //Button:
     buttonContinue.addTarget(self, action: "pressedButtonContinue", forControlEvents: UIControlEvents.TouchUpInside)
     
+    //Camera button:
     let cameraButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "avatarButtonPressed")
     self.navigationItem.rightBarButtonItem = cameraButton
-    
-    
   } //end func
   
   //MARK: Table View Data Source
@@ -121,8 +129,11 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   //Function: Handle Continue button pressed.
   func pressedButtonContinue() {
     //Save data.
-    if textUserName.text == "" {
-      println("Please enter a user name")
+    if textUserName.text == "" { //no name
+      let alertBlankUserName = UIAlertController(title: "Please enter a Name", message: "", preferredStyle: .Alert)
+      let buttonCancel = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+      alertBlankUserName.addAction(buttonCancel)
+      self.presentViewController(alertBlankUserName, animated: true, completion: nil)
     } else {
       let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
       //Add/Update selected user profile.
@@ -142,10 +153,8 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
       } //end if
       selectedUserProfile.name = textUserName.text
       selectedUserProfile.includeProfile = switchIncludeProfile.on
-      
       self.selectedUserProfile.avatar = avatarImageView.image
 
-      
       //Save data.
       appDelegate.saveUserProfilesToArchive(userProfiles!)
       
@@ -155,41 +164,81 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     } //end if
   } //end func
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-  
-
-  
-  
-    func avatarButtonPressed() {
-    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
-      self.imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-      self.imagePickerController.delegate = self
-      self.imagePickerController.allowsEditing = true
-      self.presentViewController(self.imagePickerController, animated: true, completion: nil)
-    } else
-  
-    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-      let imagePickerController = UIImagePickerController()
-      imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-      imagePickerController.delegate = self
-      imagePickerController.allowsEditing = true
-      self.presentViewController(imagePickerController, animated: true, completion: nil)
+  //Function: Handle event when Avatar button is selected.
+  func avatarButtonPressed() {
+    self.setupAlertControllerButtons()
+    self.presentViewController(self.alertController, animated: true) { () -> Void in
+      println("button pressed")
     }
   }
   
+  func setupAlertControllerButtons() {
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+      let cameraOption = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+        imagePickerController.allowsEditing = true
+//        imagePickerController.delegate = self
+//        self.presentViewController(imagePickerController, animated: true, completion: nil)
+      })
+      self.alertController.addAction(cameraOption)
+    }
+    
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+      let photoLibraryOption = UIAlertAction(title: "Photo Library", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePickerController.allowsEditing = true
+//        imagePickerController.delegate = self
+//        self.presentViewController(imagePickerController, animated: true, completion: nil)
+      })
+      self.alertController.addAction(photoLibraryOption)
+    }
+  }
+  
+//  func cameraButtonPressed() {
+//    
+//    self.setupAlertControllerButtons()
+//    imagePickerController.delegate = self
+//    self.presentViewController(imagePickerController, animated: true, completion: nil)
+//    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+//      let cameraOption = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+//        let imagePickerController = UIImagePickerController()
+//        imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+//        imagePickerController.allowsEditing = true
+//        imagePickerController.delegate = self
+//        self.presentViewController(imagePickerController, animated: true, completion: nil)
+//      })
+//      self.alertController.addAction(cameraOption)
+//    }
+//  }
+//  
+//  func photoLibraryButtonPressed() {
+//    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+//      let photoLibraryOption = UIAlertAction(title: "Photo Library", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+//        let imagePickerController = UIImagePickerController()
+//        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+//        imagePickerController.allowsEditing = true
+//        imagePickerController.delegate = self
+//        self.presentViewController(imagePickerController, animated: true, completion: nil)
+//      })
+//      self.alertController.addAction(photoLibraryOption)
+//    }
+//  }
+  
   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-    let image = info[UIImagePickerControllerEditedImage] as UIImage
+    let image = info[UIImagePickerControllerOriginalImage] as UIImage
     self.avatarImageView.image = image
     imagePickerController.dismissViewControllerAnimated(true, completion: nil)
   }
 
-  
+  //Function: Handle event when avatar image selection is cancelled.
   func imagePickerControllerDidCancel(picker: UIImagePickerController) {
     picker.dismissViewControllerAnimated(true, completion: nil)
   }
-  
-  
+
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
 }

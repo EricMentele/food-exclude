@@ -53,6 +53,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     super.viewDidLoad()
     
     
+    //Add user profile button:
+    let buttonUserProfiles = UIBarButtonItem(image: UIImage(named: "three115"), style: UIBarButtonItemStyle.Plain, target: self, action: "pressedButtonUserProfiles")
+    self.navigationItem.rightBarButtonItem = buttonUserProfiles
     
     if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
     var myDict = NSDictionary(contentsOfFile: allergenData)
@@ -62,9 +65,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.allergenDerivatives = myDict as [String : String]
     }
   
-  func viewWillAppear(animated: Bool) {
-    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(13, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
-  }
+
   
         //formatting so that the barcode reader line resizes automatically
         self.highlightView.autoresizingMask =   UIViewAutoresizing.FlexibleTopMargin |
@@ -236,7 +237,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
       
       func removeAlertView() {
-        self.alertView.removeFromSuperview()
+        self.alertView?.removeFromSuperview()
       }
       
       //MARK:  Start new scan.
@@ -280,11 +281,16 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 //        println("This product contains \(self.myMatches)")
 //  }
   
-      
-      override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-      }
+  //Function: Handle event when User Profiles button is pressed.
+  func pressedButtonUserProfiles() {
+    let vcUserProfiles = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILES") as UserProfilesViewController
+    self.navigationController?.pushViewController(vcUserProfiles, animated: true)
+  } //end func
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
       
       
 }
