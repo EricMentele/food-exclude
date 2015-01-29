@@ -61,7 +61,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     if self.selectedUserProfile.avatar != nil {
       self.avatarImageView.image = self.selectedUserProfile.avatar
     } else {
-      self.avatarImageView.image = UIImage(named: "Placeholder_person.png")
+      self.avatarImageView.image = UIImage(named: "wantedphoto.jpg")
     } //end if
     avatarImageView.layer.cornerRadius = 10
     avatarImageView.layer.masksToBounds = true
@@ -132,28 +132,8 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
       alertBlankUserName.addAction(buttonCancel)
       self.presentViewController(alertBlankUserName, animated: true, completion: nil)
     } else {
-      let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-      //Add/Update selected user profile.
-      var userProfiles = appDelegate.loadUserProfilesFromArchive() as [UserProfile]?
-      if userProfiles != nil {
-        if !userProfiles!.isEmpty { //users exist: edit/add user profile accordingly
-          if selectedUserProfileIndex >= 0 { //edit user profile
-            userProfiles![selectedUserProfileIndex] = selectedUserProfile
-          } else { //add user profile
-            userProfiles!.append(selectedUserProfile)
-          } //end if
-        } else { //no users exist: add user
-          userProfiles!.append(selectedUserProfile)
-        } //end if
-      } else { //no users exist: add user
-        userProfiles = [selectedUserProfile]
-      } //end if
-      selectedUserProfile.name = textUserName.text
-      selectedUserProfile.includeProfile = switchIncludeProfile.on
-      self.selectedUserProfile.avatar = avatarImageView.image
-
-      //Save data.
-      appDelegate.saveUserProfilesToArchive(userProfiles!)
+      //Save user profile.
+      saveUserProfile()
       
       //Present next view controller.
       let vcScanner = self.storyboard?.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
@@ -191,6 +171,34 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     picker.dismissViewControllerAnimated(true, completion: nil)
   }
 
+  //MARK: Other
+  
+  //Function: Save user profile.
+  func saveUserProfile() {
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    //Add/Update selected user profile.
+    var userProfiles = appDelegate.loadUserProfilesFromArchive() as [UserProfile]?
+    if userProfiles != nil {
+      if !userProfiles!.isEmpty { //users exist: edit/add user profile accordingly
+        if selectedUserProfileIndex >= 0 { //edit user profile
+          userProfiles![selectedUserProfileIndex] = selectedUserProfile
+        } else { //add user profile
+          userProfiles!.append(selectedUserProfile)
+        } //end if
+      } else { //no users exist: add user
+        userProfiles!.append(selectedUserProfile)
+      } //end if
+    } else { //no users exist: add user
+      userProfiles = [selectedUserProfile]
+    } //end if
+    selectedUserProfile.name = textUserName.text
+    selectedUserProfile.includeProfile = switchIncludeProfile.on
+    selectedUserProfile.avatar = avatarImageView.image
+    
+    //Save data.
+    appDelegate.saveUserProfilesToArchive(userProfiles!)
+  } //end func
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
