@@ -238,18 +238,7 @@
                             <constraint firstItem="t6D-Ja-SEg" firstAttribute="leading" secondItem="JMy-RH-x58" secondAttribute="leadingMargin" id="zjB-Zt-aoQ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="w5E-MN-aOo">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="h0G-QD-6dB">
-                            <connections>
-                                <action selector="backButtonPressed:" destination="ESI-9W-WNx" id="Tzo-uJ-BLJ"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="Dka-lo-TIv">
-                            <connections>
-                                <action selector="avatarButtonPressed:" destination="ESI-9W-WNx" id="sdG-Gp-VYi"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="w5E-MN-aOo"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="avatarImageView" destination="t6D-Ja-SEg" id="g41-tt-Co2"/>
