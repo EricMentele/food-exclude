@@ -43,8 +43,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var barcodeScanned : String!
   var networkController = NetworkController()
   var list : Ingredients!
-  
-  
   var ingredientsList = [String]()
   var allergenDerivatives = [String : String]()
   var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
@@ -180,6 +178,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             self.ingredientsList = prepList.componentsSeparatedByString(",")
             for(var i=0; i<self.ingredientsList.count; i++) {
               self.ingredientsList[i] = self.ingredientsList[i].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        //MYCODE
+//              self.list = ingredients
+//              self.barcode.text = self.list.itemName
+//              var seperatedList = self.list.seperatedList
+//              println("THIS IS THE SEPERATED LIST!!\(seperatedList)")
+//              //var prepList = self.list.ingredientsList!.lowercaseString
+//              self.crossSearchForAllergens(ingredients: seperatedList!, allergens: self.allergenDerivatives)
             }
             
             self.crossSearchForAllergens()
@@ -251,10 +256,22 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         detectionString = nil
         self.session.startRunning()
+        if self.alertView != nil {
         self.removeAlertView()
+        }
       }
       
       //MARK: Cross-search ingredients list against allergen derivatives list
+  //MYCODE
+//  func crossSearchForAllergens(#ingredients: [String], allergens: [String:String]) {
+//    for item in ingredients {
+//      println(ingredients)
+//      if let c = allergens.indexForKey(item) {
+//        self.matches.append(item)
+//        
+//      }}
+//    println("MATCHES!!!!!!!!!!!!!!!!!!!!!!!!\(self.matches)")
+//  }
       func crossSearchForAllergens() {
         for item in self.ingredientsList {
           
