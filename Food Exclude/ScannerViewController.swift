@@ -55,6 +55,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    
+    //Add user profile button:
+    let buttonUserProfiles = UIBarButtonItem(image: UIImage(named: "three115"), style: UIBarButtonItemStyle.Plain, target: self, action: "pressedButtonUserProfiles")
+    self.navigationItem.rightBarButtonItem = buttonUserProfiles
+    
     if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
     var myDict = NSDictionary(contentsOfFile: allergenData)
     NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
@@ -249,12 +254,17 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       @IBAction func newScan(sender: UIButton) {
         
         detectionString = nil
+        self.view.layer.borderColor = UIColor(red: 0, green: 0, blue: 0).CGColor
+        self.matches = [String]()
+        self.myMatches = [String]()
+        self.allergenCategories = [String]()
         self.session.startRunning()
         self.removeAlertView()
       }
       
       //MARK: Cross-search ingredients list against allergen derivatives list
       func crossSearchForAllergens() {
+        
         for item in self.ingredientsList {
           
           if let c = allergenDerivatives.indexForKey(item) {
@@ -274,20 +284,27 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         println("This product contains \(self.myMatches)")
         
         if !self.myMatches .isEmpty {
-          self.view.layer.borderWidth = 5
-          self.view.layer.borderColor = UIColor.redColor().CGColor
+          self.view.layer.borderWidth = 9
+          self.view.layer.borderColor = UIColor(red: 153, green: 0, blue: 0).CGColor
+          
+          //self.view.layer.borderColor = UIColor.redColor().CGColor
         }
         else {
-          self.view.layer.borderWidth = 5
-          self.view.layer.borderColor = UIColor.greenColor().CGColor
+          self.view.layer.borderWidth = 8
+          self.view.layer.borderColor = UIColor(red: 0, green: 153, blue: 0).CGColor
         }
   }
-
-      
-      override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-      }
+  
+  //Function: Handle event when User Profiles button is pressed.
+  func pressedButtonUserProfiles() {
+    let vcUserProfiles = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILES") as UserProfilesViewController
+    self.navigationController?.pushViewController(vcUserProfiles, animated: true)
+  } //end func
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
       
       
 }
