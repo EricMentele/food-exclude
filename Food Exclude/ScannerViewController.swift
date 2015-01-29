@@ -49,12 +49,21 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var myMatches = [String]() //this stores the allergen categories triggered in the cross-search function (e.g. whey powder is in the ingredients list and is of type milk, user is allergic to milk, so myMatches will store milk)
   var allergenCategories = [String]() //this stores allergen categories detected in the scanned ingredient list
   
-  var activeProfile : UserProfile!
-  
+  var userProfiles = [UserProfile]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    //User profile data: latest
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    self.userProfiles = appDelegate.loadUserProfilesFromArchive()!
+    for item in userProfiles {
+      var allergens = item.allergens
+      for item in allergens {
+        var allergenBool = item.name as String
+      }
+    }
+  
     
     //Add user profile button:
     let buttonUserProfiles = UIBarButtonItem(image: UIImage(named: "three115"), style: UIBarButtonItemStyle.Plain, target: self, action: "pressedButtonUserProfiles")
