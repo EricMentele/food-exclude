@@ -43,6 +43,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var barcodeScanned : String!
   var networkController = NetworkController()
   var list : Ingredients!
+  var category = [String]()
+    
   var ingredientsList = [String]()
   var allergenDerivatives = [String : String]()
   var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
@@ -109,6 +111,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         self.session.startRunning()
       }
       
+      override func viewWillAppear(animated: Bool) {
+        let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(13, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
+      }
+  
+  
       
       func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
         
