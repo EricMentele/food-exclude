@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "wantedphoto.jpg"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "Placeholder_person.png"
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
