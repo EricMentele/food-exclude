@@ -245,7 +245,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           
         }
       }
-      
+      //MARK: Remove alertView
       func removeAlertView() {
         self.alertView?.removeFromSuperview()
       }
@@ -261,6 +261,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         self.session.startRunning()
         self.removeAlertView()
       }
+  
+      @IBAction func ingredientsDetailButtonClicked(selector: UIButton) {
+        let alertCon = UIAlertController(title: NSLocalizedString("Ingredients", comment: "This is the main menu"), message: NSLocalizedString("\(ingredientsList) : Powered by Nutritionix API", comment: "Choose View"), preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertCon.addAction(okButton)
+          self.presentViewController(alertCon, animated: true, completion: nil)
+        }
+        
+  
       
       //MARK: Cross-search ingredients list against allergen derivatives list
       func crossSearchForAllergens() {
