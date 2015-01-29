@@ -30,9 +30,6 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   //Image picker:
   var imagePickerController = UIImagePickerController()
   
-  var alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-
-  
   //Outlets:
   @IBOutlet weak var textUserName: UITextField!
   @IBOutlet weak var tableAllergens: UITableView!
@@ -64,7 +61,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     if self.selectedUserProfile.avatar != nil {
       self.avatarImageView.image = self.selectedUserProfile.avatar
     } else {
-      self.avatarImageView.image = UIImage(named: "Placeholder_person.png")
+      self.avatarImageView.image = UIImage(named: "wantedphoto.jpg")
     } //end if
     avatarImageView.layer.cornerRadius = 10
     avatarImageView.layer.masksToBounds = true
@@ -135,28 +132,8 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
       alertBlankUserName.addAction(buttonCancel)
       self.presentViewController(alertBlankUserName, animated: true, completion: nil)
     } else {
-      let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-      //Add/Update selected user profile.
-      var userProfiles = appDelegate.loadUserProfilesFromArchive() as [UserProfile]?
-      if userProfiles != nil {
-        if !userProfiles!.isEmpty { //users exist: edit/add user profile accordingly
-          if selectedUserProfileIndex >= 0 { //edit user profile
-            userProfiles![selectedUserProfileIndex] = selectedUserProfile
-          } else { //add user profile
-            userProfiles!.append(selectedUserProfile)
-          } //end if
-        } else { //no users exist: add user
-          userProfiles!.append(selectedUserProfile)
-        } //end if
-      } else { //no users exist: add user
-        userProfiles = [selectedUserProfile]
-      } //end if
-      selectedUserProfile.name = textUserName.text
-      selectedUserProfile.includeProfile = switchIncludeProfile.on
-      self.selectedUserProfile.avatar = avatarImageView.image
-
-      //Save data.
-      appDelegate.saveUserProfilesToArchive(userProfiles!)
+      //Save user profile.
+      saveUserProfile()
       
       //Present next view controller.
       let vcScanner = self.storyboard?.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
@@ -166,77 +143,62 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   
   //Function: Handle event when Avatar button is selected.
   func avatarButtonPressed() {
-    self.setupAlertControllerButtons()
-    self.presentViewController(self.alertController, animated: true) { () -> Void in
-      println("button pressed")
-    }
-  }
-  
-  func setupAlertControllerButtons() {
-    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-      let cameraOption = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+      self.imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+      self.imagePickerController.delegate = self
+      self.imagePickerController.allowsEditing = true
+      self.presentViewController(self.imagePickerController, animated: true, completion: nil)
+    } else
+      
+      if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+        imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
-//        imagePickerController.delegate = self
-//        self.presentViewController(imagePickerController, animated: true, completion: nil)
-      })
-      self.alertController.addAction(cameraOption)
-    }
-    
-    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
-      let photoLibraryOption = UIAlertAction(title: "Photo Library", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        imagePickerController.allowsEditing = true
-//        imagePickerController.delegate = self
-//        self.presentViewController(imagePickerController, animated: true, completion: nil)
-      })
-      self.alertController.addAction(photoLibraryOption)
+        self.presentViewController(imagePickerController, animated: true, completion: nil)
     }
   }
   
-//  func cameraButtonPressed() {
-//    
-//    self.setupAlertControllerButtons()
-//    imagePickerController.delegate = self
-//    self.presentViewController(imagePickerController, animated: true, completion: nil)
-//    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-//      let cameraOption = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-//        let imagePickerController = UIImagePickerController()
-//        imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-//        imagePickerController.allowsEditing = true
-//        imagePickerController.delegate = self
-//        self.presentViewController(imagePickerController, animated: true, completion: nil)
-//      })
-//      self.alertController.addAction(cameraOption)
-//    }
-//  }
-//  
-//  func photoLibraryButtonPressed() {
-//    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
-//      let photoLibraryOption = UIAlertAction(title: "Photo Library", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-//        let imagePickerController = UIImagePickerController()
-//        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-//        imagePickerController.allowsEditing = true
-//        imagePickerController.delegate = self
-//        self.presentViewController(imagePickerController, animated: true, completion: nil)
-//      })
-//      self.alertController.addAction(photoLibraryOption)
-//    }
-//  }
-  
+  //Function: Handle event when avatar image is selected.
   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-    let image = info[UIImagePickerControllerOriginalImage] as UIImage
+    let image = info[UIImagePickerControllerEditedImage] as UIImage
     self.avatarImageView.image = image
     imagePickerController.dismissViewControllerAnimated(true, completion: nil)
   }
-
+  
   //Function: Handle event when avatar image selection is cancelled.
   func imagePickerControllerDidCancel(picker: UIImagePickerController) {
     picker.dismissViewControllerAnimated(true, completion: nil)
   }
-
+  
+  //MARK: Other
+  
+  //Function: Save user profile.
+  func saveUserProfile() {
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    //Add/Update selected user profile.
+    var userProfiles = appDelegate.loadUserProfilesFromArchive() as [UserProfile]?
+    if userProfiles != nil {
+      if !userProfiles!.isEmpty { //users exist: edit/add user profile accordingly
+        if selectedUserProfileIndex >= 0 { //edit user profile
+          userProfiles![selectedUserProfileIndex] = selectedUserProfile
+        } else { //add user profile
+          userProfiles!.append(selectedUserProfile)
+        } //end if
+      } else { //no users exist: add user
+        userProfiles!.append(selectedUserProfile)
+      } //end if
+    } else { //no users exist: add user
+      userProfiles = [selectedUserProfile]
+    } //end if
+    selectedUserProfile.name = textUserName.text
+    selectedUserProfile.includeProfile = switchIncludeProfile.on
+    selectedUserProfile.avatar = avatarImageView.image
+    
+    //Save data.
+    appDelegate.saveUserProfilesToArchive(userProfiles!)
+  } //end func
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
