@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6221" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="p4T-V7-q0Z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6724" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="p4T-V7-q0Z">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Scanner Controller-->
+        <!--Scanner-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="VC_SCANNER" title="Scanner Controller" id="vXZ-lx-hvc" customClass="ScannerViewController" customModule="Food_Exclude" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VC_SCANNER" title="Scanner" id="vXZ-lx-hvc" customClass="ScannerViewController" customModule="Food_Exclude" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -35,9 +35,6 @@
                                         <state key="normal" title="Ingredients">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <segue destination="PP1-4g-KkQ" kind="show" id="Vq2-e2-Swb"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I9I-5x-UUL">
                                         <rect key="frame" x="267" y="0.0" width="67" height="30"/>
@@ -64,15 +61,6 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1e-ZO-tn1">
-                                <rect key="frame" x="533" y="72" width="51" height="30"/>
-                                <state key="normal" title="Profiles">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="OWe-c4-ZMc" kind="show" id="URO-1C-2mH"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -132,42 +120,6 @@
             </objects>
             <point key="canvasLocation" x="2292" y="-368"/>
         </scene>
-        <!--Ingredients-->
-        <scene sceneID="Omv-bK-75l">
-            <objects>
-                <viewController title="Ingredients" id="PP1-4g-KkQ" customClass="IngredientsViewController" customModule="Food_Exclude" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ea4-4r-GKM"/>
-                        <viewControllerLayoutGuide type="bottom" id="1yL-fL-WaF"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="MrS-yd-yDn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Selected Food Ingredients" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3O-ie-8pi">
-                                <rect key="frame" x="199" y="72" width="202" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hz6-fc-m2G">
-                                <rect key="frame" x="105" y="162" width="391" height="418"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="ingredientDetail" destination="hz6-fc-m2G" id="hzP-zd-X87"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mQ9-KV-mqv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1627" y="342"/>
-        </scene>
         <!--User Profile-->
         <scene sceneID="YYf-cL-hmM">
             <objects>
@@ -209,10 +161,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BLl-Hr-vZA">
-                                <rect key="frame" x="220" y="109" width="51" height="31"/>
+                                <rect key="frame" x="519" y="109" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Include Profile:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewu-eP-Gkg">
-                                <rect key="frame" x="101" y="114" width="114" height="20.5"/>
+                                <rect key="frame" x="400" y="114" width="114" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -223,7 +175,6 @@
                             <constraint firstItem="MGa-aB-8a4" firstAttribute="top" secondItem="X5b-29-Jkq" secondAttribute="bottom" constant="5" id="8Ou-JN-cGv"/>
                             <constraint firstItem="ewu-eP-Gkg" firstAttribute="centerY" secondItem="BLl-Hr-vZA" secondAttribute="centerY" id="9tb-wz-fNB"/>
                             <constraint firstItem="p37-Ik-Qpu" firstAttribute="leading" secondItem="t6D-Ja-SEg" secondAttribute="trailing" constant="20" id="EVy-Jd-C3H"/>
-                            <constraint firstItem="ewu-eP-Gkg" firstAttribute="leading" secondItem="p37-Ik-Qpu" secondAttribute="leading" id="LCL-yq-nIr"/>
                             <constraint firstItem="dwd-Cf-NeW" firstAttribute="top" secondItem="MGa-aB-8a4" secondAttribute="bottom" constant="5" id="NiJ-PQ-n0s"/>
                             <constraint firstItem="t6D-Ja-SEg" firstAttribute="top" secondItem="Hpw-7g-Drk" secondAttribute="bottom" constant="10" id="YKF-Ze-yLh"/>
                             <constraint firstItem="X5b-29-Jkq" firstAttribute="leading" secondItem="JMy-RH-x58" secondAttribute="leadingMargin" constant="5" id="abx-lJ-uPb"/>
@@ -231,6 +182,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="MGa-aB-8a4" secondAttribute="trailing" constant="-16" id="i44-dy-lcI"/>
                             <constraint firstItem="p37-Ik-Qpu" firstAttribute="top" secondItem="Hpw-7g-Drk" secondAttribute="bottom" constant="10" id="i7U-uB-IKV"/>
                             <constraint firstItem="MGa-aB-8a4" firstAttribute="leading" secondItem="JMy-RH-x58" secondAttribute="leadingMargin" constant="-16" id="mzw-xQ-j0Q"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BLl-Hr-vZA" secondAttribute="trailing" constant="16" id="orm-pT-k6I"/>
                             <constraint firstItem="ewu-eP-Gkg" firstAttribute="top" secondItem="p37-Ik-Qpu" secondAttribute="bottom" constant="10" id="uT6-8d-Ssm"/>
                             <constraint firstItem="bUc-Eg-mxp" firstAttribute="top" secondItem="dwd-Cf-NeW" secondAttribute="bottom" constant="10" id="wus-PW-56a"/>
                             <constraint firstAttribute="trailingMargin" secondItem="p37-Ik-Qpu" secondAttribute="trailing" constant="10" id="xne-H4-iHW"/>
@@ -244,6 +196,8 @@
                     <connections>
                         <outlet property="avatarImageView" destination="t6D-Ja-SEg" id="g41-tt-Co2"/>
                         <outlet property="buttonContinue" destination="dwd-Cf-NeW" id="PMk-vi-ZBO"/>
+                        <outlet property="labelIncludeProfile" destination="ewu-eP-Gkg" id="evS-r7-2ar"/>
+                        <outlet property="labelSelectFoods" destination="X5b-29-Jkq" id="rPy-FU-Ha0"/>
                         <outlet property="switchIncludeProfile" destination="BLl-Hr-vZA" id="PoB-DL-ygm"/>
                         <outlet property="tableAllergens" destination="MGa-aB-8a4" id="gAi-Vr-JWD"/>
                         <outlet property="textUserName" destination="p37-Ik-Qpu" id="cAJ-Jx-ncd"/>
