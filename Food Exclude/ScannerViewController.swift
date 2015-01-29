@@ -44,7 +44,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var networkController = NetworkController()
   var list : Ingredients!
   var category = [String]()
-  
+    
   var ingredientsList = [String]()
   var allergenDerivatives = [String : String]()
   var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
@@ -63,9 +63,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.allergenDerivatives = myDict as [String : String]
     }
   
-  func viewWillAppear(animated: Bool) {
-    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(13, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
-  }
+
   
         //formatting so that the barcode reader line resizes automatically
         self.highlightView.autoresizingMask =   UIViewAutoresizing.FlexibleTopMargin |
@@ -110,8 +108,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
       
       override func viewWillAppear(animated: Bool) {
-        let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
+        let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(13, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
       }
+  
+  
       
       
       func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {

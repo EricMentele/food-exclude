@@ -64,7 +64,7 @@
 	<string>treenuts</string>
 	<key>bread flour</key>
 	<string>gluten</string>
-	<key>brewer's yeast</key>
+	<key>brewer&apos;s yeast</key>
 	<string>gluten</string>
 	<key>brown flour</key>
 	<string>gluten</string>
@@ -749,6 +749,10 @@
 	<key>yakidofu</key>
 	<string>soy</string>
 	<key>yuba</key>
+	<string>soy</string>
+	<key>carrot</key>
+	<string>soy</string>
+	<key>chicken</key>
 	<string>soy</string>
 </dict>
 </plist>
