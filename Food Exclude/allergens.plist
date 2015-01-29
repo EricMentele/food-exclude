@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>abyssinian hard</key>
+	<string>gluten</string>
+	<key>abyssinian hard triticum durum</key>
+	<string>gluten</string>
+	<key>acidophilus milk</key>
+	<string>milk</string>
+	<key>almond</key>
+	<string>treenuts</string>
+	<key>almond butter</key>
+	<string>treenuts</string>
+	<key>almond extract</key>
+	<string>treenuts</string>
+	<key>almond paste</key>
+	<string>treenuts</string>
+	<key>ammonium caseinate</key>
+	<string>milk</string>
+	<key>anacardiaceae</key>
+	<string>treenuts</string>
+	<key>anacardium nuts</key>
+	<string>treenuts</string>
+	<key>anacardium occidentale</key>
+	<string>treenuts</string>
+	<key>apovitellin</key>
+	<string>egg</string>
+	<key>arecaceae</key>
+	<string>treenuts</string>
+	<key>artificial nuts</key>
+	<string>treenuts</string>
+	<key>atta flour</key>
+	<string>gluten</string>
+	<key>barley</key>
+	<string>gluten</string>
+	<key>barley grass</key>
+	<string>gluten</string>
+	<key>barley hordeum vulgare</key>
+	<string>gluten</string>
+	<key>barley malt</key>
+	<string>gluten</string>
+	<key>bean curd</key>
+	<string>soy</string>
+	<key>beech nut</key>
+	<string>treenuts</string>
+	<key>beechnut</key>
+	<string>treenuts</string>
+	<key>beef</key>
+	<string>treenuts</string>
+	<key>beer</key>
+	<string>gluten</string>
+	<key>bertholletia excelsa</key>
+	<string>treenuts</string>
+	<key>betulaceae</key>
+	<string>treenuts</string>
+	<key>bleached flour</key>
+	<string>gluten</string>
+	<key>bran</key>
+	<string>gluten</string>
+	<key>brazil nut</key>
+	<string>treenuts</string>
+	<key>brazil nut butter</key>
+	<string>treenuts</string>
+	<key>bread flour</key>
+	<string>gluten</string>
+	<key>brewer's yeast</key>
+	<string>gluten</string>
+	<key>brown flour</key>
+	<string>gluten</string>
+	<key>bulgur</key>
+	<string>gluten</string>
+	<key>bulgur wheat</key>
+	<string>gluten</string>
+	<key>burseraceae</key>
+	<string>treenuts</string>
+	<key>bush nut</key>
+	<string>treenuts</string>
+	<key>butter</key>
+	<string>milk</string>
+	<key>butter fat</key>
+	<string>milk</string>
+	<key>butter oil</key>
+	<string>milk</string>
+	<key>butter solids</key>
+	<string>milk</string>
+	<key>buttermilk</key>
+	<string>milk</string>
+	<key>buttermilk powder</key>
+	<string>milk</string>
+	<key>butternut</key>
+	<string>treenuts</string>
+	<key>butyrospermum parkii</key>
+	<string>treenuts</string>
+	<key>calcium caseinate</key>
+	<string>milk</string>
+	<key>canarium ovatum</key>
+	<string>treenuts</string>
+	<key>caponata</key>
+	<string>treenuts</string>
+	<key>carya</key>
+	<string>treenuts</string>
+	<key>carya illinoensis</key>
+	<string>treenuts</string>
+	<key>casein</key>
+	<string>milk</string>
+	<key>caseinate</key>
+	<string>milk</string>
+	<key>cashew</key>
+	<string>treenuts</string>
+	<key>castanea</key>
+	<string>treenuts</string>
+	<key>castanea pumila</key>
+	<string>treenuts</string>
+	<key>cereal binding</key>
+	<string>gluten</string>
+	<key>cheese</key>
+	<string>milk</string>
+	<key>chestnut</key>
+	<string>treenuts</string>
+	<key>chilton</key>
+	<string>gluten</string>
+	<key>chinquapin</key>
+	<string>treenuts</string>
+	<key>cholesterolfree egg substitute</key>
+	<string>egg</string>
+	<key>club wheat</key>
+	<string>gluten</string>
+	<key>coconut</key>
+	<string>treenuts</string>
+	<key>cocos nucifera</key>
+	<string>treenuts</string>
+	<key>common wheat</key>
+	<string>gluten</string>
+	<key>condensed milk</key>
+	<string>milk</string>
+	<key>cookie crumbs</key>
+	<string>gluten</string>
+	<key>cookie dough</key>
+	<string>gluten</string>
+	<key>cookie dough pieces</key>
+	<string>gluten</string>
+	<key>corylus</key>
+	<string>treenuts</string>
+	<key>cottage cheese</key>
+	<string>milk</string>
+	<key>couscous</key>
+	<string>gluten</string>
+	<key>cream</key>
+	<string>milk</string>
+	<key>criped rice</key>
+	<string>gluten</string>
+	<key>curds</key>
+	<string>milk</string>
+	<key>custard</key>
+	<string>milk</string>
+	<key>delactosed whey</key>
+	<string>milk</string>
+	<key>demineralized whey</key>
+	<string>milk</string>
+	<key>dinkle</key>
+	<string>gluten</string>
+	<key>disodium wheatgermamido peg-2 sulfosuccinate</key>
+	<string>gluten</string>
+	<key>dried egg</key>
+	<string>egg</string>
+	<key>dried egg solids</key>
+	<string>egg</string>
+	<key>dry milk powder</key>
+	<string>milk</string>
+	<key>dry milk solids</key>
+	<string>milk</string>
+	<key>durum wheat</key>
+	<string>gluten</string>
+	<key>edible coatings</key>
+	<string>gluten</string>
+	<key>edible films</key>
+	<string>gluten</string>
+	<key>edible starch</key>
+	<string>gluten</string>
+	<key>egg</key>
+	<string>egg</string>
+	<key>egg beaters</key>
+	<string>egg</string>
+	<key>egg nog</key>
+	<string>egg</string>
+	<key>egg wash</key>
+	<string>egg</string>
+	<key>egg white</key>
+	<string>egg</string>
+	<key>egg yolk</key>
+	<string>egg</string>
+	<key>einkorn</key>
+	<string>gluten</string>
+	<key>emmer</key>
+	<string>gluten</string>
+	<key>enriched bleached flour</key>
+	<string>gluten</string>
+	<key>enriched bleached wheat flour</key>
+	<string>gluten</string>
+	<key>enriched flour</key>
+	<string>gluten</string>
+	<key>evaporated milk</key>
+	<string>milk</string>
+	<key>fagaceae</key>
+	<string>treenuts</string>
+	<key>fagus</key>
+	<string>treenuts</string>
+	<key>farina</key>
+	<string>gluten</string>
+	<key>farina graham</key>
+	<string>gluten</string>
+	<key>farro</key>
+	<string>gluten</string>
+	<key>fatsubstitutes</key>
+	<string>egg</string>
+	<key>filbert</key>
+	<string>treenuts</string>
+	<key>filler</key>
+	<string>gluten</string>
+	<key>flour</key>
+	<string>gluten</string>
+	<key>freeze dried tofu</key>
+	<string>soy</string>
+	<key>fu</key>
+	<string>gluten</string>
+	<key>gaertn</key>
+	<string>treenuts</string>
+	<key>germ</key>
+	<string>gluten</string>
+	<key>ghee</key>
+	<string>milk</string>
+	<key>gianduja</key>
+	<string>treenuts</string>
+	<key>ginkgo biloba</key>
+	<string>treenuts</string>
+	<key>ginkgoaceae</key>
+	<string>treenuts</string>
+	<key>ginko nut</key>
+	<string>treenuts</string>
+	<key>globulin</key>
+	<string>egg</string>
+	<key>goat cheese</key>
+	<string>milk</string>
+	<key>goat milk</key>
+	<string>milk</string>
+	<key>graham flour</key>
+	<string>gluten</string>
+	<key>granary flour</key>
+	<string>gluten</string>
+	<key>groats</key>
+	<string>gluten</string>
+	<key>half &amp; half</key>
+	<string>milk</string>
+	<key>hard wheat</key>
+	<string>gluten</string>
+	<key>hazelnut</key>
+	<string>treenuts</string>
+	<key>hazelnut butter</key>
+	<string>treenuts</string>
+	<key>heartnut</key>
+	<string>treenuts</string>
+	<key>heeng</key>
+	<string>gluten</string>
+	<key>hickory nut</key>
+	<string>treenuts</string>
+	<key>hing</key>
+	<string>gluten</string>
+	<key>hordeum vulgare extract</key>
+	<string>gluten</string>
+	<key>hydrolyzed casein</key>
+	<string>milk</string>
+	<key>hydrolyzed milk protein</key>
+	<string>milk</string>
+	<key>hydrolyzed soy protein</key>
+	<string>soy</string>
+	<key>hydroxypropyltrimonium hydrolyzed wheat protein</key>
+	<string>gluten</string>
+	<key>indian nut</key>
+	<string>treenuts</string>
+	<key>indian wheat flour</key>
+	<string>gluten</string>
+	<key>iron caseinate</key>
+	<string>milk</string>
+	<key>juglandaceae</key>
+	<string>treenuts</string>
+	<key>juglans</key>
+	<string>treenuts</string>
+	<key>juglans cinerea</key>
+	<string>treenuts</string>
+	<key>kamut</key>
+	<string>gluten</string>
+	<key>karike butter</key>
+	<string>treenuts</string>
+	<key>karite</key>
+	<string>treenuts</string>
+	<key>kecap manis</key>
+	<string>gluten</string>
+	<key>ketjap manis</key>
+	<string>gluten</string>
+	<key>kinnoko flour</key>
+	<string>soy</string>
+	<key>kluski pasta</key>
+	<string>gluten</string>
+	<key>koji</key>
+	<string>gluten</string>
+	<key>kyodofu</key>
+	<string>soy</string>
+	<key>lactalbumin</key>
+	<string>milk</string>
+	<key>lactoferrin</key>
+	<string>milk</string>
+	<key>lactoglobulin</key>
+	<string>milk</string>
+	<key>lactose</key>
+	<string>milk</string>
+	<key>lactulose</key>
+	<string>milk</string>
+	<key>lecythidaceae</key>
+	<string>treenuts</string>
+	<key>lichee nut</key>
+	<string>treenuts</string>
+	<key>litchi chinensis</key>
+	<string>treenuts</string>
+	<key>livetin</key>
+	<string>egg</string>
+	<key>low-fat milk</key>
+	<string>milk</string>
+	<key>lychee nut</key>
+	<string>treenuts</string>
+	<key>lysozyme</key>
+	<string>egg</string>
+	<key>macadamia</key>
+	<string>treenuts</string>
+	<key>macadamia nut</key>
+	<string>treenuts</string>
+	<key>macadamia nut butter</key>
+	<string>treenuts</string>
+	<key>macha wheat</key>
+	<string>gluten</string>
+	<key>magnesium caseinate</key>
+	<string>milk</string>
+	<key>maida</key>
+	<string>gluten</string>
+	<key>malt</key>
+	<string>gluten</string>
+	<key>malt extract</key>
+	<string>gluten</string>
+	<key>malt flavoring</key>
+	<string>gluten</string>
+	<key>malt syrup</key>
+	<string>gluten</string>
+	<key>malt vinegar</key>
+	<string>gluten</string>
+	<key>malted barley flour</key>
+	<string>gluten</string>
+	<key>malted milk</key>
+	<string>gluten</string>
+	<key>mandelonas</key>
+	<string>treenuts</string>
+	<key>marzipan</key>
+	<string>treenuts</string>
+	<key>mashuga nuts</key>
+	<string>treenuts</string>
+	<key>matza</key>
+	<string>gluten</string>
+	<key>matzah</key>
+	<string>gluten</string>
+	<key>matzo</key>
+	<string>gluten</string>
+	<key>matzo semolina</key>
+	<string>gluten</string>
+	<key>mayonnaise</key>
+	<string>egg</string>
+	<key>meringue</key>
+	<string>egg</string>
+	<key>meringuepowder</key>
+	<string>egg</string>
+	<key>meripro 711</key>
+	<string>gluten</string>
+	<key>milk</key>
+	<string>milk</string>
+	<key>milk derivative</key>
+	<string>milk</string>
+	<key>milk fat</key>
+	<string>milk</string>
+	<key>milk powder</key>
+	<string>milk</string>
+	<key>milk protein</key>
+	<string>milk</string>
+	<key>milk solids</key>
+	<string>milk</string>
+	<key>mir</key>
+	<string>gluten</string>
+	<key>miso</key>
+	<string>soy</string>
+	<key>nangai nut</key>
+	<string>treenuts</string>
+	<key>nangai nuts</key>
+	<string>treenuts</string>
+	<key>natto</key>
+	<string>soy</string>
+	<key>natural butter flavor</key>
+	<string>milk</string>
+	<key>nishasta</key>
+	<string>gluten</string>
+	<key>nonfat milk</key>
+	<string>milk</string>
+	<key>nougat</key>
+	<string>treenuts</string>
+	<key>nu-nuts®</key>
+	<string>treenuts</string>
+	<key>nut meal</key>
+	<string>treenuts</string>
+	<key>nut oil</key>
+	<string>treenuts</string>
+	<key>nut paste</key>
+	<string>treenuts</string>
+	<key>nut pieces</key>
+	<string>treenuts</string>
+	<key>nutella®</key>
+	<string>treenuts</string>
+	<key>nutmeat</key>
+	<string>treenuts</string>
+	<key>nuts</key>
+	<string>treenuts</string>
+	<key>oats</key>
+	<string>gluten</string>
+	<key>okara</key>
+	<string>soy</string>
+	<key>oriental wheat</key>
+	<string>gluten</string>
+	<key>orzo pasta</key>
+	<string>gluten</string>
+	<key>ovalbumin</key>
+	<string>egg</string>
+	<key>ovoglobulin</key>
+	<string>egg</string>
+	<key>ovomucin</key>
+	<string>egg</string>
+	<key>ovomucoid</key>
+	<string>egg</string>
+	<key>ovotransferrin</key>
+	<string>egg</string>
+	<key>ovovitelia</key>
+	<string>egg</string>
+	<key>ovovitellin</key>
+	<string>egg</string>
+	<key>palmae</key>
+	<string>treenuts</string>
+	<key>paneer</key>
+	<string>milk</string>
+	<key>pasta</key>
+	<string>gluten</string>
+	<key>pasta wheat</key>
+	<string>gluten</string>
+	<key>pearl barley</key>
+	<string>gluten</string>
+	<key>pecan</key>
+	<string>treenuts</string>
+	<key>persian wheat</key>
+	<string>gluten</string>
+	<key>perungayam</key>
+	<string>gluten</string>
+	<key>pesto</key>
+	<string>treenuts</string>
+	<key>pigndi</key>
+	<string>treenuts</string>
+	<key>pignon</key>
+	<string>treenuts</string>
+	<key>pigñolia</key>
+	<string>treenuts</string>
+	<key>pili nut</key>
+	<string>treenuts</string>
+	<key>pine nut</key>
+	<string>treenuts</string>
+	<key>pineaceae</key>
+	<string>treenuts</string>
+	<key>pinon nut</key>
+	<string>treenuts</string>
+	<key>pinus</key>
+	<string>treenuts</string>
+	<key>pinyon</key>
+	<string>treenuts</string>
+	<key>pistachio</key>
+	<string>treenuts</string>
+	<key>pistachio nut butter</key>
+	<string>treenuts</string>
+	<key>pistacia</key>
+	<string>treenuts</string>
+	<key>piñon</key>
+	<string>treenuts</string>
+	<key>piñon nut</key>
+	<string>treenuts</string>
+	<key>polish wheat</key>
+	<string>gluten</string>
+	<key>potassium caseinate</key>
+	<string>milk</string>
+	<key>poulard wheat</key>
+	<string>gluten</string>
+	<key>powdered egg</key>
+	<string>egg</string>
+	<key>pralines</key>
+	<string>treenuts</string>
+	<key>proteaceae</key>
+	<string>treenuts</string>
+	<key>prunus dulcis</key>
+	<string>treenuts</string>
+	<key>pudding</key>
+	<string>milk</string>
+	<key>recaldent</key>
+	<string>milk</string>
+	<key>rennet casein</key>
+	<string>milk</string>
+	<key>rice malt</key>
+	<string>gluten</string>
+	<key>rosaceae</key>
+	<string>treenuts</string>
+	<key>roux</key>
+	<string>gluten</string>
+	<key>rusk</key>
+	<string>gluten</string>
+	<key>rye</key>
+	<string>gluten</string>
+	<key>sapindaceae</key>
+	<string>treenuts</string>
+	<key>sapotaceae</key>
+	<string>treenuts</string>
+	<key>seitan</key>
+	<string>gluten</string>
+	<key>semolina</key>
+	<string>gluten</string>
+	<key>semolina triticum</key>
+	<string>gluten</string>
+	<key>shea nut</key>
+	<string>treenuts</string>
+	<key>shea nut butter</key>
+	<string>treenuts</string>
+	<key>sheanut</key>
+	<string>treenuts</string>
+	<key>sheep milk</key>
+	<string>milk</string>
+	<key>sheep milk cheese</key>
+	<string>milk</string>
+	<key>shot wheat</key>
+	<string>gluten</string>
+	<key>shoyu sauce</key>
+	<string>soy</string>
+	<key>silicialbuminate</key>
+	<string>egg</string>
+	<key>simplesse</key>
+	<string>egg</string>
+	<key>skim milk</key>
+	<string>milk</string>
+	<key>small spelt</key>
+	<string>gluten</string>
+	<key>sodium caseinate</key>
+	<string>milk</string>
+	<key>sour cream</key>
+	<string>milk</string>
+	<key>sour milk solids</key>
+	<string>milk</string>
+	<key>soy albumin</key>
+	<string>soy</string>
+	<key>soy bran</key>
+	<string>soy</string>
+	<key>soy concentrate</key>
+	<string>soy</string>
+	<key>soy fiber</key>
+	<string>soy</string>
+	<key>soy flour</key>
+	<string>soy</string>
+	<key>soy formula</key>
+	<string>soy</string>
+	<key>soy grits</key>
+	<string>soy</string>
+	<key>soy lecithin</key>
+	<string>soy</string>
+	<key>soy milk</key>
+	<string>soy</string>
+	<key>soy miso</key>
+	<string>soy</string>
+	<key>soy nut butter</key>
+	<string>soy</string>
+	<key>soy nuts</key>
+	<string>soy</string>
+	<key>soy protein</key>
+	<string>soy</string>
+	<key>soy protein concentrate</key>
+	<string>soy</string>
+	<key>soy protein isolate</key>
+	<string>soy</string>
+	<key>soy pulp</key>
+	<string>soy</string>
+	<key>soy sauce</key>
+	<string>soy</string>
+	<key>soy sprouts</key>
+	<string>soy</string>
+	<key>soya</key>
+	<string>soy</string>
+	<key>soya flour</key>
+	<string>soy</string>
+	<key>soybean curd</key>
+	<string>soy</string>
+	<key>soybean flour</key>
+	<string>soy</string>
+	<key>soybean granules</key>
+	<string>soy</string>
+	<key>soybean paste</key>
+	<string>soy</string>
+	<key>soybeans</key>
+	<string>soy</string>
+	<key>spelt</key>
+	<string>gluten</string>
+	<key>sprouted barley</key>
+	<string>gluten</string>
+	<key>sprouted wheat</key>
+	<string>gluten</string>
+	<key>stearyldimoniumhydroxypropyl hydrolyzed wheat protein</key>
+	<string>gluten</string>
+	<key>strong flour</key>
+	<string>gluten</string>
+	<key>suet</key>
+	<string>gluten</string>
+	<key>supro</key>
+	<string>soy</string>
+	<key>sweet whey</key>
+	<string>milk</string>
+	<key>sweetened condensed milk</key>
+	<string>milk</string>
+	<key>tabbouleh</key>
+	<string>gluten</string>
+	<key>tabouli</key>
+	<string>gluten</string>
+	<key>tamari</key>
+	<string>soy</string>
+	<key>tempeh</key>
+	<string>soy</string>
+	<key>teriyaki sauce</key>
+	<string>soy</string>
+	<key>textured soy flour</key>
+	<string>soy</string>
+	<key>textured soy protein</key>
+	<string>soy</string>
+	<key>textured vegetable protein</key>
+	<string>soy</string>
+	<key>timopheevi wheat</key>
+	<string>gluten</string>
+	<key>tofu</key>
+	<string>soy</string>
+	<key>trailblazer</key>
+	<string>egg</string>
+	<key>triticale x triticosecale</key>
+	<string>gluten</string>
+	<key>triticum aestivum</key>
+	<string>gluten</string>
+	<key>triticum aestivum subspecies compactum</key>
+	<string>gluten</string>
+	<key>triticum boeotictim</key>
+	<string>gluten</string>
+	<key>triticum carthlicum</key>
+	<string>gluten</string>
+	<key>triticum dicoccoides</key>
+	<string>gluten</string>
+	<key>triticum dicoccon</key>
+	<string>gluten</string>
+	<key>triticum durum</key>
+	<string>gluten</string>
+	<key>triticum monococcum</key>
+	<string>gluten</string>
+	<key>triticum polonicum</key>
+	<string>gluten</string>
+	<key>triticum spelta</key>
+	<string>gluten</string>
+	<key>triticum timopheevii</key>
+	<string>gluten</string>
+	<key>triticum turanicum</key>
+	<string>gluten</string>
+	<key>triticum turgidum</key>
+	<string>gluten</string>
+	<key>triticum vulgare</key>
+	<string>gluten</string>
+	<key>triticum vulgare flour lipids</key>
+	<string>gluten</string>
+	<key>udon</key>
+	<string>gluten</string>
+	<key>unbleached flour</key>
+	<string>gluten</string>
+	<key>vavilovi wheat</key>
+	<string>gluten</string>
+	<key>vital wheat gluten</key>
+	<string>gluten</string>
+	<key>vitellaria paradoxa</key>
+	<string>treenuts</string>
+	<key>vitellin</key>
+	<string>egg</string>
+	<key>walnut</key>
+	<string>treenuts</string>
+	<key>wheat</key>
+	<string>gluten</string>
+	<key>wheat amino acids</key>
+	<string>gluten</string>
+	<key>wheat bran extract</key>
+	<string>gluten</string>
+	<key>wheat durum triticum</key>
+	<string>gluten</string>
+	<key>wheat germ extract</key>
+	<string>gluten</string>
+	<key>wheat germ glycerides</key>
+	<string>gluten</string>
+	<key>wheat germ oil</key>
+	<string>gluten</string>
+	<key>wheat germamidopropyldimonium hydroxypropyl hydrolyzed wheat protein</key>
+	<string>gluten</string>
+	<key>wheat gluten</key>
+	<string>gluten</string>
+	<key>wheat grass</key>
+	<string>gluten</string>
+	<key>wheat noodles</key>
+	<string>gluten</string>
+	<key>wheat nuts</key>
+	<string>gluten</string>
+	<key>wheat protein</key>
+	<string>gluten</string>
+	<key>wheat triticum durum</key>
+	<string>gluten</string>
+	<key>whey</key>
+	<string>milk</string>
+	<key>whey powder</key>
+	<string>milk</string>
+	<key>whey protein concentrate</key>
+	<string>milk</string>
+	<key>whey protein hydrolysate</key>
+	<string>milk</string>
+	<key>whipped cream</key>
+	<string>milk</string>
+	<key>whipped topping</key>
+	<string>milk</string>
+	<key>whole egg</key>
+	<string>egg</string>
+	<key>whole milk</key>
+	<string>milk</string>
+	<key>whole-meal flour</key>
+	<string>gluten</string>
+	<key>wild einkorn</key>
+	<string>gluten</string>
+	<key>wild emmer</key>
+	<string>gluten</string>
+	<key>yakidofu</key>
+	<string>soy</string>
+	<key>yuba</key>
+	<string>soy</string>
+</dict>
+</plist>
