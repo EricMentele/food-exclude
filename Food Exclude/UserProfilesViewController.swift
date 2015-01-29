@@ -67,6 +67,8 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     cell.labelUserName.text = currentUserProfile.name
     cell.switchIncludeProfile.on = currentUserProfile.includeProfile
     cell.avatarImageView.image = currentUserProfile.avatar
+    cell.avatarImageView.layer.cornerRadius = 10
+    cell.avatarImageView.layer.masksToBounds = true 
     //Return cell.
     return cell
   } //end func
@@ -132,16 +134,4 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  
-  
-  /*
-  // MARK: - Navigation
-  
-  // In a storyboard-based application, you will often want to do a little preparation before navigation
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-  // Get the new view controller using segue.destinationViewController.
-  // Pass the selected object to the new view controller.
-  }
-  */
-  
 }

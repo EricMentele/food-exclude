@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6724" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6221" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,30 +13,38 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bq8-rK-zh7" id="U9Z-0J-5fF">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="user name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Crh-SE-iIg">
-                        <rect key="frame" x="28" y="76" width="81" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Crh-SE-iIg">
+                        <rect key="frame" x="98" y="76.5" width="80.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jz0-Zg-7BW">
+                    <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jz0-Zg-7BW">
                         <rect key="frame" x="243" y="72" width="51" height="31"/>
                     </switch>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="84H-hF-eCx">
-                        <rect key="frame" x="16" y="8" width="60" height="60"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="84H-hF-eCx">
+                        <rect key="frame" x="28" y="57" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="3HW-Cv-OcA"/>
                             <constraint firstAttribute="width" constant="60" id="aqW-5y-BEM"/>
                         </constraints>
                     </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="Crh-SE-iIg" firstAttribute="leading" secondItem="84H-hF-eCx" secondAttribute="trailing" constant="10" id="0Ml-hn-D2c"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="jz0-Zg-7BW" secondAttribute="trailing" constant="20" id="MTf-Jd-Mzs"/>
+                    <constraint firstAttribute="centerY" secondItem="84H-hF-eCx" secondAttribute="centerY" id="OhN-Ci-KqQ"/>
+                    <constraint firstAttribute="centerY" secondItem="jz0-Zg-7BW" secondAttribute="centerY" id="RfD-1e-ArM"/>
+                    <constraint firstItem="84H-hF-eCx" firstAttribute="leading" secondItem="U9Z-0J-5fF" secondAttribute="leadingMargin" constant="20" id="nP0-Wt-tFF"/>
+                    <constraint firstAttribute="centerY" secondItem="Crh-SE-iIg" secondAttribute="centerY" id="xig-ck-mcN"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="avatarImageView" destination="84H-hF-eCx" id="VM9-AO-qiK"/>
                 <outlet property="labelUserName" destination="Crh-SE-iIg" id="G7Z-VZ-rTf"/>
                 <outlet property="switchIncludeProfile" destination="jz0-Zg-7BW" id="Hnf-Ry-wtp"/>
             </connections>
-            <point key="canvasLocation" x="364" y="468"/>
+            <point key="canvasLocation" x="190" y="383"/>
         </tableViewCell>
     </objects>
 </document>
