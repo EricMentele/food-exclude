@@ -68,7 +68,8 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     cell.switchIncludeProfile.on = currentUserProfile.includeProfile
     cell.avatarImageView.image = currentUserProfile.avatar
     cell.avatarImageView.layer.cornerRadius = 10
-    cell.avatarImageView.layer.masksToBounds = true 
+    cell.avatarImageView.layer.masksToBounds = true
+    cell.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFill
     //Return cell.
     return cell
   } //end func

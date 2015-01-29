@@ -65,6 +65,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     } //end if
     avatarImageView.layer.cornerRadius = 10
     avatarImageView.layer.masksToBounds = true
+    avatarImageView.contentMode = UIViewContentMode.ScaleAspectFill
     
     //Switch:
     switchIncludeProfile.on = selectedUserProfile!.includeProfile
@@ -80,6 +81,11 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     //Camera button:
     let cameraButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "avatarButtonPressed")
     self.navigationItem.rightBarButtonItem = cameraButton
+  } //end func
+  
+  //Function: Handle event when view controller disappears.
+  override func viewWillDisappear(animated: Bool) {
+    saveUserProfile()
   } //end func
   
   //MARK: Table View Data Source
@@ -137,7 +143,6 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
       
       //Present next view controller.
       let vcScanner = self.storyboard?.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
-      vcScanner.activeProfile = self.selectedUserProfile
       self.navigationController?.pushViewController(vcScanner, animated: true)
     } //end if
   } //end func
@@ -171,7 +176,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   func imagePickerControllerDidCancel(picker: UIImagePickerController) {
     picker.dismissViewControllerAnimated(true, completion: nil)
   }
-  
+
   //MARK: Other
   
   //Function: Save user profile.
