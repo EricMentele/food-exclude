@@ -56,8 +56,11 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
       self.avatarImageView.image = self.selectedUserProfile.avatar
     } else {
       self.avatarImageView.image = UIImage(named: "Placeholder_person.png")
-    }
+    } //end if
+    avatarImageView.layer.cornerRadius = 10
+    avatarImageView.layer.masksToBounds = true
     
+    //Switch:
     switchIncludeProfile.on = selectedUserProfile!.includeProfile
     
     //Table:
