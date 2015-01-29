@@ -68,7 +68,10 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     //Button:
     buttonContinue.addTarget(self, action: "pressedButtonContinue", forControlEvents: UIControlEvents.TouchUpInside)
     
-    self.navigationController?.delegate = self
+    let cameraButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "avatarButtonPressed")
+    self.navigationItem.rightBarButtonItem = cameraButton
+    
+    
   } //end func
   
   //MARK: Table View Data Source
@@ -154,19 +157,17 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     // Dispose of any resources that can be recreated.
   }
   
-  
-  @IBAction func backButtonPressed(sender: UIBarButtonItem) {
-  }
+
   
   
-  @IBAction func avatarButtonPressed(sender: UIBarButtonItem) {
+    func avatarButtonPressed() {
     if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
       self.imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
       self.imagePickerController.delegate = self
       self.imagePickerController.allowsEditing = true
       self.presentViewController(self.imagePickerController, animated: true, completion: nil)
     } else
-    
+  
     if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
       let imagePickerController = UIImagePickerController()
       imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
@@ -181,7 +182,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     self.avatarImageView.image = image
     imagePickerController.dismissViewControllerAnimated(true, completion: nil)
   }
-  
+
   
   func imagePickerControllerDidCancel(picker: UIImagePickerController) {
     picker.dismissViewControllerAnimated(true, completion: nil)
