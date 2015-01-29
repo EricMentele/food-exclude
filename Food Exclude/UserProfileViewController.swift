@@ -22,15 +22,19 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
+class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   //REQUIRED: selected user profile index - set to -1 to add a new user profile
   var selectedUserProfileIndex: Int!
   var selectedUserProfile: UserProfile!
+  
+  var imagePickerController = UIImagePickerController()
   
   //Outlets:
   @IBOutlet weak var textUserName: UITextField!
   @IBOutlet weak var tableAllergens: UITableView!
   @IBOutlet weak var buttonContinue: UIButton!
+  
+  @IBOutlet weak var avatarImageView: UIImageView!
   
   //Function: Set up view controller.
   override func viewDidLoad() {
@@ -46,6 +50,13 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     textUserName.delegate = self
     self.textUserName.text = selectedUserProfile!.name
     
+    //Avatar:
+    if self.selectedUserProfile.avatar != nil {
+      self.avatarImageView.image = self.selectedUserProfile.avatar
+    } else {
+      self.avatarImageView.image = UIImage(named: "Placeholder_person.png")
+    }
+    
     //Table:
     tableAllergens.registerNib(UINib(nibName: "AllergenCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CELL_ALLERGEN")
     tableAllergens.dataSource = self
@@ -53,6 +64,8 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     
     //Button:
     buttonContinue.addTarget(self, action: "pressedButtonContinue", forControlEvents: UIControlEvents.TouchUpInside)
+    
+    self.navigationController?.delegate = self
   } //end func
   
   //MARK: Table View Data Source
@@ -133,4 +146,40 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
+  
+  
+  @IBAction func backButtonPressed(sender: UIBarButtonItem) {
+  }
+  
+  
+  @IBAction func avatarButtonPressed(sender: UIBarButtonItem) {
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+      self.imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+      self.imagePickerController.delegate = self
+      self.imagePickerController.allowsEditing = true
+      self.presentViewController(self.imagePickerController, animated: true, completion: nil)
+    } else
+    
+    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+      let imagePickerController = UIImagePickerController()
+      imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+      imagePickerController.delegate = self
+      imagePickerController.allowsEditing = true
+      self.presentViewController(imagePickerController, animated: true, completion: nil)
+    }
+  }
+  
+  func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    let image = info[UIImagePickerControllerEditedImage] as UIImage
+    self.avatarImageView.image = image
+    self.selectedUserProfile.avatar = image
+    imagePickerController.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  
+  func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    picker.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  
 }

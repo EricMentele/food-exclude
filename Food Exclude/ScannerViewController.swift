@@ -61,7 +61,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.allergenDerivatives = myDict as [String : String]
     }
   
-
+  func viewWillAppear(animated: Bool) {
+    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(13, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
+  }
   
         //formatting so that the barcode reader line resizes automatically
         self.highlightView.autoresizingMask =   UIViewAutoresizing.FlexibleTopMargin |
