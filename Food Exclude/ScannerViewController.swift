@@ -117,7 +117,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   
       
-      
       func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
         
         var highlightViewRect = CGRectZero
@@ -186,11 +185,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             }
             self.crossSearchForAllergens()
             
+            //self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
             
             
             println("Does this have the product name? \(self.list)")
             
-            
+            //MARK: NETWORK ALERTS
             //MARK: Item not in database alert
             if self.networkController.statusCode as NSObject == 404  {
               
@@ -257,11 +257,18 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         self.myMatches = [String]()
         self.allergenCategories = [String]()
         self.session.startRunning()
+        if self.alertView != nil {
         self.removeAlertView()
+        }
       }
       
       //MARK: Cross-search ingredients list against allergen derivatives list
-      func crossSearchForAllergens() {
+  //MYCODE
+  func crossSearchForAllergens(#ingredients: [String], allergens: [String:String]) {
+    for item in ingredients {
+      println(ingredients)
+      if let c = allergens.indexForKey(item) {
+        self.matches.append(item)
         
         for item in self.ingredientsList {
           
@@ -306,6 +313,25 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           self.view.layer.borderColor = UIColor(red: 0, green: 153, blue: 0).CGColor
         }
   }
+//      func crossSearchForAllergens() {
+//        for item in self.ingredientsList {
+//          
+//          if let c = allergenDerivatives.indexForKey(item) {
+//            self.matches.append(item)
+//            self.allergenCategories.append(self.allergenDerivatives[item]!)
+//          }}
+//        println(self.matches)
+//        println(self.allergenCategories)
+//        
+//        for item in self.allergenCategories {
+//          //this is to be replaced with the actual active user profile's allergens
+//          var myAllergens = ["milk" : "milk", "eggs" : "eggs", "fish" : "fish", "shellfish" : "shellfish", "treenuts" : "treenuts", "peanuts" : "peanuts", "wheat" : "wheat", "soy" : "soy", "gluten" : "gluten"]
+//          if let d = myAllergens.indexForKey(item) {
+//            self.myMatches.append(item)
+//          }
+//        }
+//        println("This product contains \(self.myMatches)")
+//  }
   
   //Function: Handle event when User Profiles button is pressed.
   func pressedButtonUserProfiles() {
