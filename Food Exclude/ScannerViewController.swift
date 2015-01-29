@@ -184,7 +184,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             for(var i=0; i<self.ingredientsList.count; i++) {
               self.ingredientsList[i] = self.ingredientsList[i].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             }
-            
+            println("\(self.ingredientsList)")
             self.crossSearchForAllergens()
             
             
@@ -246,7 +246,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
       
       func removeAlertView() {
-        self.alertView.removeFromSuperview()
+        self.alertView?.removeFromSuperview()
       }
       
       //MARK:  Start new scan.
