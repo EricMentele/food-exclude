@@ -191,8 +191,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             self.barcode.text = self.list.itemName
             var seperatedList = self.list.seperatedList
             println("THIS IS THE SEPERATED LIST!!\(seperatedList)")
-            //var prepList = self.list.ingredientsList!.lowercaseString
-            self.crossSearchForAllergens(ingredients: seperatedList, allergens: self.allergenDerivatives)
+            if let prepList = self.list.ingredientsList?.lowercaseString {
+              self.crossSearchForAllergens(ingredients: seperatedList, allergens: self.allergenDerivatives)
+            }
             
             //self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
             
