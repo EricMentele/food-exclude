@@ -41,29 +41,19 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var barcodeScanned : String!
   var networkController = NetworkController()
   var list : Ingredients!
-  var category = [String]()
-    
+  
   var ingredientsList = [String]()
   var allergenDerivatives = [String : String]()
   var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
   var myMatches = [String]() //this stores the allergen categories triggered in the cross-search function (e.g. whey powder is in the ingredients list and is of type milk, user is allergic to milk, so myMatches will store milk)
   var allergenCategories = [String]() //this stores allergen categories detected in the scanned ingredient list
-  
+  var myAllergens = [Allergen]()
   var userProfiles = [UserProfile]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //User profile data: latest
-    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-    self.userProfiles = appDelegate.loadUserProfilesFromArchive()!
-    for item in userProfiles {
-      var allergens = item.allergens
-      for item in allergens {
-        var allergenBool = item.name as String
-      }
-    }
-  
+    
     
     //Add user profile button:
     let buttonUserProfiles = UIBarButtonItem(image: UIImage(named: "three115"), style: UIBarButtonItemStyle.Plain, target: self, action: "pressedButtonUserProfiles")
@@ -286,8 +276,48 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       if let c = allergens.indexForKey(item) {
         self.matches.append(item)
         
-      }}
-    println("MATCHES!!!!!!!!!!!!!!!!!!!!!!!!\(self.matches)")
+        for item in self.ingredientsList {
+          
+          if let c = allergenDerivatives.indexForKey(item) {
+            self.matches.append(item)
+            self.allergenCategories.append(self.allergenDerivatives[item]!)
+          }}
+        
+        //User profile data: latest
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        self.userProfiles = appDelegate.loadUserProfilesFromArchive()!
+        
+        
+        var dictionaryOfAllergens = [String : Bool]()
+        
+        for categories in self.allergenCategories {
+          dictionaryOfAllergens[categories] = true
+          }
+    
+  
+        for user in userProfiles {
+          var allergens = user.allergens
+          for allergy in allergens {
+            if allergy.sensitive == true {
+              let match = dictionaryOfAllergens[allergy.name]
+              if match == true {
+                self.myAllergens.append(allergy)
+              }
+              }
+          }
+        }
+        
+        
+        if !self.myAllergens .isEmpty {
+          self.view.layer.borderWidth = 9
+          self.view.layer.borderColor = UIColor(red: 153, green: 0, blue: 0).CGColor
+          
+          //self.view.layer.borderColor = UIColor.redColor().CGColor
+        }
+        else {
+          self.view.layer.borderWidth = 8
+          self.view.layer.borderColor = UIColor(red: 0, green: 153, blue: 0).CGColor
+        }
   }
 //      func crossSearchForAllergens() {
 //        for item in self.ingredientsList {
