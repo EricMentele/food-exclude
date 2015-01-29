@@ -209,10 +209,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BLl-Hr-vZA">
-                                <rect key="frame" x="220" y="109" width="51" height="31"/>
+                                <rect key="frame" x="519" y="109" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Include Profile:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewu-eP-Gkg">
-                                <rect key="frame" x="101" y="114" width="114" height="20.5"/>
+                                <rect key="frame" x="400" y="114" width="114" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -223,7 +223,6 @@
                             <constraint firstItem="MGa-aB-8a4" firstAttribute="top" secondItem="X5b-29-Jkq" secondAttribute="bottom" constant="5" id="8Ou-JN-cGv"/>
                             <constraint firstItem="ewu-eP-Gkg" firstAttribute="centerY" secondItem="BLl-Hr-vZA" secondAttribute="centerY" id="9tb-wz-fNB"/>
                             <constraint firstItem="p37-Ik-Qpu" firstAttribute="leading" secondItem="t6D-Ja-SEg" secondAttribute="trailing" constant="20" id="EVy-Jd-C3H"/>
-                            <constraint firstItem="ewu-eP-Gkg" firstAttribute="leading" secondItem="p37-Ik-Qpu" secondAttribute="leading" id="LCL-yq-nIr"/>
                             <constraint firstItem="dwd-Cf-NeW" firstAttribute="top" secondItem="MGa-aB-8a4" secondAttribute="bottom" constant="5" id="NiJ-PQ-n0s"/>
                             <constraint firstItem="t6D-Ja-SEg" firstAttribute="top" secondItem="Hpw-7g-Drk" secondAttribute="bottom" constant="10" id="YKF-Ze-yLh"/>
                             <constraint firstItem="X5b-29-Jkq" firstAttribute="leading" secondItem="JMy-RH-x58" secondAttribute="leadingMargin" constant="5" id="abx-lJ-uPb"/>
@@ -231,6 +230,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="MGa-aB-8a4" secondAttribute="trailing" constant="-16" id="i44-dy-lcI"/>
                             <constraint firstItem="p37-Ik-Qpu" firstAttribute="top" secondItem="Hpw-7g-Drk" secondAttribute="bottom" constant="10" id="i7U-uB-IKV"/>
                             <constraint firstItem="MGa-aB-8a4" firstAttribute="leading" secondItem="JMy-RH-x58" secondAttribute="leadingMargin" constant="-16" id="mzw-xQ-j0Q"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BLl-Hr-vZA" secondAttribute="trailing" constant="16" id="orm-pT-k6I"/>
                             <constraint firstItem="ewu-eP-Gkg" firstAttribute="top" secondItem="p37-Ik-Qpu" secondAttribute="bottom" constant="10" id="uT6-8d-Ssm"/>
                             <constraint firstItem="bUc-Eg-mxp" firstAttribute="top" secondItem="dwd-Cf-NeW" secondAttribute="bottom" constant="10" id="wus-PW-56a"/>
                             <constraint firstAttribute="trailingMargin" secondItem="p37-Ik-Qpu" secondAttribute="trailing" constant="10" id="xne-H4-iHW"/>
@@ -244,6 +244,8 @@
                     <connections>
                         <outlet property="avatarImageView" destination="t6D-Ja-SEg" id="g41-tt-Co2"/>
                         <outlet property="buttonContinue" destination="dwd-Cf-NeW" id="PMk-vi-ZBO"/>
+                        <outlet property="labelIncludeProfile" destination="ewu-eP-Gkg" id="evS-r7-2ar"/>
+                        <outlet property="labelSelectFoods" destination="X5b-29-Jkq" id="rPy-FU-Ha0"/>
                         <outlet property="switchIncludeProfile" destination="BLl-Hr-vZA" id="PoB-DL-ygm"/>
                         <outlet property="tableAllergens" destination="MGa-aB-8a4" id="gAi-Vr-JWD"/>
                         <outlet property="textUserName" destination="p37-Ik-Qpu" id="cAJ-Jx-ncd"/>

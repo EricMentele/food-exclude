@@ -27,20 +27,26 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   var selectedUserProfileIndex: Int!
   var selectedUserProfile: UserProfile!
   
+  //Image picker:
   var imagePickerController = UIImagePickerController()
   
   //Outlets:
   @IBOutlet weak var textUserName: UITextField!
   @IBOutlet weak var tableAllergens: UITableView!
   @IBOutlet weak var buttonContinue: UIButton!
-  
   @IBOutlet weak var avatarImageView: UIImageView!
   @IBOutlet weak var switchIncludeProfile: UISwitch!
+  @IBOutlet weak var labelIncludeProfile: UILabel!
+  @IBOutlet weak var labelSelectFoods: UILabel!
   
   //Function: Set up view controller.
   override func viewDidLoad() {
     //Super:
     super.viewDidLoad()
+    
+    //Appearance:
+    labelIncludeProfile.font = UIFont(name: "Avenir", size: 15.0)
+    labelSelectFoods.font = UIFont(name: "Avenir", size: 15.0)
     
     //Selected user profile:
     if selectedUserProfileIndex < 0 {
@@ -71,10 +77,9 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     //Button:
     buttonContinue.addTarget(self, action: "pressedButtonContinue", forControlEvents: UIControlEvents.TouchUpInside)
     
+    //Camera button:
     let cameraButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "avatarButtonPressed")
     self.navigationItem.rightBarButtonItem = cameraButton
-    
-    
   } //end func
   
   //MARK: Table View Data Source
@@ -121,8 +126,11 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   //Function: Handle Continue button pressed.
   func pressedButtonContinue() {
     //Save data.
-    if textUserName.text == "" {
-      println("Please enter a user name")
+    if textUserName.text == "" { //no name
+      let alertBlankUserName = UIAlertController(title: "Please enter a Name", message: "", preferredStyle: .Alert)
+      let buttonCancel = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+      alertBlankUserName.addAction(buttonCancel)
+      self.presentViewController(alertBlankUserName, animated: true, completion: nil)
     } else {
       let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
       //Add/Update selected user profile.
@@ -142,10 +150,8 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
       } //end if
       selectedUserProfile.name = textUserName.text
       selectedUserProfile.includeProfile = switchIncludeProfile.on
-      
       self.selectedUserProfile.avatar = avatarImageView.image
 
-      
       //Save data.
       appDelegate.saveUserProfilesToArchive(userProfiles!)
       
@@ -155,15 +161,8 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     } //end if
   } //end func
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-  
-
-  
-  
-    func avatarButtonPressed() {
+  //Function: Handle event when Avatar button is selected.
+  func avatarButtonPressed() {
     if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
       self.imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
       self.imagePickerController.delegate = self
@@ -180,16 +179,20 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     }
   }
   
+  //Function: Handle event when avatar image is selected.
   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
     let image = info[UIImagePickerControllerEditedImage] as UIImage
     self.avatarImageView.image = image
     imagePickerController.dismissViewControllerAnimated(true, completion: nil)
   }
 
-  
+  //Function: Handle event when avatar image selection is cancelled.
   func imagePickerControllerDidCancel(picker: UIImagePickerController) {
     picker.dismissViewControllerAnimated(true, completion: nil)
   }
-  
-  
+
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
 }
