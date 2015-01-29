@@ -29,7 +29,7 @@ class NetworkController {
   let clientSecret = "698a373a3b0e6ecda8f223451efbe070"
   var statusCode: AnyObject?
   var nsError: NSError?
-  
+  var list : Ingredients!
   
   class var sharedNetworkController : NetworkController {
     struct Static {
@@ -80,11 +80,13 @@ class NetworkController {
             if let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary {
               println(jsonDict)
               let newIngredient = Ingredients(jsonDictionary: jsonDict)
-              println(newIngredient)
+              
               
 
               NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 completionHandler(newIngredient, nil)
+                println(newIngredient)
+                
               }) //end block
               
               

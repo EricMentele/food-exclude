@@ -17,7 +17,6 @@
 		9C139F451A77FF86009C1F47 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C139F441A77FF86009C1F47 /* Ingredients.swift */; };
 		9C563DB31A78BEBD00EAC832 /* purr.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C563DB21A78BEBD00EAC832 /* purr.wav */; };
 		9C563DB51A78BEEB00EAC832 /* Hiss.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C563DB41A78BEEB00EAC832 /* Hiss.wav */; };
-		9CC500D01A785516003FE491 /* IngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC500CF1A785516003FE491 /* IngredientsViewController.swift */; };
 		ABE71A461A771426002F0515 /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABE71A451A771426002F0515 /* AlertView.xib */; };
 		BA2E53521A76B4920055D11F /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E53511A76B4920055D11F /* UserProfile.swift */; };
 		BA2E53541A76B5480055D11F /* FoodCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E53531A76B5480055D11F /* FoodCategory.swift */; };
@@ -56,7 +55,6 @@
 		9C139F441A77FF86009C1F47 /* Ingredients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
 		9C563DB21A78BEBD00EAC832 /* purr.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = purr.wav; sourceTree = "<group>"; };
 		9C563DB41A78BEEB00EAC832 /* Hiss.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Hiss.wav; sourceTree = "<group>"; };
-		9CC500CF1A785516003FE491 /* IngredientsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsViewController.swift; sourceTree = "<group>"; };
 		ABE71A451A771426002F0515 /* AlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
 		BA2E53511A76B4920055D11F /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		BA2E53531A76B5480055D11F /* FoodCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodCategory.swift; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 				BAB735BD1A770BEF00E8C76D /* ScannerViewController.swift */,
 				BA37ECFC1A77F92600408187 /* UserProfilesViewController.swift */,
 				BA37ED021A78205F00408187 /* UserProfileViewController.swift */,
-				9CC500CF1A785516003FE491 /* IngredientsViewController.swift */,
 				40A4386C1A75973B00A24AA0 /* AppDelegate.swift */,
 			);
 			name = Controllers;
@@ -314,7 +311,6 @@
 				BA37ED031A78205F00408187 /* UserProfileViewController.swift in Sources */,
 				BAB735BE1A770BEF00E8C76D /* ScannerViewController.swift in Sources */,
 				BA37ECFD1A77F92600408187 /* UserProfilesViewController.swift in Sources */,
-				9CC500D01A785516003FE491 /* IngredientsViewController.swift in Sources */,
 				9C139F431A77FF79009C1F47 /* NetworkController.swift in Sources */,
 				40A4386D1A75973B00A24AA0 /* AppDelegate.swift in Sources */,
 				BA2E53521A76B4920055D11F /* UserProfile.swift in Sources */,

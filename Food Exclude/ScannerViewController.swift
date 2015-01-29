@@ -33,7 +33,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var alertView : UIView!
   
   
-  
   //this is adapted from http://www.bowst.com/mobile/simple-barcode-scanning-with-swift/
   let session : AVCaptureSession = AVCaptureSession()
   var previewLayer : AVCaptureVideoPreviewLayer!
@@ -42,10 +41,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var detectionString : String!
   var barcodeScanned : String!
   var networkController = NetworkController()
-  var ingredients : [Ingredients]!
+  //var ingredients : [Ingredients]!
   var list : Ingredients!
-  var ingredientDetailVC = IngredientsViewController()
-  
+  //var ingredientDetailVC = IngredientsViewController()
 
   var ingredients = ["peanuts", "salmon", "cream cheese", "orange slices"] //replace with ingredients from barcodeScanned
   var allergenDerivatives : [String : String] = ["peanuts" : "nuts", "salmon" : "fish", "koala" : "fluffy things", "sardines" : "fish"] //replace with allergenDerivatives
@@ -162,9 +160,19 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         self.list = ingredients
-        self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
-        println("Does this have the product name? \(self.list)")
+        var ingredientAlert = "Ingredients: \(self.list.ingredientsList)"
+        println("Ingredients: \(ingredientAlert)")
+        //self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
+        println("Does this have the product name? \(self.list?.itemName)")
+        var alertCon = UIAlertController(title: NSLocalizedString("Ingredients:", comment: "This is the ingredient list"), message: NSLocalizedString(" \(ingredientAlert)", comment: "Ingredients"), preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertCon.addAction(okButton)
+        self.presentViewController(alertCon, animated: true, completion: nil)
         
+       // func ingredientDetailButtonTapped(sender: UIButton) {
+       //   self.presentViewController(self.alertCon, animated: true, completion: nil)
+      //  }
+
         
         //MARK: Item not in database alert
         if self.networkController.statusCode as NSObject == 404  {
@@ -209,6 +217,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     return 
   }//func captureOutput
+  
+  
+  
   
   
   //MARK: Timed AlertView
