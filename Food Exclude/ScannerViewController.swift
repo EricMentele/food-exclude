@@ -298,7 +298,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
               if match == true {
                 self.myAllergens.append(allergy)
               }
-              }
+            }
           }
         }
         
@@ -314,25 +314,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           self.view.layer.borderColor = UIColor(red: 0, green: 153, blue: 0).CGColor
         }
   }
-//      func crossSearchForAllergens() {
-//        for item in self.ingredientsList {
-//          
-//          if let c = allergenDerivatives.indexForKey(item) {
-//            self.matches.append(item)
-//            self.allergenCategories.append(self.allergenDerivatives[item]!)
-//          }}
-//        println(self.matches)
-//        println(self.allergenCategories)
-//        
-//        for item in self.allergenCategories {
-//          //this is to be replaced with the actual active user profile's allergens
-//          var myAllergens = ["milk" : "milk", "eggs" : "eggs", "fish" : "fish", "shellfish" : "shellfish", "treenuts" : "treenuts", "peanuts" : "peanuts", "wheat" : "wheat", "soy" : "soy", "gluten" : "gluten"]
-//          if let d = myAllergens.indexForKey(item) {
-//            self.myMatches.append(item)
-//          }
-//        }
-//        println("This product contains \(self.myMatches)")
-//  }
+
   
   //Function: Handle event when User Profiles button is pressed.
   func pressedButtonUserProfiles() {
