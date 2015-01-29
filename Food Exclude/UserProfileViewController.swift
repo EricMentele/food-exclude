@@ -143,6 +143,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
       
       //Present next view controller.
       let vcScanner = self.storyboard?.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
+      vcScanner.activeProfile = self.selectedUserProfile
       self.navigationController?.pushViewController(vcScanner, animated: true)
     } //end if
   } //end func
@@ -155,13 +156,13 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
       self.imagePickerController.allowsEditing = true
       self.presentViewController(self.imagePickerController, animated: true, completion: nil)
     } else
-  
-    if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-      let imagePickerController = UIImagePickerController()
-      imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-      imagePickerController.delegate = self
-      imagePickerController.allowsEditing = true
-      self.presentViewController(imagePickerController, animated: true, completion: nil)
+      
+      if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        self.presentViewController(imagePickerController, animated: true, completion: nil)
     }
   }
   
@@ -171,7 +172,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     self.avatarImageView.image = image
     imagePickerController.dismissViewControllerAnimated(true, completion: nil)
   }
-
+  
   //Function: Handle event when avatar image selection is cancelled.
   func imagePickerControllerDidCancel(picker: UIImagePickerController) {
     picker.dismissViewControllerAnimated(true, completion: nil)
