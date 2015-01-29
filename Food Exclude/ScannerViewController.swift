@@ -32,8 +32,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   var alertView : UIView!
   
-  
-  
   //this is adapted from http://www.bowst.com/mobile/simple-barcode-scanning-with-swift/
   let session : AVCaptureSession = AVCaptureSession()
   var previewLayer : AVCaptureVideoPreviewLayer!
@@ -49,7 +47,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var allergenDerivatives = [String : String]()
   var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
   var myMatches = [String]() //this stores the allergen categories triggered in the cross-search function (e.g. whey powder is in the ingredients list and is of type milk, user is allergic to milk, so myMatches will store milk)
-  var allergenCategories = [String]() //this stores allergen categories for current active user(s)
+  var allergenCategories = [String]() //this stores allergen categories detected in the scanned ingredient list
+  
+  var activeProfile : UserProfile!
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -253,12 +254,17 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       @IBAction func newScan(sender: UIButton) {
         
         detectionString = nil
+        self.view.layer.borderColor = UIColor(red: 0, green: 0, blue: 0).CGColor
+        self.matches = [String]()
+        self.myMatches = [String]()
+        self.allergenCategories = [String]()
         self.session.startRunning()
         self.removeAlertView()
       }
       
       //MARK: Cross-search ingredients list against allergen derivatives list
       func crossSearchForAllergens() {
+        
         for item in self.ingredientsList {
           
           if let c = allergenDerivatives.indexForKey(item) {
@@ -276,6 +282,17 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           }
         }
         println("This product contains \(self.myMatches)")
+        
+        if !self.myMatches .isEmpty {
+          self.view.layer.borderWidth = 9
+          self.view.layer.borderColor = UIColor(red: 153, green: 0, blue: 0).CGColor
+          
+          //self.view.layer.borderColor = UIColor.redColor().CGColor
+        }
+        else {
+          self.view.layer.borderWidth = 8
+          self.view.layer.borderColor = UIColor(red: 0, green: 153, blue: 0).CGColor
+        }
   }
   
   //Function: Handle event when User Profiles button is pressed.

@@ -137,6 +137,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
       
       //Present next view controller.
       let vcScanner = self.storyboard?.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
+      vcScanner.activeProfile = self.selectedUserProfile
       self.navigationController?.pushViewController(vcScanner, animated: true)
     } //end if
   } //end func
