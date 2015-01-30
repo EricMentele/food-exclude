@@ -50,10 +50,8 @@ class NetworkController {
   
   func fetchIngredientListForUPC (upcCode : String, completionHandler : (Ingredients?, String?) -> ()) {
     
-    //var upcCode = "767707001067"
-    
+ 
     let requestURL = "https://api.nutritionix.com/v1_1/item?upc=\(upcCode)&appId=\(clientID)&appKey=\(clientSecret)"
-//    println(requestURL)
     let url = NSURL(string: requestURL)
     
     let getRequest = NSMutableURLRequest(URL: NSURL(string: requestURL)!)
@@ -61,8 +59,7 @@ class NetworkController {
     let dataTask = self.urlSession.dataTaskWithRequest(getRequest, completionHandler: { (data, response, error) -> Void in
       
       self.nsError = error?
-//      println(self.nsError)
-//      println(error)
+      
       if error == nil {
         
 //         println(response)
@@ -84,7 +81,7 @@ class NetworkController {
               
 
               NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                completionHandler(newIngredient, nil)
+                completionHandler(newIngredient,nil)
               }) //end block
               
               
@@ -92,8 +89,12 @@ class NetworkController {
             }//end if
           case 404:
             println("404")
-            
+            completionHandler(nil, "404")
           
+          case 401:
+            println("401")
+            completionHandler(nil, "401")
+            
           case 300...599:
             
             println("This is bad - it's an error that may or may not be your fault")
