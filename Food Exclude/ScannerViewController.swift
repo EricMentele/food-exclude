@@ -286,7 +286,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                 self.myAllergens.append(allergy)
               }
             }
-          }
+          }}}
 //        }
 //        }
         
@@ -298,7 +298,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           self.view.layer.borderWidth = 8
           self.view.layer.borderColor = UIColor(red: 0, green: 153, blue: 0).CGColor
         }
-      }}}
+      }
       
       
       //Function: Handle event when User Profiles button is pressed.
