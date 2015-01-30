@@ -31,6 +31,8 @@
 		BA37ED071A7824C900408187 /* AllergenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37ED061A7824C900408187 /* AllergenCell.swift */; };
 		BA37ED091A7844FC00408187 /* Allergen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA37ED081A7844FC00408187 /* Allergen.swift */; };
 		BAB735BE1A770BEF00E8C76D /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB735BD1A770BEF00E8C76D /* ScannerViewController.swift */; };
+		BAE056B71A7BFA5400BDF935 /* UserProfilesHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAE056B61A7BFA5400BDF935 /* UserProfilesHeader.xib */; };
+		BAE056B91A7BFA7E00BDF935 /* UserProfilesHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE056B81A7BFA7E00BDF935 /* UserProfilesHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		BA37ED061A7824C900408187 /* AllergenCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergenCell.swift; sourceTree = "<group>"; };
 		BA37ED081A7844FC00408187 /* Allergen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Allergen.swift; sourceTree = "<group>"; };
 		BAB735BD1A770BEF00E8C76D /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		BAE056B61A7BFA5400BDF935 /* UserProfilesHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfilesHeader.xib; sourceTree = "<group>"; };
+		BAE056B81A7BFA7E00BDF935 /* UserProfilesHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfilesHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,8 @@
 				ABE71A451A771426002F0515 /* AlertView.xib */,
 				BA37ED041A78238A00408187 /* AllergenCell.xib */,
 				BA37ED061A7824C900408187 /* AllergenCell.swift */,
+				BAE056B61A7BFA5400BDF935 /* UserProfilesHeader.xib */,
+				BAE056B81A7BFA7E00BDF935 /* UserProfilesHeader.swift */,
 				BA37ECFE1A77FFF900408187 /* UserProfileCell.xib */,
 				BA37ED001A78163100408187 /* UserProfileCell.swift */,
 			);
@@ -255,11 +261,11 @@
 				TargetAttributes = {
 					40A438661A75973B00A24AA0 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 8F48NKUJX6;
+						DevelopmentTeam = L5DSMLC352;
 					};
 					40A4387B1A75973B00A24AA0 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 8F48NKUJX6;
+						DevelopmentTeam = L5DSMLC352;
 						TestTargetID = 40A438661A75973B00A24AA0;
 					};
 				};
@@ -291,6 +297,7 @@
 				40A438931A7692F100A24AA0 /* readme in Resources */,
 				9C563DB51A78BEEB00EAC832 /* Hiss.wav in Resources */,
 				40A438721A75973B00A24AA0 /* Main.storyboard in Resources */,
+				BAE056B71A7BFA5400BDF935 /* UserProfilesHeader.xib in Resources */,
 				ABE71A461A771426002F0515 /* AlertView.xib in Resources */,
 				4E7B67511A7A2069005E63F5 /* allergens.plist in Resources */,
 				BA37ECFF1A77FFF900408187 /* UserProfileCell.xib in Resources */,
@@ -320,6 +327,7 @@
 				9C139F451A77FF86009C1F47 /* Ingredients.swift in Sources */,
 				BA37ED071A7824C900408187 /* AllergenCell.swift in Sources */,
 				4E7B67571A7AE30C005E63F5 /* colorExtension.swift in Sources */,
+				BAE056B91A7BFA7E00BDF935 /* UserProfilesHeader.swift in Sources */,
 				BA37ED031A78205F00408187 /* UserProfileViewController.swift in Sources */,
 				BAB735BE1A770BEF00E8C76D /* ScannerViewController.swift in Sources */,
 				BA37ECFD1A77F92600408187 /* UserProfilesViewController.swift in Sources */,
