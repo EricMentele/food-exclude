@@ -322,10 +322,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.navigationController?.pushViewController(vcUserProfiles, animated: true)
   } //end func
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+//    func didReceiveMemoryWarning() {
+//      super.didReceiveMemoryWarning()
+//    // Dispose of any resources that can be recreated.
+//    }
   }
-      
+}
+
+    
       
 }
