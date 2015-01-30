@@ -256,8 +256,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             self.allergenCategories.append(self.allergenDerivatives[allergen]!)
           }
         }
-          println(self.allergenCategories)
-    }
+          }
+    println(self.allergenCategories)
     
         //load user profile data
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
