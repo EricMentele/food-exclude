@@ -166,7 +166,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       
       self.networkController.fetchIngredientListForUPC(self.barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
  
-        
+
         if ingredients != nil {
         self.list = ingredients
         self.ingredientsList = self.list.seperatedList
@@ -188,7 +188,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         
         //MARK: API calls maxed alert.
-        if self.networkController.statusCode == nil {
+        if self.networkController.statusCode as NSObject == 401 {
           
           
           //MARK: Network connection alert.
