@@ -107,7 +107,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
   
   override func viewWillAppear(animated: Bool) {
-    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(13, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
+    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
   }
   
   
@@ -247,21 +247,25 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 //      println(ingredients)
 //      if let c = allergens.indexForKey(item) {
 //        self.matches.append(item)
-//        
+    
+        //loop over the ingredients list for all allergen derivatives, put matches into self.matches
         for item in self.ingredientsList {
-          
-          if let c = allergenDerivatives.indexForKey(item) {
-            self.matches.append(item)
-            self.allergenCategories.append(self.allergenDerivatives[item]!)
+          for allergen in allergenDerivatives.keys {
+            if item.rangeOfString(allergen.lowercaseString) != nil {
+            self.matches.append(allergen)
+            self.allergenCategories.append(self.allergenDerivatives[allergen]!)
           }
         }
-        
-        //User profile data: latest
+          println(self.allergenCategories)
+    }
+    
+        //load user profile data
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         self.userProfiles = appDelegate.loadUserProfilesFromArchive()!
         
         var dictionaryOfAllergens = [String : Bool]()
         
+        //load allergens that active users have and put them in myAllergens
         for categories in self.allergenCategories {
           dictionaryOfAllergens[categories] = true
           for user in userProfiles {
@@ -276,7 +280,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           }}}
 //        }
 //        }
-        
+    
+    
+    
+        //change border color
         if !self.myAllergens .isEmpty {
           self.view.layer.borderWidth = 9
           self.view.layer.borderColor = UIColor(red: 153, green: 0, blue: 0).CGColor
