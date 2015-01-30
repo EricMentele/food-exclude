@@ -166,7 +166,6 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     picker.dismissViewControllerAnimated(true, completion: nil)
   }
   
-  
   //MARK: Other
   
   //Function: Save user profile.
@@ -180,12 +179,15 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
           userProfiles![selectedUserProfileIndex] = selectedUserProfile
         } else { //add user profile
           userProfiles!.append(selectedUserProfile)
+          selectedUserProfileIndex = userProfiles!.count - 1
         } //end if
       } else { //no users exist: add user
         userProfiles!.append(selectedUserProfile)
+        selectedUserProfileIndex = 0
       } //end if
     } else { //no users exist: add user
       userProfiles = [selectedUserProfile]
+      selectedUserProfileIndex = 0
     } //end if
     selectedUserProfile.name = textUserName.text
     selectedUserProfile.includeProfile = switchIncludeProfile.on
