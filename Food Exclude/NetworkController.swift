@@ -60,7 +60,8 @@ class NetworkController {
     
     let dataTask = self.urlSession.dataTaskWithRequest(getRequest, completionHandler: { (data, response, error) -> Void in
       
-      self.nsError = error?
+      self.nsError = error
+      //println(self.nsError)
 //      println(self.nsError)
 //      println(error)
       if error == nil {

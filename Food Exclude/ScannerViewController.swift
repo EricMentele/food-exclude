@@ -260,9 +260,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         self.myMatches = [String]()
         self.allergenCategories = [String]()
         self.session.startRunning()
-        if self.alertView != nil {
-        self.removeAlertView()
-        }
       }
       
       //MARK: Cross-search ingredients list against allergen derivatives list
