@@ -110,7 +110,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   }
   
   
-  
   func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
     
     var highlightViewRect = CGRectZero
@@ -146,7 +145,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
       }
     }
-    
+  
     self.barcode.text = "Barcode scanned: \(self.detectionString)"
     self.barcodeScanned = self.detectionString
     self.highlightView.frame = highlightViewRect
@@ -166,18 +165,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         //self.session.stopRunning()
       }
       
-      self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
-        
-        self.list = ingredients
-        if let var prepList = self.list.ingredientsList?.lowercaseString {
-        self.ingredientsList = prepList.componentsSeparatedByString(",")
-        for(var i=0; i<self.ingredientsList.count; i++) {
-          self.ingredientsList[i] = self.ingredientsList[i].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-          }}
+      self.networkController.fetchIngredientListForUPC(self.barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
+
+        self.list = ingredients 
+        self.ingredientsList = self.list.seperatedList
         self.crossSearchForAllergens()
-        
-        //self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
-        
         
         println("Does this have the product name? \(self.list)")
         
@@ -207,62 +199,17 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             println("fail")
             
             //self.session.stopRunning()
-          }
-          
-          
-          self.networkController.fetchIngredientListForUPC(self.barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
-            
-            self.list = ingredients
-            var prepList = self.list.ingredientsList!.lowercaseString
-            self.ingredientsList = prepList.componentsSeparatedByString(",")
-            for(var i=0; i<self.ingredientsList.count; i++) {
-              self.ingredientsList[i] = self.ingredientsList[i].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-            }
-
-            self.crossSearchForAllergens()
-            
-            //self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
-            
-            
-            println("Does this have the product name? \(self.list)")
-            
-            //MARK: NETWORK ALERTS
-            //MARK: Item not in database alert
-            if self.networkController.statusCode as NSObject == 404  {
-              
-              let itemNotFoundAlert = UIAlertController(title: "Item Not Found", message: "This item is not in the database", preferredStyle: .Alert)
-              let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
-              itemNotFoundAlert.addAction(okButton)
-              self.presentViewController(itemNotFoundAlert, animated: true, completion: nil)
-            }//if
-            
-            
-            //MARK: API calls maxed alert.
-            if self.networkController.statusCode as NSObject == 401  {
-              
-              let apiMaxed = UIAlertController(title: "API Call Limit", message: "The daily maximum for API calls has been reached", preferredStyle: .Alert)
-              let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
-              apiMaxed.addAction(okButton)
-              self.presentViewController(apiMaxed, animated: true, completion: nil)
-            }//if
-            
-          })
-        } else {
-          
-          
-          
-          return
-        }//else in if barcode != nil
-        
-      })
+          }}
+        })
     }
-    else {
+              else {
       
       return
-    }//else in if barcode != nil
+        }
+    //else in if barcode != nil
     
     return
-  }//func captureOutput
+    }//func captureOutput
 
   //MARK: Timed AlertView
   
