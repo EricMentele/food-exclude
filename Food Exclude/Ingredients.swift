@@ -53,7 +53,9 @@ class Ingredients {
     self.itemDescription = jsonDictionary["item_description"] as? String
     self.ingredientsList = jsonDictionary["nf_ingredient_statement"]  as? String
     
-    if let clearedString = self.ingredientsList?.stringByReplacingOccurrencesOfString("[\\()\\@]", withString: "", options: .RegularExpressionSearch) {
+    
+    var newString = self.ingredientsList?.lowercaseString
+    if let clearedString = newString?.stringByReplacingOccurrencesOfString("[\\()\\@]", withString: "", options: .RegularExpressionSearch) {
       //println("THIS IS THE CLEARED STRING\(clearedString)")
       self.seperatedList = clearedString.componentsSeparatedByString(",")
     }
