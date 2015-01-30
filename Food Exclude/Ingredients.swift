@@ -31,7 +31,7 @@ class Ingredients {
   var brandID : String?
   var itemID : String?
   var itemDescription : String?
-  var ingredientsList : String = ""
+  var ingredientsList : String?
   var allergenMilk : String?
   var allergenEggs : String?
   var allergenFish : String?
@@ -51,13 +51,16 @@ class Ingredients {
     self.brandID = jsonDictionary["brand_id"] as? String
     self.itemID = jsonDictionary["item_id"] as? String
     self.itemDescription = jsonDictionary["item_description"] as? String
-    self.ingredientsList = jsonDictionary["nf_ingredient_statement"]  as String
+    self.ingredientsList = jsonDictionary["nf_ingredient_statement"]  as? String
     self.allergenMilk = jsonDictionary["allergen_contains_milk"]  as? String
     
-    var clearedString = self.ingredientsList.stringByReplacingOccurrencesOfString("[\\()\\@]", withString: "", options: .RegularExpressionSearch)
-    //println("THIS IS THE CLEARED STRING\(clearedString)")
-    self.seperatedList = clearedString.componentsSeparatedByString(",")
     
+    var newString = self.ingredientsList?.lowercaseString
+    if let clearedString = newString?.stringByReplacingOccurrencesOfString("[\\()\\@]", withString: "", options: .RegularExpressionSearch) {
+      //println("THIS IS THE CLEARED STRING\(clearedString)")
+      self.seperatedList = clearedString.componentsSeparatedByString(",")
+    }
+
     if self.allergenMilk !=  nil {
       self.allergenList.append("Milk")
     }
@@ -85,9 +88,6 @@ class Ingredients {
       self.allergenList.append("Gluten")
     }
   }
-  
-  
-  
   
 
 }
