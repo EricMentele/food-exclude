@@ -18,6 +18,7 @@
 		4E7B67571A7AE30C005E63F5 /* colorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7B67561A7AE30C005E63F5 /* colorExtension.swift */; };
 		9C139F431A77FF79009C1F47 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C139F421A77FF79009C1F47 /* NetworkController.swift */; };
 		9C139F451A77FF86009C1F47 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C139F441A77FF86009C1F47 /* Ingredients.swift */; };
+		9C54FFC91A7AFABD006C4BAB /* NutritionixAPI.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C54FFC81A7AFABD006C4BAB /* NutritionixAPI.png */; };
 		9C563DB31A78BEBD00EAC832 /* purr.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C563DB21A78BEBD00EAC832 /* purr.wav */; };
 		9C563DB51A78BEEB00EAC832 /* Hiss.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C563DB41A78BEEB00EAC832 /* Hiss.wav */; };
 		ABE71A461A771426002F0515 /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABE71A451A771426002F0515 /* AlertView.xib */; };
@@ -61,6 +62,7 @@
 		4E7B67561A7AE30C005E63F5 /* colorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = colorExtension.swift; sourceTree = "<group>"; };
 		9C139F421A77FF79009C1F47 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		9C139F441A77FF86009C1F47 /* Ingredients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
+		9C54FFC81A7AFABD006C4BAB /* NutritionixAPI.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NutritionixAPI.png; sourceTree = "<group>"; };
 		9C563DB21A78BEBD00EAC832 /* purr.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = purr.wav; sourceTree = "<group>"; };
 		9C563DB41A78BEEB00EAC832 /* Hiss.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Hiss.wav; sourceTree = "<group>"; };
 		ABE71A451A771426002F0515 /* AlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
@@ -170,9 +172,9 @@
 		40A438951A76D4B800A24AA0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				40A438751A75973B00A24AA0 /* LaunchScreen.xib */,
 				40A438701A75973B00A24AA0 /* Main.storyboard */,
 				40A438731A75973B00A24AA0 /* Images.xcassets */,
-				40A438751A75973B00A24AA0 /* LaunchScreen.xib */,
 				ABE71A451A771426002F0515 /* AlertView.xib */,
 				BA37ED041A78238A00408187 /* AllergenCell.xib */,
 				BA37ED061A7824C900408187 /* AllergenCell.swift */,
@@ -187,6 +189,7 @@
 		9CCF777B1A79583B00C532F3 /* icons/images */ = {
 			isa = PBXGroup;
 			children = (
+				9C54FFC81A7AFABD006C4BAB /* NutritionixAPI.png */,
 			);
 			name = icons/images;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C54FFC91A7AFABD006C4BAB /* NutritionixAPI.png in Resources */,
 				40A438931A7692F100A24AA0 /* readme in Resources */,
 				9C563DB51A78BEEB00EAC832 /* Hiss.wav in Resources */,
 				40A438721A75973B00A24AA0 /* Main.storyboard in Resources */,
