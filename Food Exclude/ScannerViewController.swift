@@ -168,11 +168,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         self.list = ingredients
-        var prepList = self.list.ingredientsList.lowercaseString
+        if let var prepList = self.list.ingredientsList?.lowercaseString {
         self.ingredientsList = prepList.componentsSeparatedByString(",")
         for(var i=0; i<self.ingredientsList.count; i++) {
           self.ingredientsList[i] = self.ingredientsList[i].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        }
+          }}
         self.crossSearchForAllergens()
         
         //self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
