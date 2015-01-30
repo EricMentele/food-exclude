@@ -38,10 +38,11 @@
                                             <action selector="newScan:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="zUv-X2-20p"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barcode" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZl-Fp-d63" userLabel="Barcode">
-                                        <rect key="frame" x="16" y="67" width="65" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barcode" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="JZl-Fp-d63" userLabel="Barcode">
+                                        <rect key="frame" x="16" y="67" width="300" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="JLQ-uE-miC"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="LHB-wg-EZu"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="u8T-xi-rRl"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
