@@ -46,6 +46,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     
     //Appearance:
     labelIncludeProfile.font = UIFont(name: "Avenir", size: 15.0)
+    labelIncludeProfile.text = "Shopping for?"
     labelSelectFoods.font = UIFont(name: "Avenir", size: 15.0)
     
     //Selected user profile:
@@ -137,11 +138,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
       let buttonCancel = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
       alertBlankUserName.addAction(buttonCancel)
       self.presentViewController(alertBlankUserName, animated: true, completion: nil)
-    } else {
-      //Save user profile.
-      saveUserProfile()
-      
-      //Present next view controller.
+    } else { //go to scanner
       let vcScanner = self.storyboard?.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
       self.navigationController?.pushViewController(vcScanner, animated: true)
     } //end if
@@ -154,7 +151,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
       self.imagePickerController.delegate = self
       self.imagePickerController.allowsEditing = true
       self.presentViewController(self.imagePickerController, animated: true, completion: nil)
-    } 
+    }
   }
   
   //Function: Handle event when avatar image is selected.
@@ -168,7 +165,8 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   func imagePickerControllerDidCancel(picker: UIImagePickerController) {
     picker.dismissViewControllerAnimated(true, completion: nil)
   }
-
+  
+  
   //MARK: Other
   
   //Function: Save user profile.

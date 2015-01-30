@@ -62,14 +62,24 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     //Cell:
     let cell = tableView.dequeueReusableCellWithIdentifier("CELL_USER_PROFILE", forIndexPath: indexPath) as UserProfileCell
+    
     //Cell contents:
     let currentUserProfile = userProfiles[indexPath.row] as UserProfile
     cell.labelUserName.text = currentUserProfile.name
-    cell.switchIncludeProfile.on = currentUserProfile.includeProfile
+    
+    if currentUserProfile.includeProfile {
+      cell.imageIncludeProfile.image = UIImage(named: "CircleCheck")
+    } else {
+      cell.imageIncludeProfile.image = UIImage(named: "CircleX")
+    } //end if
+    cell.imageIncludeProfile.layer.masksToBounds = true
+    cell.imageIncludeProfile.contentMode = UIViewContentMode.ScaleAspectFill
+    
     cell.avatarImageView.image = currentUserProfile.avatar
     cell.avatarImageView.layer.cornerRadius = 10
     cell.avatarImageView.layer.masksToBounds = true
     cell.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFill
+    
     //Return cell.
     return cell
   } //end func
@@ -89,24 +99,19 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
       //Reload table.
       tableUserProfiles.reloadData()
     } //end if
-    
-    
-    //    if listTableView.editing{
-    //      //listTableView.editing = false;
-    //      listTableView.setEditing(false, animated: true);
-    //      //listTableView.reloadData();
-    //    }
-    //    else{
-    //      //listTableView.editing = true;
-    //      listTableView.setEditing(true, animated: true);
-    //      barButton.title = "Done";
-    //      barButton.style =  UIBarButtonItemStyle.Done;
-    //      //listTableView.reloadData();
-    //    }
-    
   } //end func
   
   //MARK: Table View Delegate
+  
+  //Function: Set table header.
+  func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let header = NSBundle.mainBundle().loadNibNamed("UserProfilesHeader", owner: tableView, options: nil).first as UIView
+    return header
+  } //end func
+  
+  func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 60.0
+  } //end func
   
   //Function: Handle cell selected event.
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

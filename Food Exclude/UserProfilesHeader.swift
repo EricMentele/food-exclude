@@ -1,8 +1,8 @@
 //
-//  UserProfileCell.swift
+//  UserProfilesHeader.swift
 //  Food Exclude
 //
-//  Created by Alexandra Norcross on 1/27/15.
+//  Created by Alexandra Norcross on 1/29/15.
 //  Copyright (c) 2015
 //David Rogers,
 //Vania Kurniawati,
@@ -22,9 +22,12 @@
 
 import UIKit
 
-class UserProfileCell: UITableViewCell {
+class UserProfilesHeader: UIView {
   //Outlets:
-  @IBOutlet weak var labelUserName: UILabel!
-  @IBOutlet weak var avatarImageView: UIImageView!
-  @IBOutlet weak var imageIncludeProfile: UIImageView!
+  @IBOutlet weak var labelIncludeProfile: UILabel!
+  
+  //Function: Set up.
+  override func awakeFromNib() {
+    labelIncludeProfile.font = UIFont(name: "Avenir-Black", size: 20.0)
+  } //end func
 }
