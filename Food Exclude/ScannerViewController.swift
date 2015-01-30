@@ -178,11 +178,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
             
             self.list = ingredients
-            var prepList = self.list.ingredientsList!.lowercaseString
-            self.ingredientsList = prepList.componentsSeparatedByString(",")
-            for(var i=0; i<self.ingredientsList.count; i++) {
-              self.ingredientsList[i] = self.ingredientsList[i].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            if let prepList = self.list.ingredientsList?.lowercaseString {
+              self.ingredientsList = prepList.componentsSeparatedByString(",")
+              for(var i=0; i<self.ingredientsList.count; i++) {
+                self.ingredientsList[i] = self.ingredientsList[i].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+              }
             }
+
 
             self.crossSearchForAllergens()
             
@@ -265,11 +267,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       
       //MARK: Cross-search ingredients list against allergen derivatives list
   //MYCODE
-  func crossSearchForAllergens(#ingredients: [String], allergens: [String:String]) {
-    for item in ingredients {
-      println(ingredients)
-      if let c = allergens.indexForKey(item) {
-        self.matches.append(item)
+  func crossSearchForAllergens() {
+//    for item in ingredients
+    
+//      println(ingredients)
+//      if let c = allergens.indexForKey(item)
+    
+//        self.matches.append(item)
         
         for item in self.ingredientsList {
           
@@ -326,9 +330,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 //      super.didReceiveMemoryWarning()
 //    // Dispose of any resources that can be recreated.
 //    }
-  }
-}
 
-    
-      
+  
 }
