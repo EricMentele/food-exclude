@@ -62,7 +62,7 @@ class Ingredients {
       //println("THIS IS THE CLEARED STRING\(clearedString)")
       
       self.seperatedList = clearedString.componentsSeparatedByString(" ")
-      println(seperatedList)
+      //println(seperatedList)
     }
     
     
