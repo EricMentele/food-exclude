@@ -26,7 +26,7 @@ class NetworkController {
   
   var urlSession : NSURLSession
   let clientID = "48bd25da"
-  let clientSecret = "698a373a3b0e6ecda8f223451efbe070"  
+  let clientSecret = "698a373a3b0e6ecda8f223451efbe070"
   var statusCode: AnyObject?
   var nsError: NSError?
   
