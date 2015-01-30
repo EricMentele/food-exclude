@@ -89,11 +89,15 @@ class NetworkController {
             }//end if
           case 404:
             println("404")
-            completionHandler(nil, "404")
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+              completionHandler(nil, "404")
+            })
           
           case 401:
             println("401")
-            completionHandler(nil, "401")
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+              completionHandler(nil, "401")
+            })
             
           case 300...599:
             
