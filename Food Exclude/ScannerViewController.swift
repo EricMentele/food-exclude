@@ -144,24 +144,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           self.session.stopRunning()
           break
         }
-        
-        
-        let output = AVCaptureMetadataOutput()
-        output.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
-        self.session.addOutput(output)
-        output.metadataObjectTypes = output.availableMetadataObjectTypes
-        
-        //this is the scanning scene, setting the frame to the view.bounds will cover up other views
-        previewLayer = AVCaptureVideoPreviewLayer.layerWithSession(session) as AVCaptureVideoPreviewLayer
-        previewLayer.frame = CGRect(x: 0, y: 40, width: self.view.bounds.width, height: self.view.bounds.height * 0.6)
-        previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-        self.view.layer.addSublayer(previewLayer)
-        
-        self.session.startRunning()
-      }
-      
-      override func viewWillAppear(animated: Bool) {
-        let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(18, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
       }
     }
   
@@ -217,62 +199,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             println("fail")
             
             //self.session.stopRunning()
-          }
-          
-          
-          NetworkController.sharedNetworkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
-            
-            self.list = ingredients
-            if let prepList = self.list.ingredientsList?.lowercaseString {
-              self.ingredientsList = prepList.componentsSeparatedByString(",")
-              for(var i=0; i<self.ingredientsList.count; i++) {
-                self.ingredientsList[i] = self.ingredientsList[i].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-              }
-            }
-            
-
-
-            self.crossSearchForAllergens()
-            
-            //self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
-            
-            
-            println("Does this have the product name? \(self.list)")
-            
-            //MARK: NETWORK ALERTS
-            //MARK: Item not in database alert
-            if self.networkController.statusCode as? NSObject == 404  {
-              
-              let itemNotFoundAlert = UIAlertController(title: "Item Not Found", message: "This item is not in the database", preferredStyle: .Alert)
-              let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
-              itemNotFoundAlert.addAction(okButton)
-              self.presentViewController(itemNotFoundAlert, animated: true, completion: nil)
-            }
-            
-            
-            //MARK: API calls maxed alert.
-            if self.networkController.statusCode as? NSObject == 401  {
-              
-              let apiMaxed = UIAlertController(title: "API Call Limit", message: "The daily maximum for API calls has been reached", preferredStyle: .Alert)
-              let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
-              apiMaxed.addAction(okButton)
-              self.presentViewController(apiMaxed, animated: true, completion: nil)
-            }//if
-            
-          })
-        } else {
-          
-          
-          
-          
-          return
-        }//else in if barcode != nil
-        
-        return
-      }//func captureOutput
-      
-      
-      //MARK: Timed AlertView
+          }}
+        })
+    }
+              else {
       
       return
         }
@@ -323,6 +253,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   //MARK: Cross-search ingredients list against allergen derivatives list
   //MYCODE
   func crossSearchForAllergens() {
+//    for item in self.ingredients {
+//      println(ingredients)
+//      if let c = allergens.indexForKey(item) {
+//        self.matches.append(item)
+//        
         for item in self.ingredientsList {
           
           if let c = allergenDerivatives.indexForKey(item) {
@@ -360,19 +295,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           self.view.layer.borderWidth = 8
           self.view.layer.borderColor = UIColor(red: 0, green: 153, blue: 0).CGColor
         }
-  }
-
-  
-  //Function: Handle event when User Profiles button is pressed.
-  func pressedButtonUserProfiles() {
-    let vcUserProfiles = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILES") as UserProfilesViewController
-    self.navigationController?.pushViewController(vcUserProfiles, animated: true)
-  } //end func
-  
-//    func didReceiveMemoryWarning() {
-//      super.didReceiveMemoryWarning()
-//    // Dispose of any resources that can be recreated.
-//    }
-
-  
+      }}}
+      
+      
+      //Function: Handle event when User Profiles button is pressed.
+      func pressedButtonUserProfiles() {
+        let vcUserProfiles = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILES") as UserProfilesViewController
+        self.navigationController?.pushViewController(vcUserProfiles, animated: true)
+      }//end func
 }
