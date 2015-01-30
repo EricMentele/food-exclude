@@ -20,24 +20,17 @@
                             <view opaque="NO" alpha="0.49999999999999994" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UbO-uA-Kq1">
                                 <rect key="frame" x="0.0" y="400" width="600" height="200"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barcode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZl-Fp-d63" userLabel="Barcode">
-                                        <rect key="frame" x="16" y="40" width="200" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="JLQ-uE-miC"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="u8T-xi-rRl"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evc-wf-BcH">
-                                        <rect key="frame" x="262" y="162" width="77" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evc-wf-BcH">
+                                        <rect key="frame" x="8" y="162" width="77" height="30"/>
                                         <state key="normal" title="Ingredients">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="ingredientsDetailButtonClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9um-aP-lhK"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I9I-5x-UUL">
-                                        <rect key="frame" x="267" y="0.0" width="67" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I9I-5x-UUL">
+                                        <rect key="frame" x="525" y="162" width="67" height="30"/>
                                         <state key="normal" title="Next Item">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -45,19 +38,43 @@
                                             <action selector="newScan:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="zUv-X2-20p"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Barcode" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZl-Fp-d63" userLabel="Barcode">
+                                        <rect key="frame" x="16" y="67" width="200" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="JLQ-uE-miC"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="u8T-xi-rRl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="JLQ-uE-miC"/>
+                                                <exclude reference="u8T-xi-rRl"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="evc-wf-BcH" firstAttribute="leading" secondItem="UbO-uA-Kq1" secondAttribute="leading" constant="8" id="3no-jm-J4n"/>
+                                    <constraint firstAttribute="centerY" secondItem="I9I-5x-UUL" secondAttribute="centerY" constant="-77" id="BK8-70-gQW"/>
+                                    <constraint firstItem="JZl-Fp-d63" firstAttribute="top" secondItem="UbO-uA-Kq1" secondAttribute="top" constant="67" id="EV2-AT-GKT"/>
                                     <constraint firstAttribute="height" constant="200" id="JC9-ZM-xPi"/>
+                                    <constraint firstItem="JZl-Fp-d63" firstAttribute="leading" secondItem="UbO-uA-Kq1" secondAttribute="leading" constant="16" id="QVP-ND-gFy"/>
+                                    <constraint firstAttribute="trailing" secondItem="I9I-5x-UUL" secondAttribute="trailing" constant="8" id="aMh-9T-bQG"/>
                                     <constraint firstAttribute="height" constant="200" id="dOr-wS-LDZ"/>
                                     <constraint firstAttribute="width" constant="200" id="dui-R8-71D"/>
                                     <constraint firstItem="JZl-Fp-d63" firstAttribute="leading" secondItem="UbO-uA-Kq1" secondAttribute="leading" constant="16" id="iW3-0M-TiV"/>
                                     <constraint firstItem="JZl-Fp-d63" firstAttribute="top" secondItem="UbO-uA-Kq1" secondAttribute="top" constant="40" id="vj4-aw-3U9"/>
+                                    <constraint firstAttribute="bottom" secondItem="evc-wf-BcH" secondAttribute="bottom" constant="8" id="zhJ-Dz-064"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="JC9-ZM-xPi"/>
                                         <exclude reference="dui-R8-71D"/>
+                                        <exclude reference="iW3-0M-TiV"/>
+                                        <exclude reference="vj4-aw-3U9"/>
                                     </mask>
                                 </variation>
                             </view>
