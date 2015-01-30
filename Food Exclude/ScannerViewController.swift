@@ -50,6 +50,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var myAllergens = [Allergen]()
   var userProfiles = [UserProfile]()
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -112,7 +113,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
       
       override func viewWillAppear(animated: Bool) {
-        let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(13, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
+        let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(18, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
       }
   
   
@@ -164,7 +165,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           //MARK: Network connection alert.
           
           if NetworkController.sharedNetworkController.nsError != nil {
-            
             let networkIssueAlert = UIAlertController(title: "Network Error", message: "Please make sure you have an internet connecton and try again later", preferredStyle: .Alert)
             let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
             networkIssueAlert.addAction(cancelButton)
@@ -175,7 +175,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           }
           
           
-          self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
+          NetworkController.sharedNetworkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
             
             self.list = ingredients
             if let prepList = self.list.ingredientsList?.lowercaseString {
@@ -184,6 +184,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                 self.ingredientsList[i] = self.ingredientsList[i].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
               }
             }
+            
 
 
             self.crossSearchForAllergens()
@@ -195,17 +196,17 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             
             //MARK: NETWORK ALERTS
             //MARK: Item not in database alert
-            if self.networkController.statusCode as NSObject == 404  {
+            if self.networkController.statusCode as? NSObject == 404  {
               
               let itemNotFoundAlert = UIAlertController(title: "Item Not Found", message: "This item is not in the database", preferredStyle: .Alert)
               let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
               itemNotFoundAlert.addAction(okButton)
               self.presentViewController(itemNotFoundAlert, animated: true, completion: nil)
-            }//if
+            }
             
             
             //MARK: API calls maxed alert.
-            if self.networkController.statusCode as NSObject == 401  {
+            if self.networkController.statusCode as? NSObject == 401  {
               
               let apiMaxed = UIAlertController(title: "API Call Limit", message: "The daily maximum for API calls has been reached", preferredStyle: .Alert)
               let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -215,6 +216,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             
           })
         } else {
+          
           
           
           
@@ -268,13 +270,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       //MARK: Cross-search ingredients list against allergen derivatives list
   //MYCODE
   func crossSearchForAllergens() {
-//    for item in ingredients
-    
-//      println(ingredients)
-//      if let c = allergens.indexForKey(item)
-    
-//        self.matches.append(item)
-        
         for item in self.ingredientsList {
           
           if let c = allergenDerivatives.indexForKey(item) {

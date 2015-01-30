@@ -70,7 +70,7 @@ class NetworkController {
         if let httpResponse = response as? NSHTTPURLResponse {
          
           var status = httpResponse.statusCode
-          self.statusCode = status
+          //self.statusCode = status
           
           
           

@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScannerViewController" customModule="Food_Exclude" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view opaque="NO" alpha="0.19999999999999968" contentMode="scaleToFill" id="iN0-l3-epB">
+        <view userInteractionEnabled="NO" contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="300" height="250"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -20,7 +20,7 @@ Tap Next Item.</string>
                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="KRm-ry-UIw" secondAttribute="trailing" constant="5" id="6BX-Zv-AJd"/>
                 <constraint firstItem="KRm-ry-UIw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="Wwa-Fd-Xm9"/>
