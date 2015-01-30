@@ -201,80 +201,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             println("fail")
             
             //self.session.stopRunning()
-          }
-          
-          
-          self.networkController.fetchIngredientListForUPC(barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
-            
-            self.list = ingredients
-            var prepList = self.list.ingredientsList!.lowercaseString
-            self.ingredientsList = prepList.componentsSeparatedByString(",")
-            for(var i=0; i<self.ingredientsList.count; i++) {
-              self.ingredientsList[i] = self.ingredientsList[i].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-            }
-            self.crossSearchForAllergens()
-            
-            //self.ingredientDetailVC.ingredientDetail?.text = "Ingredients: \(self.list?.ingredientsList)"
-            
-            
-            println("Does this have the product name? \(self.list)")
-            
-            //MARK: NETWORK ALERTS
-            //MARK: Item not in database alert
-            if self.networkController.statusCode as NSObject == 404  {
-              
-              let itemNotFoundAlert = UIAlertController(title: "Item Not Found", message: "This item is not in the database", preferredStyle: .Alert)
-              let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
-              itemNotFoundAlert.addAction(okButton)
-              self.presentViewController(itemNotFoundAlert, animated: true, completion: nil)
-            }//if
-            
-            
-            //MARK: API calls maxed alert.
-            if self.networkController.statusCode as NSObject == 401  {
-              
-              let apiMaxed = UIAlertController(title: "API Call Limit", message: "The daily maximum for API calls has been reached", preferredStyle: .Alert)
-              let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
-              apiMaxed.addAction(okButton)
-              self.presentViewController(apiMaxed, animated: true, completion: nil)
-            }//if
-            
-          })
-        } else {
-          
-          
-          
-          return
-        }//else in if barcode != nil
-        
-        return
-      }//func captureOutput
-      
-      
-      //MARK: Timed AlertView
-      
-      func displayAlertView() {
-        if detectionString == nil {
-          self.alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as UIView
-          alertView.center = self.view.center
-          alertView.alpha = 0
-          alertView.transform = CGAffineTransformMakeScale(0.4, 0.4)
-          self.view.addSubview(alertView)
-          
-          UIView.animateWithDuration(0.4, delay: 0.5, options: nil, animations: { () -> Void in
-            self.alertView.alpha = 1
-            self.alertView.transform =  CGAffineTransformMakeScale(1.0, 1.0)
-            }) { (finished) -> Void in
-              
-              let removeTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "removeAlertView", userInfo: nil, repeats: false)
-          }
-        } else {
-          
-        }
-      }
-      //MARK: Remove alertView
-      func removeAlertView() {
-        self.alertView?.removeFromSuperview()
+          //}
       }
         })
     }
@@ -302,15 +229,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         self.alertView.transform =  CGAffineTransformMakeScale(1.0, 1.0)}) { (finished) -> Void in
           let removeTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "removeAlertView", userInfo: nil, repeats: false)
       }
-  
-      @IBAction func ingredientsDetailButtonClicked(selector: UIButton) {
-        let alertCon = UIAlertController(title: NSLocalizedString("Ingredients", comment: "This is the main menu"), message: NSLocalizedString("\(ingredientsList) : Powered by Nutritionix API", comment: "Choose View"), preferredStyle: UIAlertControllerStyle.ActionSheet)
-        let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
-        alertCon.addAction(okButton)
-          self.presentViewController(alertCon, animated: true, completion: nil)
-        }
-        
-  
+    }
+    else {
       
     }
   }
@@ -318,6 +238,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   func removeAlertView() {
     self.alertView?.removeFromSuperview()
   }
+      @IBAction func ingredientsDetailButtonClicked(selector: UIButton) {
+        let alertCon = UIAlertController(title: NSLocalizedString("Ingredients", comment: "This is the main menu"), message: NSLocalizedString("\(ingredientsList) : Powered by Nutritionix API", comment: "Choose View"), preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertCon.addAction(okButton)
+          self.presentViewController(alertCon, animated: true, completion: nil)
+        }
+        
   
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {
@@ -334,6 +261,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 }
 
   //MARK: Cross-search ingredients list against allergen derivatives list
+      
+      //MARK: Cross-search ingredients list against allergen derivatives list
   //MYCODE
   func crossSearchForAllergens() {
 //    for item in self.ingredients {
