@@ -75,7 +75,7 @@ class NetworkController {
           case 200...299:
 //            println("outside 200")
             if let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary {
-//              println(jsonDict)
+             println(jsonDict)
               let newIngredient = Ingredients(jsonDictionary: jsonDict)
 //              println(newIngredient)
               
