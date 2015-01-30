@@ -19,6 +19,12 @@
 		9C139F431A77FF79009C1F47 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C139F421A77FF79009C1F47 /* NetworkController.swift */; };
 		9C139F451A77FF86009C1F47 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C139F441A77FF86009C1F47 /* Ingredients.swift */; };
 		9C318A161A7C0BDA0034794D /* cuttingboard.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9C318A151A7C0BDA0034794D /* cuttingboard.jpeg */; };
+		9C318A181A7C16B10034794D /* cuttingboard-icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9C318A171A7C16B10034794D /* cuttingboard-icon.jpg */; };
+		9C318A1A1A7C26EE0034794D /* cuttingboard-180.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C318A191A7C26EE0034794D /* cuttingboard-180.png */; };
+		9C318A1C1A7C27C80034794D /* cuttingboard-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C318A1B1A7C27C80034794D /* cuttingboard-120.png */; };
+		9C318A1E1A7C28990034794D /* cuttingboard-80.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C318A1D1A7C28990034794D /* cuttingboard-80.png */; };
+		9C318A201A7C29220034794D /* cuttingboard-87.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C318A1F1A7C29220034794D /* cuttingboard-87.png */; };
+		9C318A221A7C29850034794D /* cuttingboard-58.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C318A211A7C29850034794D /* cuttingboard-58.png */; };
 		9C54FFC91A7AFABD006C4BAB /* NutritionixAPI.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C54FFC81A7AFABD006C4BAB /* NutritionixAPI.png */; };
 		9C563DB31A78BEBD00EAC832 /* purr.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C563DB21A78BEBD00EAC832 /* purr.wav */; };
 		9C563DB51A78BEEB00EAC832 /* Hiss.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C563DB41A78BEEB00EAC832 /* Hiss.wav */; };
@@ -64,6 +70,12 @@
 		9C139F421A77FF79009C1F47 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		9C139F441A77FF86009C1F47 /* Ingredients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
 		9C318A151A7C0BDA0034794D /* cuttingboard.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cuttingboard.jpeg; sourceTree = "<group>"; };
+		9C318A171A7C16B10034794D /* cuttingboard-icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cuttingboard-icon.jpg"; sourceTree = "<group>"; };
+		9C318A191A7C26EE0034794D /* cuttingboard-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cuttingboard-180.png"; sourceTree = "<group>"; };
+		9C318A1B1A7C27C80034794D /* cuttingboard-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cuttingboard-120.png"; sourceTree = "<group>"; };
+		9C318A1D1A7C28990034794D /* cuttingboard-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cuttingboard-80.png"; sourceTree = "<group>"; };
+		9C318A1F1A7C29220034794D /* cuttingboard-87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cuttingboard-87.png"; sourceTree = "<group>"; };
+		9C318A211A7C29850034794D /* cuttingboard-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cuttingboard-58.png"; sourceTree = "<group>"; };
 		9C54FFC81A7AFABD006C4BAB /* NutritionixAPI.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NutritionixAPI.png; sourceTree = "<group>"; };
 		9C563DB21A78BEBD00EAC832 /* purr.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = purr.wav; sourceTree = "<group>"; };
 		9C563DB41A78BEEB00EAC832 /* Hiss.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Hiss.wav; sourceTree = "<group>"; };
@@ -191,6 +203,12 @@
 		9CCF777B1A79583B00C532F3 /* icons/images */ = {
 			isa = PBXGroup;
 			children = (
+				9C318A1F1A7C29220034794D /* cuttingboard-87.png */,
+				9C318A211A7C29850034794D /* cuttingboard-58.png */,
+				9C318A1D1A7C28990034794D /* cuttingboard-80.png */,
+				9C318A1B1A7C27C80034794D /* cuttingboard-120.png */,
+				9C318A191A7C26EE0034794D /* cuttingboard-180.png */,
+				9C318A171A7C16B10034794D /* cuttingboard-icon.jpg */,
 				9C54FFC81A7AFABD006C4BAB /* NutritionixAPI.png */,
 				9C318A151A7C0BDA0034794D /* cuttingboard.jpeg */,
 			);
@@ -302,9 +320,15 @@
 			files = (
 				9C54FFC91A7AFABD006C4BAB /* NutritionixAPI.png in Resources */,
 				40A438931A7692F100A24AA0 /* readme in Resources */,
+				9C318A201A7C29220034794D /* cuttingboard-87.png in Resources */,
 				9C563DB51A78BEEB00EAC832 /* Hiss.wav in Resources */,
+				9C318A1E1A7C28990034794D /* cuttingboard-80.png in Resources */,
+				9C318A1A1A7C26EE0034794D /* cuttingboard-180.png in Resources */,
+				9C318A221A7C29850034794D /* cuttingboard-58.png in Resources */,
 				40A438721A75973B00A24AA0 /* Main.storyboard in Resources */,
 				BAE056B71A7BFA5400BDF935 /* UserProfilesHeader.xib in Resources */,
+				9C318A181A7C16B10034794D /* cuttingboard-icon.jpg in Resources */,
+				9C318A1C1A7C27C80034794D /* cuttingboard-120.png in Resources */,
 				ABE71A461A771426002F0515 /* AlertView.xib in Resources */,
 				4E7B67511A7A2069005E63F5 /* allergens.plist in Resources */,
 				BA37ECFF1A77FFF900408187 /* UserProfileCell.xib in Resources */,
