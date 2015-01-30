@@ -166,11 +166,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
       
       self.networkController.fetchIngredientListForUPC(self.barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
-
-        self.list = ingredients 
+ 
+        
+        if ingredients != nil {
+        self.list = ingredients
         self.ingredientsList = self.list.seperatedList
         self.crossSearchForAllergens()
-        
+        }
         println("Does this have the product name? \(self.list)")
         
         //MARK: NETWORK ALERTS
@@ -185,12 +187,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         
         //MARK: API calls maxed alert.
-        if self.networkController.statusCode as NSObject == 401  {
+        if self.networkController.statusCode == nil {
           
           
           //MARK: Network connection alert.
           
-          if NetworkController.sharedNetworkController.nsError != nil {
+          //if NetworkController.sharedNetworkController.nsError != nil {
             
             let networkIssueAlert = UIAlertController(title: "Network Error", message: "Please make sure you have an internet connecton and try again later", preferredStyle: .Alert)
             let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
@@ -199,7 +201,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             println("fail")
             
             //self.session.stopRunning()
-          }}
+          //}
+      }
         })
     }
               else {
