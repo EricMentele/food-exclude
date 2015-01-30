@@ -146,7 +146,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
     }
   
-    self.barcode.text = "Barcode scanned: \(self.detectionString)"
     self.barcodeScanned = self.detectionString
     self.highlightView.frame = highlightViewRect
     
@@ -172,6 +171,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         self.list = ingredients
         self.ingredientsList = self.list.seperatedList
         self.crossSearchForAllergens()
+        self.barcode.text = self.list.itemName
+        
         }
         println("Does this have the product name? \(self.list)")
         

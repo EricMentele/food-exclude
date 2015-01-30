@@ -56,7 +56,7 @@ class Ingredients {
     
     
     var newString = self.ingredientsList?.lowercaseString
-    if let clearedString = newString?.stringByReplacingOccurrencesOfString("[\\()\\@]", withString: "", options: .RegularExpressionSearch) {
+    if let clearedString = newString?.stringByReplacingOccurrencesOfString("[\\(\\)\\[\\]\\.\\@]", withString: "", options: .RegularExpressionSearch) {
       //println("THIS IS THE CLEARED STRING\(clearedString)")
       self.seperatedList = clearedString.componentsSeparatedByString(",")
     }
