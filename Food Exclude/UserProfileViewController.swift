@@ -154,15 +154,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
       self.imagePickerController.delegate = self
       self.imagePickerController.allowsEditing = true
       self.presentViewController(self.imagePickerController, animated: true, completion: nil)
-    } else
-      
-      if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-        imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
-    }
+    } 
   }
   
   //Function: Handle event when avatar image is selected.
