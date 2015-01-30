@@ -155,55 +155,28 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       
       if NetworkController.sharedNetworkController.nsError != nil {
         
-        let networkIssueAlert = UIAlertController(title: "Network Error", message: "Please make sure you have an internet connecton and try again later", preferredStyle: .Alert)
-        let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        networkIssueAlert.addAction(cancelButton)
-        self.presentViewController(networkIssueAlert, animated: true, completion: nil)
-        println("fail")
+        
         
         //self.session.stopRunning()
       }
       
       self.networkController.fetchIngredientListForUPC(self.barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
  
-
+        
         if ingredients != nil {
         self.list = ingredients
         self.ingredientsList = self.list.seperatedList
         self.crossSearchForAllergens()
         self.barcode.text = self.list.itemName
         
+        } else if errorDescription != nil {
+          let networkIssueAlert = UIAlertController(title: "Network Error", message: errorDescription, preferredStyle: .Alert)
+          let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+          networkIssueAlert.addAction(cancelButton)
+          self.presentViewController(networkIssueAlert, animated: true, completion: nil)
+          println("fail")
         }
         println("Does this have the product name? \(self.list)")
-        
-        //MARK: NETWORK ALERTS
-        //MARK: Item not in database alert
-        if self.networkController.statusCode as NSObject == 404  {
-          
-          let itemNotFoundAlert = UIAlertController(title: "Item Not Found", message: "This item is not in the database", preferredStyle: .Alert)
-          let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
-          itemNotFoundAlert.addAction(okButton)
-          self.presentViewController(itemNotFoundAlert, animated: true, completion: nil)
-        }//if
-        
-        
-        //MARK: API calls maxed alert.
-        if self.networkController.statusCode as NSObject == 401 {
-          
-          
-          //MARK: Network connection alert.
-          
-          //if NetworkController.sharedNetworkController.nsError != nil {
-            
-            let networkIssueAlert = UIAlertController(title: "Network Error", message: "Please make sure you have an internet connecton and try again later", preferredStyle: .Alert)
-            let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            networkIssueAlert.addAction(cancelButton)
-            self.presentViewController(networkIssueAlert, animated: true, completion: nil)
-            println("fail")
-            
-            //self.session.stopRunning()
-          //}
-      }
         })
     }
               else {

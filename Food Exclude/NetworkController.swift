@@ -90,13 +90,13 @@ class NetworkController {
           case 404:
             println("404")
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-              completionHandler(nil, "404")
+              completionHandler(nil, "This item is not in the database.")
             })
           
           case 401:
             println("401")
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-              completionHandler(nil, "401")
+              completionHandler(nil, "Api limit reached.")
             })
             
           case 300...599:
@@ -110,7 +110,9 @@ class NetworkController {
             println("This is odd - default case fired")
           }//end Switch
         }//httpResponse
-      }//if error
+      } else {
+        completionHandler(nil,"Connectivity error. Try again later.")
+      }
     })//dataTask
     dataTask.resume()
   }//fetchIngredientListForUPC
