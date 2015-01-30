@@ -43,6 +43,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var list : Ingredients!
   
   var ingredientsList = [String]()
+  var originIngredientsList = String()
   var allergenDerivatives = [String : String]()
   var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
   var myMatches = [String]()
@@ -106,7 +107,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
   
   override func viewWillAppear(animated: Bool) {
-    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(13, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
+    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
   }
   
   
@@ -155,11 +156,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       
       if NetworkController.sharedNetworkController.nsError != nil {
         
-        let networkIssueAlert = UIAlertController(title: "Network Error", message: "Please make sure you have an internet connecton and try again later", preferredStyle: .Alert)
-        let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        networkIssueAlert.addAction(cancelButton)
-        self.presentViewController(networkIssueAlert, animated: true, completion: nil)
-        println("fail")
+        
         
         //self.session.stopRunning()
       }
@@ -170,40 +167,20 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         if ingredients != nil {
         self.list = ingredients
         self.ingredientsList = self.list.seperatedList
+          if self.list.ingredientsList != nil {
+        self.originIngredientsList = self.list.ingredientsList!
+          }
         self.crossSearchForAllergens()
         self.barcode.text = self.list.itemName
         
+        } else if errorDescription != nil {
+          let networkIssueAlert = UIAlertController(title: "Network Error", message: errorDescription, preferredStyle: .Alert)
+          let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+          networkIssueAlert.addAction(cancelButton)
+          self.presentViewController(networkIssueAlert, animated: true, completion: nil)
+          println("fail")
         }
         println("Does this have the product name? \(self.list)")
-        
-        //MARK: NETWORK ALERTS
-        //MARK: Item not in database alert
-        if self.networkController.statusCode as NSObject == 404  {
-          
-          let itemNotFoundAlert = UIAlertController(title: "Item Not Found", message: "This item is not in the database", preferredStyle: .Alert)
-          let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
-          itemNotFoundAlert.addAction(okButton)
-          self.presentViewController(itemNotFoundAlert, animated: true, completion: nil)
-        }//if
-        
-        
-        //MARK: API calls maxed alert.
-        if self.networkController.statusCode == nil {
-          
-          
-          //MARK: Network connection alert.
-          
-          //if NetworkController.sharedNetworkController.nsError != nil {
-            
-            let networkIssueAlert = UIAlertController(title: "Network Error", message: "Please make sure you have an internet connecton and try again later", preferredStyle: .Alert)
-            let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            networkIssueAlert.addAction(cancelButton)
-            self.presentViewController(networkIssueAlert, animated: true, completion: nil)
-            println("fail")
-            
-            //self.session.stopRunning()
-          //}
-      }
         })
     }
               else {
@@ -240,7 +217,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.alertView?.removeFromSuperview()
   }
       @IBAction func ingredientsDetailButtonClicked(selector: UIButton) {
-        let alertCon = UIAlertController(title: NSLocalizedString("Ingredients", comment: "This is the main menu"), message: NSLocalizedString("\(ingredientsList) : Powered by Nutritionix API", comment: "Choose View"), preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let alertCon = UIAlertController(title: NSLocalizedString("Ingredients", comment: "This is the main menu"), message: NSLocalizedString("\(originIngredientsList) : Powered by Nutritionix API", comment: "Choose View"), preferredStyle: UIAlertControllerStyle.ActionSheet)
         let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertCon.addAction(okButton)
           self.presentViewController(alertCon, animated: true, completion: nil)
@@ -270,21 +247,25 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 //      println(ingredients)
 //      if let c = allergens.indexForKey(item) {
 //        self.matches.append(item)
-//        
+    
+        //loop over the ingredients list for all allergen derivatives, put matches into self.matches
         for item in self.ingredientsList {
-          
-          if let c = allergenDerivatives.indexForKey(item) {
-            self.matches.append(item)
-            self.allergenCategories.append(self.allergenDerivatives[item]!)
+          for allergen in allergenDerivatives.keys {
+            if item.rangeOfString(allergen.lowercaseString) != nil {
+            self.matches.append(allergen)
+            self.allergenCategories.append(self.allergenDerivatives[allergen]!)
           }
         }
-        
-        //User profile data: latest
+          }
+    println(self.allergenCategories)
+    
+        //load user profile data
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         self.userProfiles = appDelegate.loadUserProfilesFromArchive()!
         
         var dictionaryOfAllergens = [String : Bool]()
         
+        //load allergens that active users have and put them in myAllergens
         for categories in self.allergenCategories {
           dictionaryOfAllergens[categories] = true
           for user in userProfiles {
@@ -299,7 +280,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           }}}
 //        }
 //        }
-        
+    
+    
+    
+        //change border color
         if !self.myAllergens .isEmpty {
           self.view.layer.borderWidth = 9
           self.view.layer.borderColor = UIColor(red: 153, green: 0, blue: 0).CGColor
