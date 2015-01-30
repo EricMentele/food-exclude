@@ -43,6 +43,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var list : Ingredients!
   
   var ingredientsList = [String]()
+  var originIngredientsList = String()
   var allergenDerivatives = [String : String]()
   var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
   var myMatches = [String]()
@@ -166,6 +167,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         if ingredients != nil {
         self.list = ingredients
         self.ingredientsList = self.list.seperatedList
+          if self.list.ingredientsList != nil {
+        self.originIngredientsList = self.list.ingredientsList!
+          }
         self.crossSearchForAllergens()
         self.barcode.text = self.list.itemName
         
@@ -213,7 +217,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.alertView?.removeFromSuperview()
   }
       @IBAction func ingredientsDetailButtonClicked(selector: UIButton) {
-        let alertCon = UIAlertController(title: NSLocalizedString("Ingredients", comment: "This is the main menu"), message: NSLocalizedString("\(ingredientsList) : Powered by Nutritionix API", comment: "Choose View"), preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let alertCon = UIAlertController(title: NSLocalizedString("Ingredients", comment: "This is the main menu"), message: NSLocalizedString("\(originIngredientsList) : Powered by Nutritionix API", comment: "Choose View"), preferredStyle: UIAlertControllerStyle.ActionSheet)
         let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertCon.addAction(okButton)
           self.presentViewController(alertCon, animated: true, completion: nil)
