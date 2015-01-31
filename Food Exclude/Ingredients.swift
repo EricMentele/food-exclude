@@ -55,16 +55,12 @@ class Ingredients {
     self.allergenMilk = jsonDictionary["allergen_contains_milk"]  as? String
     
     
-    var list = self.ingredientsList?.stringByReplacingOccurrencesOfString("Gluten", withString: "", options: NSStringCompareOptions(), range: nil)
-    //println(list)
-    var newString = list?.lowercaseString
-    if let clearedString = newString?.stringByReplacingOccurrencesOfString("[\\(\\)\\[\\]\\.\\,\\gluten-free\\gluten free\\dairy-free\\dairy free\\milk-free\\milk free\\nut-free\\nut free\\treenut-free\\treenut free\\casein-free\\casein free\\caseinate free\\caseinate-free\\egg-free\\egg free\\wheat-free\\wheat free\\peanut-free\\peanut free\\shellfish-free\\shellfish free\\@]", withString: "", options: .RegularExpressionSearch) {
-      //println("THIS IS THE CLEARED STRING\(clearedString)")
-      
+    var newString = self.ingredientsList?.lowercaseString
+    if let clearedString = newString?.stringByReplacingOccurrencesOfString("[\\(\\)\\[\\]\\.\\glutenfree\\gluten free\\dairyfree\\dairy free\\@]", withString: "", options: .RegularExpressionSearch) {
+      println("THIS IS THE CLEARED STRING\(clearedString)")
       self.seperatedList = clearedString.componentsSeparatedByString(" ")
       //println(seperatedList)
     }
-    
     
     
     if self.allergenMilk !=  nil {
