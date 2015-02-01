@@ -51,6 +51,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var myAllergens = [Allergen]()
   var userProfiles = [UserProfile]()
   
+  var sessionTimer = NSTimer()
+  var newSessionTimer = NSTimer()
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -107,7 +111,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
   
   override func viewWillAppear(animated: Bool) {
-    let sessionTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
+    self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
   }
   
   
@@ -155,14 +159,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       //MARK: Network connection alert.
       
       if NetworkController.sharedNetworkController.nsError != nil {
-        
-        
-        
         //self.session.stopRunning()
       }
       
       self.networkController.fetchIngredientListForUPC(self.barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
- 
         
         if ingredients != nil {
         self.list = ingredients
@@ -182,66 +182,63 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
         println("Does this have the product name? \(self.list)")
         })
-    }
-              else {
-      
+    } else {
       return
-        }
+      }
     //else in if barcode != nil
-    
     return
     }//func captureOutput
 
-  //MARK: Timed AlertView
   
+  //MARK: Timed AlertView
   func displayAlertView() {
     if detectionString == nil {
       self.alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as UIView
       alertView.center = self.view.center
       alertView.alpha = 0
-      alertView.transform = CGAffineTransformMakeScale(0.4, 0.4)
+      alertView.transform = CGAffineTransformMakeScale(0.01, 0.01)
       self.view.addSubview(alertView)
       
       UIView.animateWithDuration(0.4, delay: 0.5, options: nil, animations: { () -> Void in
         self.alertView.alpha = 1
         self.alertView.transform =  CGAffineTransformMakeScale(1.0, 1.0)}) { (finished) -> Void in
-          let removeTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: "removeAlertView", userInfo: nil, repeats: false)
+          let removeTimer = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: "removeAlertView", userInfo: nil, repeats: false)
       }
-    }
-    else {
-      
     }
   }
   
   func removeAlertView() {
-    self.alertView?.removeFromSuperview()
-  }
-      @IBAction func ingredientsDetailButtonClicked(selector: UIButton) {
-        let alertCon = UIAlertController(title: NSLocalizedString("Ingredients", comment: "This is the main menu"), message: NSLocalizedString("\(originIngredientsList) : Powered by Nutritionix API", comment: "Choose View"), preferredStyle: UIAlertControllerStyle.ActionSheet)
-        let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
-        alertCon.addAction(okButton)
-          self.presentViewController(alertCon, animated: true, completion: nil)
+    UIView.animateWithDuration(0.4, delay: 0.5, options: nil, animations: { () -> Void in
+      self.alertView.alpha = 0
+      self.alertView.transform =  CGAffineTransformMakeScale(0.01, 0.01)}) { (finished) -> Void in
+        self.alertView.removeFromSuperview()
+        self.sessionTimer.invalidate()
+        self.newSessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
         }
-        
+  }
+  
+  
+  
+  @IBAction func ingredientsDetailButtonClicked(selector: UIButton) {
+    let alertCon = UIAlertController(title: NSLocalizedString("Ingredients", comment: "This is the main menu"), message: NSLocalizedString("\(originIngredientsList) : Powered by Nutritionix API", comment: "Choose View"), preferredStyle: UIAlertControllerStyle.ActionSheet)
+    let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
+    alertCon.addAction(okButton)
+    self.presentViewController(alertCon, animated: true, completion: nil)
+  }
+    
   
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {
-    
     detectionString = nil
     self.view.layer.borderColor = UIColor(red: 0, green: 0, blue: 0).CGColor
     self.matches = [String]()
     self.myMatches = [String]()
     self.allergenCategories = [String]()
     self.session.startRunning()
-    if self.alertView != nil {
-      self.removeAlertView()
-    }
-}
-
-  //MARK: Cross-search ingredients list against allergen derivatives list
+  }
       
-      //MARK: Cross-search ingredients list against allergen derivatives list
-  //MYCODE
+  //MARK: Cross-search ingredients list against allergen derivatives list
+
   func crossSearchForAllergens() {
 //    for item in self.ingredients {
 //      println(ingredients)
@@ -254,9 +251,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             if item.rangeOfString(allergen.lowercaseString) != nil {
             self.matches.append(allergen)
             self.allergenCategories.append(self.allergenDerivatives[allergen]!)
+            }
           }
         }
-          }
     println(self.allergenCategories)
     
         //load user profile data
@@ -272,16 +269,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             var allergens = user.allergens
             for allergy in allergens {
               if allergy.sensitive == true {
-              let match = dictionaryOfAllergens[allergy.name]
-              if match == true {
-                self.myAllergens.append(allergy)
+                let match = dictionaryOfAllergens[allergy.name]
+                if match == true {
+                  self.myAllergens.append(allergy)
+                }
               }
             }
-          }}}
-//        }
-//        }
-    
-    
+          }
+        }
+   
     
         //change border color
         if !self.myAllergens .isEmpty {
