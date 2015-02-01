@@ -168,12 +168,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         self.list = ingredients
         self.ingredientsList = self.list.seperatedList
           if self.list.ingredientsList != nil {
-        self.originIngredientsList = self.list.ingredientsList!
+            self.originIngredientsList = self.list.ingredientsList!
           }
         self.crossSearchForAllergens()
         self.barcode.text = self.list.itemName
         
-        } else if errorDescription != nil {
+        }
+        
+        if errorDescription != nil {
           let networkIssueAlert = UIAlertController(title: "Network Error", message: errorDescription, preferredStyle: .Alert)
           let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
           networkIssueAlert.addAction(cancelButton)
@@ -181,18 +183,18 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           println("fail")
         }
         println("Does this have the product name? \(self.list)")
+        self.displayAlertView()
         })
-    } else {
-      return
-      }
+    }
+
     //else in if barcode != nil
     return
-    }//func captureOutput
+  }//func captureOutput
 
   
   //MARK: Timed AlertView
   func displayAlertView() {
-    if detectionString == nil {
+    if self.detectionString == nil {
       self.alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as UIView
       alertView.center = self.view.center
       alertView.alpha = 0
@@ -204,6 +206,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         self.alertView.transform =  CGAffineTransformMakeScale(1.0, 1.0)}) { (finished) -> Void in
           let removeTimer = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: "removeAlertView", userInfo: nil, repeats: false)
       }
+    } else {
+      return
     }
   }
   
@@ -235,6 +239,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.myMatches = [String]()
     self.allergenCategories = [String]()
     self.session.startRunning()
+    
   }
       
   //MARK: Cross-search ingredients list against allergen derivatives list
