@@ -55,13 +55,17 @@ class Ingredients {
     self.allergenMilk = jsonDictionary["allergen_contains_milk"]  as? String
     
     
-    var newString = self.ingredientsList?.lowercaseString
-    if let clearedString = newString?.stringByReplacingOccurrencesOfString("[\\(\\)\\[\\]\\.\\@]", withString: "", options: .RegularExpressionSearch) {
-      //println("THIS IS THE CLEARED STRING\(clearedString)")
-      self.seperatedList = clearedString.componentsSeparatedByString(" ")
-      //println(seperatedList)
-    }
-
+    if let newString = self.ingredientsList?.lowercaseString {
+      
+      var clearedString = newString.stringByReplacingOccurrencesOfString("(([\\,\\(\\)\\[\\]\\/\\\n\\@]))", withString: "", options: .RegularExpressionSearch)
+      var freeString = clearedString.stringByReplacingOccurrencesOfString("(\\w+\\sfree)", withString: "", options: .RegularExpressionSearch)
+      var factoryFreeString = freeString.stringByReplacingOccurrencesOfString("(allergen information:.+)", withString: "", options: .RegularExpressionSearch)
+      self.seperatedList = factoryFreeString.componentsSeparatedByString(" ")
+      println("THIS IS THE CLEARED STRING\(factoryFreeString)")
+      println(seperatedList)
+    }//new string
+    
+    
     if self.allergenMilk !=  nil {
       self.allergenList.append("Milk")
     }
