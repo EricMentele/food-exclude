@@ -50,7 +50,7 @@ class NetworkController {
   
   func fetchIngredientListForUPC (upcCode : String, completionHandler : (Ingredients?, String?) -> ()) {
     
- 
+    
     let requestURL = "https://api.nutritionix.com/v1_1/item?upc=\(upcCode)&appId=\(clientID)&appKey=\(clientSecret)"
     let url = NSURL(string: requestURL)
     
@@ -62,10 +62,10 @@ class NetworkController {
       
       if error == nil {
         
-//         println(response)
+        //         println(response)
         
         if let httpResponse = response as? NSHTTPURLResponse {
-         
+          
           var status = httpResponse.statusCode
           self.statusCode = status
           
@@ -73,13 +73,13 @@ class NetworkController {
           
           switch httpResponse.statusCode {
           case 200...299:
-//            println("outside 200")
+            //            println("outside 200")
             if let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary {
-             println(jsonDict)
+              //println(jsonDict)
               let newIngredient = Ingredients(jsonDictionary: jsonDict)
-//              println(newIngredient)
+              //              println(newIngredient)
               
-
+              
               NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 completionHandler(newIngredient,nil)
               }) //end block
@@ -92,7 +92,7 @@ class NetworkController {
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
               completionHandler(nil, "This item is not in the database.")
             })
-          
+            
           case 401:
             println("401")
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in

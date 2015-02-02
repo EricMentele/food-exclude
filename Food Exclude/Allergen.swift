@@ -26,7 +26,7 @@ import Foundation
 class Allergen: NSObject, NSCoding {
   var name: String
   var sensitive: Bool
-
+  
   //MARK: Initialize class
   
   //Initialize:
@@ -34,7 +34,7 @@ class Allergen: NSObject, NSCoding {
     self.name = name
     self.sensitive = sensitive
   } //end init
-
+  
   //MARK: NSKeyedArchiver
   
   //Initialize: Load from archive.
