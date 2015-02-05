@@ -26,8 +26,8 @@ import AVFoundation
 
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
   
+  @IBOutlet weak var toolBar: UIToolbar!
   @IBOutlet weak var barcode: UILabel!
-  
   @IBOutlet weak var nextItem: UIButton!
   
   var alertView : UIView!
@@ -58,10 +58,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //Add user profile button:
+    //user profile button
     let buttonUserProfiles = UIBarButtonItem(image: UIImage(named: "three115"), style: UIBarButtonItemStyle.Plain, target: self, action: "pressedButtonUserProfiles")
-    self.navigationItem.rightBarButtonItem = buttonUserProfiles
-    
+    let spaceLeft = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+    toolBar.items = [spaceLeft, buttonUserProfiles]
+
     //load allergenData
     if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
       var myDict = NSDictionary(contentsOfFile: allergenData)
@@ -108,10 +109,22 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.session.startRunning()
   }
   
-
   
   override func viewWillAppear(animated: Bool) {
     self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
+  }
+  
+  
+  override func viewDidAppear(animated: Bool) {
+    //go to default profile, if no profile exists
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    if let userProfilesFromArchive = appDelegate.loadUserProfilesFromArchive() as [UserProfile]? {
+      if userProfilesFromArchive.isEmpty { //no users: direct to default profile
+        gotoUserProfileDefault()
+      } //end if
+    } else { //no users: direct to default profile
+      gotoUserProfileDefault()
+    } //end if
   }
   
   
@@ -296,9 +309,16 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
       
       
-      //Function: Handle event when User Profiles button is pressed.
-      func pressedButtonUserProfiles() {
-        let vcUserProfiles = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILES") as UserProfilesViewController
-        self.navigationController?.pushViewController(vcUserProfiles, animated: true)
-      }//end func
+  //Function: Handle event when User Profiles button is pressed.
+  func pressedButtonUserProfiles() {
+    let vcUserProfiles = self.storyboard?.instantiateViewControllerWithIdentifier("NAV_USER_PROFILES") as UINavigationController
+    self.presentViewController(vcUserProfiles, animated: true, completion: nil)
+  }//end func
+  
+  //Function: Go to default User Profile.
+  func gotoUserProfileDefault() {
+    let vcUserProfile = storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
+    vcUserProfile.selectedUserProfileIndex = -1
+    self.presentViewController(vcUserProfile, animated: true, completion: nil)
+  } //end func
 }
