@@ -23,6 +23,8 @@
 import UIKit
 
 class UserProfilesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+  //Outlets:
+  @IBOutlet weak var buttonScanner: UIButton!
   //Table: to display user profiles
   @IBOutlet weak var tableUserProfiles: UITableView!
   var userProfiles: [UserProfile]!
@@ -32,6 +34,9 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     //Super:
     super.viewDidLoad()
     
+    //Title:
+    self.navigationItem.title = "Users"
+    
     //Table:
     tableUserProfiles.registerNib(UINib(nibName: "UserProfileCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CELL_USER_PROFILE")
     tableUserProfiles.dataSource = self
@@ -40,6 +45,9 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     //Add user profile button:
     let buttonAddUserProfile = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "pressedButtonAddUserProfile")
     self.navigationItem.rightBarButtonItem = buttonAddUserProfile
+    
+    //Scanner button:
+    buttonScanner.addTarget(self, action: "pressedButtonScanner", forControlEvents: UIControlEvents.TouchUpInside)
   } //end func
   
   //Function: Set up view controller.
@@ -136,8 +144,8 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     self.navigationController?.pushViewController(vcUserProfile, animated: true)
   } //end func
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
+  //Function:  Handle Scanner button pressed.
+  func pressedButtonScanner() {
+    self.dismissViewControllerAnimated(true, completion: nil)
+  } //end func
 }
