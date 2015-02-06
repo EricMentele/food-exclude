@@ -102,7 +102,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     //this is the scanning scene, setting the frame to the view.bounds will cover up other views
     previewLayer = AVCaptureVideoPreviewLayer.layerWithSession(session) as AVCaptureVideoPreviewLayer
-    previewLayer.frame = CGRect(x: 0, y: 40, width: self.view.bounds.width, height: self.view.bounds.height * 0.6)
+    previewLayer.frame = CGRect(x: 0, y: 65, width: self.view.bounds.width, height: self.view.bounds.height * 0.6)
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
     self.view.layer.addSublayer(previewLayer)
     
