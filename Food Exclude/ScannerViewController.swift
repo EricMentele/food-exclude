@@ -45,7 +45,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var ingredientsList = [String]()
   var originIngredientsList = String()
   var allergenDerivatives = [String : String]()
-  var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
+  var matches = [String]() //this variable will store allergen categories that exist in the ingredients list
   var myMatches = [String]()
   var allergenCategories = [String]() //this stores allergen categories detected in the scanned ingredient list
   var myAllergens = [Allergen]()
@@ -256,23 +256,74 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   }
       
   //MARK: Cross-search ingredients list against allergen derivatives list
+  var ngrams: [String: String] = [:]
 
+  // generate the n-grams for the ingredients
+  
+//  for ingredient in self.ingredientsList {
+//  var ingredientComp = ingredient.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).componentsSeparatedByString(" ")
+//  for(var i=0; i<ingredientComp.count; i++) {
+//  
+//  var ngram = ""
+//  
+//  for(var j=i; j<ingredientComp.count; j++) {
+//  
+//  if(!ngram.isEmpty) {
+//  
+//  ngram += " "
+//  
+//  }
+//  
+//  ngram += ingredientComp[j]
+//  
+//  ngrams[ngram] = ingredient
+//  
+//  }}}
+//  
+//  var matches: [String: String] = [:]
+//  
+//  for (key, value) in allergens {
+//  
+//  if let match = ngrams[key] {
+//  
+//  matches[key] = match
+//  
+//  }}
+
+//  for match in matches {
+//  
+//  println(match)
+//
+//  }
+  
   func crossSearchForAllergens() {
-//    for item in self.ingredients {
-//      println(ingredients)
-//      if let c = allergens.indexForKey(item) {
-//        self.matches.append(item)
-    
+  
         //loop over the ingredients list for all allergen derivatives, put matches into self.matches
-        for item in self.ingredientsList {
-          for allergen in allergenDerivatives.keys {
-            if item.rangeOfString(allergen.lowercaseString) != nil {
-            self.matches.append(allergen)
-            self.allergenCategories.append(self.allergenDerivatives[allergen]!)
+    
+    //generate the n-grams for the ingredients
+    for ingredient in self.ingredientsList {
+          var ingredientComp = ingredient.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).componentsSeparatedByString(" ")
+          for (var i=0; i<ingredientComp.count; i++) {
+            var ngram = ""
+            for (var j=i; j<ingredientComp.count; j++) {
+              if(!ngram.isEmpty) {
+                ngram += " "
+              }
+              ngram += ingredientComp[j]
+              ngrams[ngram] = ingredient
+              }
             }
           }
-        }
-    println(self.allergenCategories)
+    var matches: [String : String] = [:]
+    for (key, value) in self.allergenDerivatives {
+      if let match = ngrams[key] {
+        matches[key] = match
+      }
+    }
+    for (key, value) in matches {
+      self.matches.append(key)
+      self.allergenCategories.append(self.allergenDerivatives[key]!)
+    }
     
         //load user profile data
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
