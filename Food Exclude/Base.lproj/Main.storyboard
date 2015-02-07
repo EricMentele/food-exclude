@@ -68,30 +68,19 @@
                                 </constraints>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIL-ht-Oj4">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="62M-eS-kkY"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items/>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="UbO-uA-Kq1" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="380" id="2bK-yJ-gIQ"/>
-                            <constraint firstItem="PIL-ht-Oj4" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="2cu-Ai-eCl"/>
                             <constraint firstItem="PIL-ht-Oj4" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="GNU-iG-tLa"/>
                             <constraint firstItem="UbO-uA-Kq1" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="Q9Q-jD-M1y"/>
                             <constraint firstAttribute="bottomMargin" secondItem="UbO-uA-Kq1" secondAttribute="bottom" id="Qtm-89-oiw"/>
-                            <constraint firstItem="UbO-uA-Kq1" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="123" id="RdN-p9-znf"/>
+                            <constraint firstItem="PIL-ht-Oj4" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="20" id="Tyg-Pk-r4g"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PIL-ht-Oj4" secondAttribute="trailing" constant="-16" id="bMe-Gr-3bT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UbO-uA-Kq1" secondAttribute="trailing" constant="-16" id="nvl-VR-TKW"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="2bK-yJ-gIQ"/>
-                                <exclude reference="RdN-p9-znf"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="Y4a-au-ysX"/>
                     <connections>
