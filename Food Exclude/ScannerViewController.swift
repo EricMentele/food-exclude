@@ -297,22 +297,28 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
     }
     
-    
-    //change border color
-    if !self.myAllergens .isEmpty {
-      self.view.layer.borderWidth = 9
-      self.view.layer.borderColor = UIColor(red: 153, green: 0, blue: 0).CGColor
-    }
-    else {
-      self.view.layer.borderWidth = 8
-      self.view.layer.borderColor = UIColor(red: 0, green: 153, blue: 0).CGColor
-    }
-  }
-  
-  
+        //change border color
+        if !self.myAllergens .isEmpty {
+          self.view.layer.borderWidth = 9
+          self.view.layer.borderColor = UIColor(red: 153, green: 0, blue: 0).CGColor
+          }
+        else {
+          self.view.layer.borderWidth = 8
+          self.view.layer.borderColor = UIColor(red: 0, green: 153, blue: 0).CGColor
+        }
+      }
+      
+      
   //Function: Handle event when User Profiles button is pressed.
   func pressedButtonUserProfiles() {
-    let vcUserProfiles = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILES") as UserProfilesViewController
-    self.navigationController?.pushViewController(vcUserProfiles, animated: true)
+    let vcUserProfiles = self.storyboard?.instantiateViewControllerWithIdentifier("NAV_USER_PROFILES") as UINavigationController
+    self.presentViewController(vcUserProfiles, animated: true, completion: nil)
   }//end func
+  
+  //Function: Go to default User Profile.
+  func gotoUserProfileDefault() {
+    let vcUserProfile = storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
+    vcUserProfile.selectedUserProfileIndex = -1
+    self.presentViewController(vcUserProfile, animated: true, completion: nil)
+  } //end func
 }
