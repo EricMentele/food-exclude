@@ -26,8 +26,8 @@ import AVFoundation
 
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
   
+  @IBOutlet weak var toolBar: UIToolbar!
   @IBOutlet weak var barcode: UILabel!
-  
   @IBOutlet weak var nextItem: UIButton!
   
   var alertView : UIView!
@@ -58,10 +58,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //Add user profile button:
+    //user profile button
     let buttonUserProfiles = UIBarButtonItem(image: UIImage(named: "three115"), style: UIBarButtonItemStyle.Plain, target: self, action: "pressedButtonUserProfiles")
-    self.navigationItem.rightBarButtonItem = buttonUserProfiles
-    
+    let spaceLeft = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+    toolBar.items = [spaceLeft, buttonUserProfiles]
+
     //load allergenData
     if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
       var myDict = NSDictionary(contentsOfFile: allergenData)
@@ -101,7 +102,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     //this is the scanning scene, setting the frame to the view.bounds will cover up other views
     previewLayer = AVCaptureVideoPreviewLayer.layerWithSession(session) as AVCaptureVideoPreviewLayer
-    previewLayer.frame = CGRect(x: 0, y: 40, width: self.view.bounds.width, height: self.view.bounds.height * 0.6)
+    previewLayer.frame = CGRect(x: 0, y: 65, width: self.view.bounds.width, height: self.view.bounds.height * 0.6)
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
     self.view.layer.addSublayer(previewLayer)
     
@@ -112,6 +113,19 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   override func viewWillAppear(animated: Bool) {
     self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
+  }
+  
+  
+  override func viewDidAppear(animated: Bool) {
+    //go to default profile, if no profile exists
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    if let userProfilesFromArchive = appDelegate.loadUserProfilesFromArchive() as [UserProfile]? {
+      if userProfilesFromArchive.isEmpty { //no users: direct to default profile
+        gotoUserProfileDefault()
+      } //end if
+    } else { //no users: direct to default profile
+      gotoUserProfileDefault()
+    } //end if
   }
   
   
