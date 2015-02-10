@@ -48,6 +48,28 @@ class NetworkController {
   }
   
   
+//  func fetchAllergensList(completionHandler: (AnyObject) -> ()) {
+//    let requestURL = "http://foodscanr.herokuapp.com/allergens"
+//    let url = NSURL(string: requestURL)
+//    let getRequest = NSMutableURLRequest(URL: url!)
+//    let dataTask = self.urlSession.dataTaskWithRequest(getRequest, completionHandler: { (data, response, error) -> Void in
+//      if error == nil {
+//        if let allergensDict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary {
+//          println(allergensDict)
+//          NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+//            completionHandler(allergensDict)
+//          })
+//        }
+//     
+//      }
+//      else {
+//        println("something went wrong")
+//      }
+//    })
+//  }
+  
+  
+  //MARK: fetchIngredientList
   func fetchIngredientListForUPC (upcCode : String, completionHandler : (Ingredients?, String?) -> ()) {
     
  
