@@ -45,7 +45,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   var ingredientsList = [String]()
   var originIngredientsList = String()
   var allergenDerivatives = [String : String]()
-  var matches = [String]() //this variable will store allergen derivatives that exist in the ingredients list
+  var matches = [String]() //this variable will store allergen categories that exist in the ingredients list
   var myMatches = [String]()
   var allergenCategories = [String]() //this stores allergen categories detected in the scanned ingredient list
   var myAllergens = [Allergen]()
@@ -62,8 +62,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     let buttonUserProfiles = UIBarButtonItem(image: UIImage(named: "three115"), style: UIBarButtonItemStyle.Plain, target: self, action: "pressedButtonUserProfiles")
     let spaceLeft = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
     toolBar.items = [spaceLeft, buttonUserProfiles]
-
+    
     //load allergenData
+    //    self.networkController.fetchAllergensList { (allergens) -> () in
+    //      println(allergens)
+    //    }
+    //
+    
     if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
       var myDict = NSDictionary(contentsOfFile: allergenData)
       NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
@@ -163,7 +168,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
       }
     }
-  
+    
     self.barcodeScanned = self.detectionString
     self.highlightView.frame = highlightViewRect
     
@@ -178,14 +183,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.networkController.fetchIngredientListForUPC(self.barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         if ingredients != nil {
-        self.list = ingredients
-        self.ingredientsList = self.list.seperatedList
+          self.list = ingredients
+          self.ingredientsList = self.list.seperatedList
           if self.list.ingredientsList != nil {
             self.originIngredientsList = self.list.ingredientsList!
           }
-        self.crossSearchForAllergens()
-        self.barcode.text = self.list.itemName
-        
+          self.crossSearchForAllergens()
+          self.barcode.text = self.list.itemName
+          
         }
         
         if errorDescription != nil {
@@ -197,13 +202,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
         println("Does this have the product name? \(self.list)")
         self.displayAlertView()
-        })
+      })
     }
-
+    
     //else in if barcode != nil
     return
   }//func captureOutput
-
+  
   
   //MARK: Timed AlertView
   func displayAlertView() {
@@ -231,7 +236,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         self.alertView.removeFromSuperview()
         self.sessionTimer.invalidate()
         self.newSessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
-        }
+    }
   }
   
   
@@ -242,7 +247,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     alertCon.addAction(okButton)
     self.presentViewController(alertCon, animated: true, completion: nil)
   }
-    
+  
   
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {
@@ -254,61 +259,78 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.session.startRunning()
     
   }
-      
+  
   //MARK: Cross-search ingredients list against allergen derivatives list
-
+  var ngrams: [String: String] = [:]
+  
   func crossSearchForAllergens() {
-//    for item in self.ingredients {
-//      println(ingredients)
-//      if let c = allergens.indexForKey(item) {
-//        self.matches.append(item)
     
-        //loop over the ingredients list for all allergen derivatives, put matches into self.matches
-        for item in self.ingredientsList {
-          for allergen in allergenDerivatives.keys {
-            if item.rangeOfString(allergen.lowercaseString) != nil {
-            self.matches.append(allergen)
-            self.allergenCategories.append(self.allergenDerivatives[allergen]!)
-            }
+    //loop over the ingredients list for all allergen derivatives, put matches into self.matches
+    //generate the n-grams for the ingredients
+    for ingredient in self.ingredientsList {
+      var ingredientComp = ingredient.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).componentsSeparatedByString(" ")
+      for (var i=0; i<ingredientComp.count; i++) {
+        var ngram = ""
+        for (var j=i; j<ingredientComp.count; j++) {
+          if(!ngram.isEmpty) {
+            ngram += " "
           }
+          ngram += ingredientComp[j]
+          ngrams[ngram] = ingredient
+          
         }
-    println(self.allergenCategories)
-    
-        //load user profile data
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        self.userProfiles = appDelegate.loadUserProfilesFromArchive()!
-        
-        var dictionaryOfAllergens = [String : Bool]()
-        
-        //load allergens that active users have and put them in myAllergens
-        for categories in self.allergenCategories {
-          dictionaryOfAllergens[categories] = true
-          for user in userProfiles {
-            var allergens = user.allergens
-            for allergy in allergens {
-              if allergy.sensitive == true {
-                let match = dictionaryOfAllergens[allergy.name]
-                if match == true {
-                  self.myAllergens.append(allergy)
-                }
-              }
-            }
-          }
-        }
-   
-    
-        //change border color
-        if !self.myAllergens .isEmpty {
-          self.view.layer.borderWidth = 9
-          self.view.layer.borderColor = UIColor(red: 153, green: 0, blue: 0).CGColor
-          }
-        else {
-          self.view.layer.borderWidth = 8
-          self.view.layer.borderColor = UIColor(red: 0, green: 153, blue: 0).CGColor
+      }
+    }
+    var matches: [String : String] = [:]
+      for (key, value) in self.allergenDerivatives {
+        if let match = ngrams[key] {
+          matches[key] = match
         }
       }
       
-      
+    for (key, value) in matches {
+      println(key, value)
+      self.matches.append(key)
+      self.allergenCategories.append(self.allergenDerivatives[key]!)
+      }
+    println(self.matches)
+    println(self.allergenCategories)
+    
+    //load user profile data
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    self.userProfiles = appDelegate.loadUserProfilesFromArchive()!
+    
+    var dictionaryOfAllergens = [String : Bool]()
+    
+    //load allergens that active users have and put them in myAllergens
+    for categories in self.allergenCategories {
+      dictionaryOfAllergens[categories] = true
+      for user in userProfiles {
+        var allergens = user.allergens
+        for allergy in allergens {
+          if allergy.sensitive == true {
+            let match = dictionaryOfAllergens[allergy.name]
+            if match == true {
+              self.myAllergens.append(allergy)
+            }
+          }
+        }
+      }
+    }
+    
+    
+    //change border color
+    if !self.myAllergens .isEmpty {
+      self.view.layer.borderWidth = 9
+      self.view.layer.borderColor = UIColor(red: 153, green: 0, blue: 0).CGColor
+    }
+    else {
+      self.view.layer.borderWidth = 8
+      self.view.layer.borderColor = UIColor(red: 0, green: 153, blue: 0).CGColor
+    }
+  }
+  
+  
   //Function: Handle event when User Profiles button is pressed.
   func pressedButtonUserProfiles() {
     let vcUserProfiles = self.storyboard?.instantiateViewControllerWithIdentifier("NAV_USER_PROFILES") as UINavigationController
