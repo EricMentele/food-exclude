@@ -48,25 +48,56 @@ class NetworkController {
   }
   
   
-//  func fetchAllergensList(completionHandler: (AnyObject) -> ()) {
-//    let requestURL = "http://foodscanr.herokuapp.com/allergens"
-//    let url = NSURL(string: requestURL)
-//    let getRequest = NSMutableURLRequest(URL: url!)
-//    let dataTask = self.urlSession.dataTaskWithRequest(getRequest, completionHandler: { (data, response, error) -> Void in
-//      if error == nil {
-//        if let allergensDict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary {
-//          println(allergensDict)
-//          NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-//            completionHandler(allergensDict)
-//          })
-//        }
-//     
-//      }
-//      else {
-//        println("something went wrong")
-//      }
-//    })
-//  }
+  //MARK: fetchAllergensList
+  func fetchAllergensList (completionHandler : (NSDictionary?, String?) -> ()) {
+    
+    let requestURL = "http://foodscanr.herokuapp.com/allergens"
+    let url = NSURL(string: requestURL)
+    
+    let getRequest = NSMutableURLRequest(URL: NSURL(string: requestURL)!)
+    
+    let dataTask = self.urlSession.dataTaskWithRequest(getRequest, completionHandler: { (data, response, error) -> Void in
+      
+      self.nsError = error?
+      
+      if error == nil {
+        
+        if let httpResponse = response as? NSHTTPURLResponse {
+          
+          var status = httpResponse.statusCode
+          self.statusCode = status
+          
+          switch httpResponse.statusCode {
+          case 200...299:
+            if let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary {
+              NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                completionHandler(jsonDict,nil)
+              }) //end block
+              
+            }//end if
+          case 404:
+            println("404")
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+              completionHandler(nil, "Web service not found")
+            })
+            
+          case 300...599:
+            println("This is bad - it's an error that may or may not be your fault")
+            completionHandler(nil, "this is bad!")
+            
+          default:
+            println("This is odd - default case fired")
+          }//end Switch
+        }//httpResponse
+      } else {
+        completionHandler(nil,"Connectivity error. Try again later.")
+      }
+    })//dataTask
+    dataTask.resume()
+  }//fetchAllergensList
+
+ 
+
   
   
   //MARK: fetchIngredientList
@@ -99,7 +130,7 @@ class NetworkController {
             if let jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary {
              println(jsonDict)
               let newIngredient = Ingredients(jsonDictionary: jsonDict)
-//              println(newIngredient)
+              //println(newIngredient)
               
 
               NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in

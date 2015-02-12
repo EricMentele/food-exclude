@@ -62,20 +62,20 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     let buttonUserProfiles = UIBarButtonItem(image: UIImage(named: "three115"), style: UIBarButtonItemStyle.Plain, target: self, action: "pressedButtonUserProfiles")
     let spaceLeft = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
     toolBar.items = [spaceLeft, buttonUserProfiles]
-    
+  
     //load allergenData
-    //    self.networkController.fetchAllergensList { (allergens) -> () in
-    //      println(allergens)
-    //    }
-    //
+    self.networkController.fetchAllergensList({ (allergens, error) -> () in
+      self.allergenDerivatives = allergens as [String : String]
+    })
     
-    if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
-      var myDict = NSDictionary(contentsOfFile: allergenData)
-      NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-        self.allergenDerivatives = myDict as [String : String]
-      })
-      self.allergenDerivatives = myDict as [String : String]
-    }
+    
+//    if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
+//      var myDict = NSDictionary(contentsOfFile: allergenData)
+//      NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+//        self.allergenDerivatives = myDict as [String : String]
+//      })
+//      self.allergenDerivatives = myDict as [String : String]
+//    }
     
     //formatting so that the barcode reader line resizes automatically
     self.highlightView.autoresizingMask =   UIViewAutoresizing.FlexibleTopMargin |
@@ -200,7 +200,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           self.presentViewController(networkIssueAlert, animated: true, completion: nil)
           println("fail")
         }
-        println("Does this have the product name? \(self.list)")
+        //println("Does this have the product name? \(self.list)")
         self.displayAlertView()
       })
     }
@@ -289,13 +289,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
       
     for (key, value) in matches {
-      println(key, value)
+      //println(key, value)
       self.matches.append(key)
       self.allergenCategories.append(self.allergenDerivatives[key]!)
       }
-    println(self.matches)
-    println(self.allergenCategories)
-    
+    println(self.ingredientsList)
+    println("Contains the following known allergen derivatives \(self.matches)")
+    println("Contains allergens in the following categories \(self.allergenCategories)")
+  
     //load user profile data
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     self.userProfiles = appDelegate.loadUserProfilesFromArchive()!
