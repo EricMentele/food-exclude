@@ -4,6 +4,8 @@
 <dict>
 	<key>abyssinian hard</key>
 	<string>gluten</string>
+	<key>peanuts</key>
+	<string>peanuts</string>
 	<key>abyssinian hard triticum durum</key>
 	<string>gluten</string>
 	<key>acidophilus milk</key>
@@ -46,10 +48,6 @@
 	<string>treenuts</string>
 	<key>beechnut</key>
 	<string>treenuts</string>
-	<key>beef</key>
-	<string>treenuts</string>
-	<key>beer</key>
-	<string>gluten</string>
 	<key>bertholletia excelsa</key>
 	<string>treenuts</string>
 	<key>betulaceae</key>
@@ -240,6 +238,8 @@
 	<string>treenuts</string>
 	<key>globulin</key>
 	<string>egg</string>
+	<key>gluten</key>
+	<string>gluten</string>
 	<key>goat cheese</key>
 	<string>milk</string>
 	<key>goat milk</key>
@@ -751,10 +751,6 @@
 	<key>yakidofu</key>
 	<string>soy</string>
 	<key>yuba</key>
-	<string>soy</string>
-	<key>sugar</key>
-	<string>soy</string>
-	<key>fresh apples</key>
 	<string>soy</string>
 </dict>
 </plist>

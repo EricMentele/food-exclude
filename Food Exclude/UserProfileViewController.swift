@@ -46,7 +46,6 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     
     //Appearance:
     labelIncludeProfile.font = UIFont(name: "Avenir", size: 15.0)
-    labelIncludeProfile.text = "Shopping for?"
     labelSelectFoods.font = UIFont(name: "Avenir", size: 15.0)
     
     //Selected user profile:
@@ -76,7 +75,10 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     tableAllergens.dataSource = self
     tableAllergens.delegate = self
     
-    //Button:
+    //Buttons:
+    let buttonBack = UIBarButtonItem(title: "Users", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+    self.navigationItem.backBarButtonItem = buttonBack
+    
     buttonContinue.addTarget(self, action: "pressedButtonContinue", forControlEvents: UIControlEvents.TouchUpInside)
     
     //Camera button:
@@ -138,9 +140,8 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
       let buttonCancel = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
       alertBlankUserName.addAction(buttonCancel)
       self.presentViewController(alertBlankUserName, animated: true, completion: nil)
-    } else { //go to scanner
-      let vcScanner = self.storyboard?.instantiateViewControllerWithIdentifier("VC_SCANNER") as ScannerViewController
-      self.navigationController?.pushViewController(vcScanner, animated: true)
+    } else { //go back to scanner
+      self.dismissViewControllerAnimated(true, completion: nil)
     } //end if
   } //end func
   
@@ -196,9 +197,4 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     //Save data.
     appDelegate.saveUserProfilesToArchive(userProfiles!)
   } //end func
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
 }

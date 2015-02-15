@@ -53,15 +53,21 @@ class Ingredients {
     self.itemDescription = jsonDictionary["item_description"] as? String
     self.ingredientsList = jsonDictionary["nf_ingredient_statement"]  as? String
     self.allergenMilk = jsonDictionary["allergen_contains_milk"]  as? String
+   
     
-    
-    var newString = self.ingredientsList?.lowercaseString
-    if let clearedString = newString?.stringByReplacingOccurrencesOfString("[\\(\\)\\[\\]\\.\\@]", withString: "", options: .RegularExpressionSearch) {
-      //println("THIS IS THE CLEARED STRING\(clearedString)")
-      self.seperatedList = clearedString.componentsSeparatedByString(" ")
+    //VK changed, added componentsSeparatedByString(".")[0]
+    if let string = self.ingredientsList?.lowercaseString.componentsSeparatedByString(".")[0] {
+      self.seperatedList = string.componentsSeparatedByString(",")
+//      var clearedString = newString.stringByReplacingOccurrencesOfString("(([\\,\\(\\)\\[\\]\\/\\\n\\@]))", withString: "", options: .RegularExpressionSearch)
+//      var freeString = clearedString.stringByReplacingOccurrencesOfString("(\\w+\\sfree)", withString: "", options: .RegularExpressionSearch)
+//      var factoryFreeString = freeString.stringByReplacingOccurrencesOfString("(allergen information:.+)", withString: "", options: .RegularExpressionSearch)
+//      //VK changed, used to be  self.seperatedList = factoryFreeString.componentsSeparatedByString(" ")
+      //self.seperatedList = factoryFreeString.componentsSeparatedByString(",")
+      //println("THIS IS THE CLEARED STRING \(factoryFreeString)")
       //println(seperatedList)
-    }
+    }//new string
 
+    
     if self.allergenMilk !=  nil {
       self.allergenList.append("Milk")
     }
