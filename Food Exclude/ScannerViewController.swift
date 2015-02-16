@@ -112,11 +112,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.view.layer.addSublayer(previewLayer)
     
     self.session.startRunning()
-  }
-  
-  
-  override func viewWillAppear(animated: Bool) {
-    self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
+    
+    self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
   }
   
   
@@ -164,6 +161,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           detectionString = (metadata as AVMetadataMachineReadableCodeObject).stringValue
           
           self.session.stopRunning()
+          
           break
         }
       }
@@ -182,7 +180,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       
       self.networkController.fetchIngredientListForUPC(self.barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
+        
         if ingredients != nil {
+          
           self.list = ingredients
           self.ingredientsList = self.list.seperatedList
           if self.list.ingredientsList != nil {
@@ -215,7 +215,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           println("fail")
         }
         //println("Does this have the product name? \(self.list)")
-        self.displayAlertView()
       })
     }
     
@@ -249,7 +248,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.alertView.transform =  CGAffineTransformMakeScale(0.01, 0.01)}) { (finished) -> Void in
         self.alertView.removeFromSuperview()
         self.sessionTimer.invalidate()
-        self.newSessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
+        self.newSessionTimer = NSTimer.scheduledTimerWithTimeInterval(16, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
     }
   }
   
@@ -300,6 +299,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {
+    
     detectionString = nil
     self.view.layer.borderColor = UIColor(red: 0, green: 0, blue: 0).CGColor
     self.matches = [String]()
