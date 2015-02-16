@@ -179,7 +179,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       if NetworkController.sharedNetworkController.nsError != nil {
         //self.session.stopRunning()
       }
-      
+      self.originIngredientsList = ""
+
       self.networkController.fetchIngredientListForUPC(self.barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         if ingredients != nil {
@@ -274,6 +275,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 //      
  } else {
 //      
+    
       self.ingredientTextView.text = "\(originIngredientsList)  May contain the allergen derivatives:\(self.matches) in the allergen category: \(self.allergenCategories)    : Powered by Nutritionix API"
 //      self.view.layer.borderColor = UIColor.redColor().CGColor
 //      self.view.layer.borderWidth = 11

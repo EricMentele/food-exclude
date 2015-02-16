@@ -55,7 +55,6 @@ class Ingredients {
     self.allergenMilk = jsonDictionary["allergen_contains_milk"]  as? String
    
     
-    //VK changed, added componentsSeparatedByString(".")[0]
     if let newString = self.ingredientsList?.lowercaseString {
       var clearedString = newString.stringByReplacingOccurrencesOfString("(([\\,\\(\\)\\[\\]\\/\\\n\\@]))", withString: "", options: .RegularExpressionSearch)
       var freeString = clearedString.stringByReplacingOccurrencesOfString("(\\w+\\sfree)", withString: "", options: .RegularExpressionSearch)
