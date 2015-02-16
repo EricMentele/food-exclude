@@ -196,10 +196,24 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           self.crossSearchForAllergens()
           self.barcode.text = self.list.itemName
           
+          if self.originIngredientsList == "" {
+          self.highlightView.layer.borderColor = UIColor.yellowColor().CGColor
+          self.view.addSubview(self.highlightView)
+          self.view.addSubview(self.ingredientListView)
+          self.ingredientListView.hidden = false
+          self.ingredientListView.alpha = 0.99
+          self.ingredientTextView.text = "Ingredients for this item are not yet available, but may become available soon. Please try another item."
+          
+          } else {
+            
+            self.ingredientListView.hidden = true
+            
+            }
         }
         
         if errorDescription != nil {
-          let networkIssueAlert = UIAlertController(title: "Network Error", message: errorDescription, preferredStyle: .Alert)
+          let networkIssueAlert = UIAlertController(title: "Error", message: errorDescription, preferredStyle: .Alert)
+         
           let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
           networkIssueAlert.addAction(cancelButton)
           self.presentViewController(networkIssueAlert, animated: true, completion: nil)
@@ -254,10 +268,22 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     if originIngredientsList == "" {
       ingredientTextView.text = "Ingredients for this item are not yet available, but may become available soon. Please try another item."
-    
+      
+      
+    } else if self.matches.count == 0 {
+      
+      self.highlightView.layer.borderColor = UIColor.greenColor().CGColor
+      self.highlightView.layer.borderWidth = 11
+      self.view.addSubview(highlightView)
+      
+      self.ingredientTextView.text = "\(originIngredientsList)  : Powered by Nutritionix API"
+      
     } else {
-  
+      
       self.ingredientTextView.text = "\(originIngredientsList)  May contain the allergen derivatives:\(self.matches) in the allergen category: \(self.allergenCategories)    : Powered by Nutritionix API"
+      self.highlightView.layer.borderColor = UIColor.redColor().CGColor
+      self.highlightView.layer.borderWidth = 11
+      self.view.addSubview(highlightView)
   
     }
     
