@@ -69,18 +69,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     toolBar.items = [spaceLeft, buttonUserProfiles]
   
     //load allergenData
-    self.networkController.fetchAllergensList({ (allergens, error) -> () in
-      self.allergenDerivatives = allergens as [String : String]
-    })
-    
-    
-//    if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
-//      var myDict = NSDictionary(contentsOfFile: allergenData)
-//      NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-//        self.allergenDerivatives = myDict as [String : String]
-//      })
-//      self.allergenDerivatives = myDict as [String : String]
-//    }
+    if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
+      var myDict = NSDictionary(contentsOfFile: allergenData)
+      NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+        self.allergenDerivatives = myDict as [String : String]
+      })
+      self.allergenDerivatives = myDict as [String : String]
+    }
     
     //formatting so that the barcode reader line resizes automatically
     self.highlightView.autoresizingMask =   UIViewAutoresizing.FlexibleTopMargin |
