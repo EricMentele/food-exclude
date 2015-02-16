@@ -86,7 +86,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     //color for the barcode reader line
     self.highlightView.layer.borderColor = UIColor.greenColor().CGColor
     self.highlightView.layer.borderWidth = 3
-    self.view.addSubview(highlightView)
+//    self.view.addSubview(highlightView)
     
     //dismissButton
     //    self.dismissButton.addTarget(self, action: "dismissButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
@@ -192,9 +192,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           self.barcode.text = self.list.itemName
           
           if self.originIngredientsList == "" {
-          self.highlightView.layer.borderColor = UIColor.yellowColor().CGColor
-          self.view.addSubview(self.highlightView)
+          
           self.view.addSubview(self.ingredientListView)
+          self.view.layer.borderColor = UIColor.yellowColor().CGColor
           self.ingredientListView.hidden = false
           self.ingredientListView.alpha = 0.99
           self.ingredientTextView.text = "Ingredients for this item are not yet available, but may become available soon. Please try another item."
@@ -267,18 +267,17 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       
     } else if self.matches.count == 0 {
       
-      self.highlightView.layer.borderColor = UIColor.greenColor().CGColor
-      self.highlightView.layer.borderWidth = 11
-      self.view.addSubview(highlightView)
+      self.view.layer.borderColor = UIColor.greenColor().CGColor
+      self.view.layer.borderWidth = 11
       
       self.ingredientTextView.text = "\(originIngredientsList)  : Powered by Nutritionix API"
       
     } else {
       
       self.ingredientTextView.text = "\(originIngredientsList)  May contain the allergen derivatives:\(self.matches) in the allergen category: \(self.allergenCategories)    : Powered by Nutritionix API"
-      self.highlightView.layer.borderColor = UIColor.redColor().CGColor
-      self.highlightView.layer.borderWidth = 11
-      self.view.addSubview(highlightView)
+      self.view.layer.borderColor = UIColor.redColor().CGColor
+      self.view.layer.borderWidth = 11
+     
   
     }
     
