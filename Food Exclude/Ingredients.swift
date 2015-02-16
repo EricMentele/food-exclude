@@ -56,15 +56,13 @@ class Ingredients {
    
     
     //VK changed, added componentsSeparatedByString(".")[0]
-    if let string = self.ingredientsList?.lowercaseString.componentsSeparatedByString(".")[0] {
-      self.seperatedList = string.componentsSeparatedByString(",")
-//      var clearedString = newString.stringByReplacingOccurrencesOfString("(([\\,\\(\\)\\[\\]\\/\\\n\\@]))", withString: "", options: .RegularExpressionSearch)
-//      var freeString = clearedString.stringByReplacingOccurrencesOfString("(\\w+\\sfree)", withString: "", options: .RegularExpressionSearch)
-//      var factoryFreeString = freeString.stringByReplacingOccurrencesOfString("(allergen information:.+)", withString: "", options: .RegularExpressionSearch)
-//      //VK changed, used to be  self.seperatedList = factoryFreeString.componentsSeparatedByString(" ")
-      //self.seperatedList = factoryFreeString.componentsSeparatedByString(",")
-      //println("THIS IS THE CLEARED STRING \(factoryFreeString)")
-      //println(seperatedList)
+    if let newString = self.ingredientsList?.lowercaseString {
+      var clearedString = newString.stringByReplacingOccurrencesOfString("(([\\,\\(\\)\\[\\]\\/\\\n\\@]))", withString: "", options: .RegularExpressionSearch)
+      var freeString = clearedString.stringByReplacingOccurrencesOfString("(\\w+\\sfree)", withString: "", options: .RegularExpressionSearch)
+      var factoryFreeString = freeString.stringByReplacingOccurrencesOfString("(allergen information:.+)", withString: "", options: .RegularExpressionSearch)
+      self.seperatedList = factoryFreeString.componentsSeparatedByString(",")
+      println("THIS IS THE CLEARED STRING \(factoryFreeString)")
+      println(seperatedList)
     }//new string
 
     

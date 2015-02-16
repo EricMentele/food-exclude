@@ -263,22 +263,23 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     if originIngredientsList == "" {
       ingredientTextView.text = "Ingredients for this item are not yet available, but may become available soon. Please try another item."
-      
-      
-    } else if self.matches.count == 0 {
-      
-      self.view.layer.borderColor = UIColor.greenColor().CGColor
-      self.view.layer.borderWidth = 11
-      
-      self.ingredientTextView.text = "\(originIngredientsList)  : Powered by Nutritionix API"
-      
-    } else {
-      
+//      
+//      
+//    } else if self.myAllergens.count == 0 {
+//      
+//      self.view.layer.borderColor = UIColor.greenColor().CGColor
+//      self.view.layer.borderWidth = 11
+//
+      //self.ingredientTextView.text = "\(originIngredientsList)  : Powered by Nutritionix API"
+//      
+ } else {
+//      
       self.ingredientTextView.text = "\(originIngredientsList)  May contain the allergen derivatives:\(self.matches) in the allergen category: \(self.allergenCategories)    : Powered by Nutritionix API"
-      self.view.layer.borderColor = UIColor.redColor().CGColor
-      self.view.layer.borderWidth = 11
+//      self.view.layer.borderColor = UIColor.redColor().CGColor
+//      self.view.layer.borderWidth = 11
      
-  
+      
+      
     }
     
     
@@ -368,6 +369,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
     }
     
+    println(self.myAllergens)
     
     //change border color
     if !self.myAllergens .isEmpty {
