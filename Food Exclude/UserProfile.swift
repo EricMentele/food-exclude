@@ -6,7 +6,7 @@
 //  Copyright (c) 2015
 //David Rogers,
 //Vania Kurniawati,
-//Clint Akins,
+//Clint Akin,
 //Alexandra Norcross,
 //Eric Mentele. All rights reserved.
 //
@@ -35,15 +35,17 @@ class UserProfile: NSObject, NSCoding {
     self.name = ""
     self.includeProfile = true
     
+    
+    self.allergens.append(Allergen(name: "wheat/gluten", sensitive: false))
     self.allergens.append(Allergen(name: "milk", sensitive: false))
     self.allergens.append(Allergen(name: "eggs", sensitive: false))
-    self.allergens.append(Allergen(name: "fish", sensitive: false))
-    self.allergens.append(Allergen(name: "shellfish", sensitive: false))
+//    self.allergens.append(Allergen(name: "fish", sensitive: false))
+//    self.allergens.append(Allergen(name: "shellfish", sensitive: false))
     self.allergens.append(Allergen(name: "treenuts", sensitive: false))
-    self.allergens.append(Allergen(name: "peanuts", sensitive: false))
-    self.allergens.append(Allergen(name: "wheat", sensitive: false))
+//    self.allergens.append(Allergen(name: "peanuts", sensitive: false))
+    
     self.allergens.append(Allergen(name: "soy", sensitive: false))
-    self.allergens.append(Allergen(name: "gluten", sensitive: false))
+//    self.allergens.append(Allergen(name: "gluten", sensitive: false))
   } //end init
   
   //MARK: NSKeyedArchiver

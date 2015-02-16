@@ -74,14 +74,6 @@
 	<string>treenuts</string>
 	<key>bush nut</key>
 	<string>treenuts</string>
-	<key>butter</key>
-	<string>milk</string>
-	<key>butter fat</key>
-	<string>milk</string>
-	<key>butter oil</key>
-	<string>milk</string>
-	<key>butter solids</key>
-	<string>milk</string>
 	<key>buttermilk</key>
 	<string>milk</string>
 	<key>buttermilk powder</key>
@@ -238,8 +230,6 @@
 	<string>treenuts</string>
 	<key>globulin</key>
 	<string>egg</string>
-	<key>gluten</key>
-	<string>gluten</string>
 	<key>goat cheese</key>
 	<string>milk</string>
 	<key>goat milk</key>
@@ -400,8 +390,6 @@
 	<string>treenuts</string>
 	<key>natto</key>
 	<string>soy</string>
-	<key>natural butter flavor</key>
-	<string>milk</string>
 	<key>nishasta</key>
 	<string>gluten</string>
 	<key>nonfat milk</key>

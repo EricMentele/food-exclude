@@ -6,7 +6,7 @@
 //  Copyright (c) 2015
 //David Rogers,
 //Vania Kurniawati,
-//Clint Akins,
+//Clint Akin,
 //Alexandra Norcross,
 //Eric Mentele. All rights reserved.
 //
@@ -29,6 +29,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   @IBOutlet weak var toolBar: UIToolbar!
   @IBOutlet weak var barcode: UILabel!
   @IBOutlet weak var nextItem: UIButton!
+  @IBOutlet weak var ingredientListView: UIView!
+  
+  @IBOutlet weak var ingredientTextView: UITextView!
   
   var alertView : UIView!
   
@@ -57,6 +60,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    self.ingredientListView.alpha = 0
     
     //user profile button
     let buttonUserProfiles = UIBarButtonItem(image: UIImage(named: "three115"), style: UIBarButtonItemStyle.Plain, target: self, action: "pressedButtonUserProfiles")
@@ -242,10 +247,34 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   
   @IBAction func ingredientsDetailButtonClicked(selector: UIButton) {
-    let alertCon = UIAlertController(title: NSLocalizedString("Ingredients", comment: "This is the main menu"), message: NSLocalizedString("\(originIngredientsList) : Powered by Nutritionix API", comment: "Choose View"), preferredStyle: UIAlertControllerStyle.ActionSheet)
-    let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
-    alertCon.addAction(okButton)
-    self.presentViewController(alertCon, animated: true, completion: nil)
+    
+    self.view.addSubview(ingredientListView)
+    self.ingredientListView.hidden = false
+    self.ingredientListView.alpha = 0.99
+    
+    if originIngredientsList == "" {
+      ingredientTextView.text = "Ingredients for this item are not yet available, but may become available soon. Please try another item."
+    
+    } else {
+  
+      self.ingredientTextView.text = "\(originIngredientsList)  May contain the allergen derivatives:\(self.matches) in the allergen category: \(self.allergenCategories)    : Powered by Nutritionix API"
+  
+    }
+    
+    
+
+  
+  
+//    let alertCon = UIAlertController(title: NSLocalizedString("Ingredients", comment: "This is the main menu"), message: NSLocalizedString("\(originIngredientsList) : Powered by Nutritionix API", comment: "Choose View"), preferredStyle: UIAlertControllerStyle.ActionSheet)
+//    let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//    alertCon.addAction(okButton)
+//    self.presentViewController(alertCon, animated: true, completion: nil)
+  }
+  
+  
+  @IBAction func okPressed(sender: AnyObject) {
+    
+    self.ingredientListView.alpha = 0
   }
   
   
@@ -322,11 +351,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     //change border color
     if !self.myAllergens .isEmpty {
-      self.view.layer.borderWidth = 9
+      self.view.layer.borderWidth = 11
       self.view.layer.borderColor = UIColor(red: 153, green: 0, blue: 0).CGColor
     }
     else {
-      self.view.layer.borderWidth = 8
+      self.view.layer.borderWidth = 11
       self.view.layer.borderColor = UIColor(red: 0, green: 153, blue: 0).CGColor
     }
   }

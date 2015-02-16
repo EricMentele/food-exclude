@@ -5,13 +5,13 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>BFBDF369-7DE7-4456-9C1A-269437699985</string>
+	<string>D6E8091D-8DF2-4E76-B821-C5FB8C38F6EA</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Food Exclude</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>2DDF6D7CB196C9020FD1AC921AF8AD9C82B31ADD</key>
-		<string>https://github.com/EricMentele/food-exclude.git</string>
+		<string>https://github.com/EricMentele/food-exclude</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Food Exclude.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/EricMentele/food-exclude.git</string>
+	<string>https://github.com/EricMentele/food-exclude</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
