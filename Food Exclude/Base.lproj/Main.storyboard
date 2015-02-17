@@ -76,7 +76,7 @@
                                 <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="evc-wf-BcH" firstAttribute="leading" secondItem="UbO-uA-Kq1" secondAttribute="leading" constant="20" id="3no-jm-J4n"/>
-                                    <constraint firstItem="evc-wf-BcH" firstAttribute="top" secondItem="JZl-Fp-d63" secondAttribute="bottom" constant="39" id="DmI-qI-zaD"/>
+                                    <constraint firstItem="evc-wf-BcH" firstAttribute="top" secondItem="JZl-Fp-d63" secondAttribute="bottom" constant="33" id="DmI-qI-zaD"/>
                                     <constraint firstItem="JZl-Fp-d63" firstAttribute="top" secondItem="UbO-uA-Kq1" secondAttribute="top" constant="67" id="EV2-AT-GKT"/>
                                     <constraint firstItem="JZl-Fp-d63" firstAttribute="leading" secondItem="UbO-uA-Kq1" secondAttribute="leading" constant="20" id="QVP-ND-gFy"/>
                                     <constraint firstAttribute="bottom" secondItem="I9I-5x-UUL" secondAttribute="bottom" constant="16" id="Xyw-1g-0mX"/>
