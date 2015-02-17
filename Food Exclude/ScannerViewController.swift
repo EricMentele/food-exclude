@@ -78,15 +78,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     let buttonUserProfiles = UIBarButtonItem(image: UIImage(named: "three115"), style: UIBarButtonItemStyle.Plain, target: self, action: "pressedButtonUserProfiles")
     let spaceLeft = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
     toolBar.items = [spaceLeft, buttonUserProfiles]
-  
-    //load allergenData
-    if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
-      var myDict = NSDictionary(contentsOfFile: allergenData)
-      NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-        self.allergenDerivatives = myDict as [String : String]
-      })
-      self.allergenDerivatives = myDict as [String : String]
-    }
     
     //formatting so that the barcode reader line resizes automatically
     self.highlightView.autoresizingMask =   UIViewAutoresizing.FlexibleTopMargin |
@@ -143,6 +134,24 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
     
+   self.matches.removeAll(keepCapacity: false)
+   self.myMatches.removeAll(keepCapacity: false)
+    self.allergenCategories.removeAll(keepCapacity: false)
+      self.myAllergens.removeAll(keepCapacity: false);
+
+    
+    //load allergen data
+    if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
+      var myDict = NSDictionary(contentsOfFile: allergenData)
+      NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+        self.matches = [""]
+        self.myMatches = [""]
+        self.allergenDerivatives = myDict as [String : String]
+      })
+      self.allergenDerivatives = myDict as [String : String]
+    }
+
+    
     var highlightViewRect = CGRectZero
     
     var barCodeObject : AVMetadataObject!
@@ -190,6 +199,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
       self.originIngredientsList = ""
 
+
       self.networkController.fetchIngredientListForUPC(self.barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         
@@ -200,6 +210,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           if self.list.ingredientsList != nil {
             self.originIngredientsList = self.list.ingredientsList!
           }
+          self.matches = [""]
+          
           self.crossSearchForAllergens()
           self.barcode.text = self.list.itemName
           
@@ -277,34 +289,20 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     if originIngredientsList == "" {
       ingredientTextView.text = "Ingredients for this item are not yet available, but may become available soon. Please try another item."
-//      
-//      
-    } else if self.matches.count == 0 {
-//      
-//      self.view.layer.borderColor = UIColor.greenColor().CGColor
-//      self.view.layer.borderWidth = 11
-//
-        self.ingredientTextView.text = "\(originIngredientsList)  : Powered by Nutritionix API"
-//      
-    } else {
-//      
-    
-      self.ingredientTextView.text = "\(originIngredientsList)  May contain the allergen derivatives:\(self.matches) in the allergen category: \(self.allergenCategories)    : Powered by Nutritionix API"
-//      self.view.layer.borderColor = UIColor.redColor().CGColor
-//      self.view.layer.borderWidth = 11
      
       
+    } else if self.matches == [""] {
+
+
+        self.ingredientTextView.text = "\(originIngredientsList)  : Powered by Nutritionix API"
+      
+    } else {
+      
+    
+      self.ingredientTextView.text = "\(originIngredientsList) May contain the allergen derivatives:\(self.matches) in the allergen category: \(self.allergenCategories)    : Powered by Nutritionix API"
       
     }
     
-    
-
-  
-  
-//    let alertCon = UIAlertController(title: NSLocalizedString("Ingredients", comment: "This is the main menu"), message: NSLocalizedString("\(originIngredientsList) : Powered by Nutritionix API", comment: "Choose View"), preferredStyle: UIAlertControllerStyle.ActionSheet)
-//    let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
-//    alertCon.addAction(okButton)
-//    self.presentViewController(alertCon, animated: true, completion: nil)
   }
   
   
@@ -317,16 +315,37 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {
     
-    
+    println("new scan pressed")
     self.warningLabel?.hidden = true
     detectionString = nil
     self.barcode.text = nil
     self.view.layer.borderColor = UIColor.clearColor().CGColor
     self.maskView.backgroundColor = UIColor.clearColor()
+    
+    //tried recreating arrays
     self.matches = [String]()
     self.myMatches = [String]()
     self.allergenCategories = [String]()
+    self.myAllergens = [Allergen]()
     self.session.startRunning()
+    self.allergenDerivatives = [String : String]()
+    
+    self.originIngredientsList = String()
+    
+    //clearing the arrays here as well
+    self.matches = [""]
+    self.myMatches = [""]
+    
+    
+    //reload allergenData
+    if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
+      var myDict = NSDictionary(contentsOfFile: allergenData)
+      NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+        self.allergenDerivatives = myDict as [String : String]
+      })
+      self.allergenDerivatives = myDict as [String : String]
+    }
+    //however this results in the original array still being passed - !
     
   }
   
@@ -335,6 +354,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   func crossSearchForAllergens() {
     
+    println("crosssearch")
     //loop over the ingredients list for all allergen derivatives, put matches into self.matches
     //generate the n-grams for the ingredients
     for ingredient in self.ingredientsList {
@@ -352,12 +372,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
     }
     var matches: [String : String] = [:]
+    
       for (key, value) in self.allergenDerivatives {
         if let match = ngrams[key] {
           matches[key] = match
         }
       }
-      
+    self.ngrams = [:]
+    
+    println("!!!!!!!!!!!!!!matches are \(matches)!!!!!!!!\(matches.count)!!!")
     for (key, value) in matches {
       //println(key, value)
       self.matches.append(key)
@@ -366,7 +389,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     println(self.ingredientsList)
     println("Contains the following known allergen derivatives \(self.matches)")
     println("Contains allergens in the following categories \(self.allergenCategories)")
-  
+  println(matches.count)
     //load user profile data
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     self.userProfiles = appDelegate.loadUserProfilesFromArchive()!
@@ -420,6 +443,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.maskView.backgroundColor = UIColor.greenColor()
       self.maskView.alpha = 0.2
     }
+    
   }
   
   
