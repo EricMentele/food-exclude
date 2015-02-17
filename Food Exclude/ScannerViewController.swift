@@ -33,6 +33,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   @IBOutlet weak var ingredientTextView: UITextView!
   
+  @IBOutlet var superView: UIView!
+  
+  @IBOutlet weak var maskView: UIView!
+  
+  @IBOutlet weak var warningLabel = UILabel()
+  
+  
+  
   var alertView : UIView!
   
   //this is adapted from http://www.bowst.com/mobile/simple-barcode-scanning-with-swift/
@@ -61,7 +69,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.warningLabel?.hidden = true
+    
     self.ingredientListView.alpha = 0
+    self.maskView.alpha = 0
     
     //user profile button
     let buttonUserProfiles = UIBarButtonItem(image: UIImage(named: "three115"), style: UIBarButtonItemStyle.Plain, target: self, action: "pressedButtonUserProfiles")
@@ -196,8 +207,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           
           self.view.addSubview(self.ingredientListView)
           self.view.layer.borderColor = UIColor.yellowColor().CGColor
+          self.view.addSubview(self.maskView)
+          self.maskView.hidden = false
+          self.maskView.alpha = 0.2
           self.ingredientListView.hidden = false
-          self.ingredientListView.alpha = 0.99
+          self.ingredientListView.alpha = 0.95
           self.ingredientTextView.text = "Ingredients for this item are not yet available, but may become available soon. Please try another item."
           
           } else {
@@ -259,20 +273,20 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     self.view.addSubview(ingredientListView)
     self.ingredientListView.hidden = false
-    self.ingredientListView.alpha = 0.99
+    self.ingredientListView.alpha = 0.95
     
     if originIngredientsList == "" {
       ingredientTextView.text = "Ingredients for this item are not yet available, but may become available soon. Please try another item."
 //      
 //      
-//    } else if self.myAllergens.count == 0 {
+    } else if self.matches.count == 0 {
 //      
 //      self.view.layer.borderColor = UIColor.greenColor().CGColor
 //      self.view.layer.borderWidth = 11
 //
-      //self.ingredientTextView.text = "\(originIngredientsList)  : Powered by Nutritionix API"
+        self.ingredientTextView.text = "\(originIngredientsList)  : Powered by Nutritionix API"
 //      
- } else {
+    } else {
 //      
     
       self.ingredientTextView.text = "\(originIngredientsList)  May contain the allergen derivatives:\(self.matches) in the allergen category: \(self.allergenCategories)    : Powered by Nutritionix API"
@@ -303,8 +317,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {
     
+    
+    self.warningLabel?.hidden = true
     detectionString = nil
-    self.view.layer.borderColor = UIColor(red: 0, green: 0, blue: 0).CGColor
+    self.barcode.text = nil
+    self.view.layer.borderColor = UIColor.clearColor().CGColor
+    self.maskView.backgroundColor = UIColor.clearColor()
     self.matches = [String]()
     self.myMatches = [String]()
     self.allergenCategories = [String]()
@@ -375,12 +393,32 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     //change border color
     if !self.myAllergens .isEmpty {
-      self.view.layer.borderWidth = 11
+      self.view.layer.borderWidth = 15
       self.view.layer.borderColor = UIColor(red: 153, green: 0, blue: 0).CGColor
+      self.view.addSubview(maskView)
+      
+      self.warningLabel?.textColor = UIColor.redColor()
+      self.warningLabel?.alpha = 0.9
+      self.warningLabel?.text = "Allergen Detected"
+      self.warningLabel?.hidden = false
+      
+      self.maskView.hidden = false
+      self.maskView.backgroundColor = UIColor.redColor()
+      self.maskView.alpha = 0.2
     }
     else {
-      self.view.layer.borderWidth = 11
+      self.view.layer.borderWidth = 15
       self.view.layer.borderColor = UIColor(red: 0, green: 153, blue: 0).CGColor
+      self.view.addSubview(maskView)
+      
+      self.warningLabel?.textColor = UIColor.greenColor()
+      self.warningLabel?.alpha = 0.9
+      self.warningLabel?.text = "Allergen Free"
+      self.warningLabel?.hidden = false
+      
+      self.maskView.hidden = false
+      self.maskView.backgroundColor = UIColor.greenColor()
+      self.maskView.alpha = 0.2
     }
   }
   
