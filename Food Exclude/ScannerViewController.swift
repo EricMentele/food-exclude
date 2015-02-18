@@ -6,7 +6,7 @@
 //  Copyright (c) 2015
 //David Rogers,
 //Vania Kurniawati,
-//Clint Akin,
+//Clint Akins,
 //Alexandra Norcross,
 //Eric Mentele. All rights reserved.
 //
@@ -32,6 +32,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   @IBOutlet weak var ingredientListView: UIView!
   
   @IBOutlet weak var ingredientTextView: UITextView!
+  
+  @IBOutlet var superView: UIView!
+  
+  @IBOutlet weak var maskView: UIView!
+  
+  @IBOutlet weak var warningLabel = UILabel()
+  
+  
   
   var alertView : UIView!
   
@@ -61,21 +69,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.warningLabel?.hidden = true
+    
     self.ingredientListView.alpha = 0
+    self.maskView.alpha = 0
     
     //user profile button
     let buttonUserProfiles = UIBarButtonItem(image: UIImage(named: "three115"), style: UIBarButtonItemStyle.Plain, target: self, action: "pressedButtonUserProfiles")
     let spaceLeft = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
     toolBar.items = [spaceLeft, buttonUserProfiles]
-  
-    //load allergenData
-    if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
-      var myDict = NSDictionary(contentsOfFile: allergenData)
-      NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-        self.allergenDerivatives = myDict as [String : String]
-      })
-      self.allergenDerivatives = myDict as [String : String]
-    }
     
     //formatting so that the barcode reader line resizes automatically
     self.highlightView.autoresizingMask =   UIViewAutoresizing.FlexibleTopMargin |
@@ -112,11 +114,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     self.view.layer.addSublayer(previewLayer)
     
     self.session.startRunning()
-  }
-  
-  
-  override func viewWillAppear(animated: Bool) {
-    self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(15, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
+    
+    self.sessionTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: "displayAlertView", userInfo: nil, repeats: true)
   }
   
   
@@ -134,6 +133,24 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   
   func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+    
+   self.matches.removeAll(keepCapacity: false)
+   self.myMatches.removeAll(keepCapacity: false)
+    self.allergenCategories.removeAll(keepCapacity: false)
+      self.myAllergens.removeAll(keepCapacity: false);
+
+    
+    //load allergen data
+    if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
+      var myDict = NSDictionary(contentsOfFile: allergenData)
+      NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+        self.matches = [""]
+        self.myMatches = [""]
+        self.allergenDerivatives = myDict as [String : String]
+      })
+      self.allergenDerivatives = myDict as [String : String]
+    }
+
     
     var highlightViewRect = CGRectZero
     
@@ -164,6 +181,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           detectionString = (metadata as AVMetadataMachineReadableCodeObject).stringValue
           
           self.session.stopRunning()
+          
           break
         }
       }
@@ -179,15 +197,21 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       if NetworkController.sharedNetworkController.nsError != nil {
         //self.session.stopRunning()
       }
-      
+      self.originIngredientsList = ""
+
+
       self.networkController.fetchIngredientListForUPC(self.barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
+        
         if ingredients != nil {
+          
           self.list = ingredients
           self.ingredientsList = self.list.seperatedList
           if self.list.ingredientsList != nil {
             self.originIngredientsList = self.list.ingredientsList!
           }
+          self.matches = [""]
+          
           self.crossSearchForAllergens()
           self.barcode.text = self.list.itemName
           
@@ -195,8 +219,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           
           self.view.addSubview(self.ingredientListView)
           self.view.layer.borderColor = UIColor.yellowColor().CGColor
+          self.view.addSubview(self.maskView)
+          self.maskView.hidden = false
+          self.maskView.alpha = 0.2
           self.ingredientListView.hidden = false
-          self.ingredientListView.alpha = 0.99
+          self.ingredientListView.alpha = 0.95
           self.ingredientTextView.text = "Ingredients for this item are not yet available, but may become available soon. Please try another item."
           
           } else {
@@ -215,7 +242,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
           println("fail")
         }
         //println("Does this have the product name? \(self.list)")
-        self.displayAlertView()
       })
     }
     
@@ -249,7 +275,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       self.alertView.transform =  CGAffineTransformMakeScale(0.01, 0.01)}) { (finished) -> Void in
         self.alertView.removeFromSuperview()
         self.sessionTimer.invalidate()
-        self.newSessionTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
+        self.newSessionTimer = NSTimer.scheduledTimerWithTimeInterval(16, target: self, selector: "displayAlertView", userInfo: nil, repeats: false)
     }
   }
   
@@ -259,36 +285,24 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     self.view.addSubview(ingredientListView)
     self.ingredientListView.hidden = false
-    self.ingredientListView.alpha = 0.99
+    self.ingredientListView.alpha = 0.95
     
     if originIngredientsList == "" {
       ingredientTextView.text = "Ingredients for this item are not yet available, but may become available soon. Please try another item."
+     
       
-      
-    } else if self.matches.count == 0 {
-      
-      self.view.layer.borderColor = UIColor.greenColor().CGColor
-      self.view.layer.borderWidth = 11
-      
-      self.ingredientTextView.text = "\(originIngredientsList)  : Powered by Nutritionix API"
+    } else if self.matches == [""] {
+
+
+        self.ingredientTextView.text = "\(originIngredientsList)  : Powered by Nutritionix API"
       
     } else {
       
-      self.ingredientTextView.text = "\(originIngredientsList)  May contain the allergen derivatives:\(self.matches) in the allergen category: \(self.allergenCategories)    : Powered by Nutritionix API"
-      self.view.layer.borderColor = UIColor.redColor().CGColor
-      self.view.layer.borderWidth = 11
-     
-  
+    
+      self.ingredientTextView.text = "\(originIngredientsList) May contain the allergen derivatives:\(self.matches) in the allergen category: \(self.allergenCategories)    : Powered by Nutritionix API"
+      
     }
     
-    
-
-  
-  
-//    let alertCon = UIAlertController(title: NSLocalizedString("Ingredients", comment: "This is the main menu"), message: NSLocalizedString("\(originIngredientsList) : Powered by Nutritionix API", comment: "Choose View"), preferredStyle: UIAlertControllerStyle.ActionSheet)
-//    let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
-//    alertCon.addAction(okButton)
-//    self.presentViewController(alertCon, animated: true, completion: nil)
   }
   
   
@@ -300,12 +314,38 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   //MARK:  Start new scan.
   @IBAction func newScan(sender: UIButton) {
+    
+    println("new scan pressed")
+    self.warningLabel?.hidden = true
     detectionString = nil
-    self.view.layer.borderColor = UIColor(red: 0, green: 0, blue: 0).CGColor
+    self.barcode.text = nil
+    self.view.layer.borderColor = UIColor.clearColor().CGColor
+    self.maskView.backgroundColor = UIColor.clearColor()
+    
+    //tried recreating arrays
     self.matches = [String]()
     self.myMatches = [String]()
     self.allergenCategories = [String]()
+    self.myAllergens = [Allergen]()
     self.session.startRunning()
+    self.allergenDerivatives = [String : String]()
+    
+    self.originIngredientsList = String()
+    
+    //clearing the arrays here as well
+    self.matches = [""]
+    self.myMatches = [""]
+    
+    
+    //reload allergenData
+    if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
+      var myDict = NSDictionary(contentsOfFile: allergenData)
+      NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+        self.allergenDerivatives = myDict as [String : String]
+      })
+      self.allergenDerivatives = myDict as [String : String]
+    }
+    //however this results in the original array still being passed - !
     
   }
   
@@ -314,6 +354,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   func crossSearchForAllergens() {
     
+    println("crosssearch")
     //loop over the ingredients list for all allergen derivatives, put matches into self.matches
     //generate the n-grams for the ingredients
     for ingredient in self.ingredientsList {
@@ -331,12 +372,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
     }
     var matches: [String : String] = [:]
+    
       for (key, value) in self.allergenDerivatives {
         if let match = ngrams[key] {
           matches[key] = match
         }
       }
-      
+    self.ngrams = [:]
+    
+    println("!!!!!!!!!!!!!!matches are \(matches)!!!!!!!!\(matches.count)!!!")
     for (key, value) in matches {
       //println(key, value)
       self.matches.append(key)
@@ -345,7 +389,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     println(self.ingredientsList)
     println("Contains the following known allergen derivatives \(self.matches)")
     println("Contains allergens in the following categories \(self.allergenCategories)")
-  
+  println(matches.count)
     //load user profile data
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     self.userProfiles = appDelegate.loadUserProfilesFromArchive()!
@@ -368,16 +412,38 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       }
     }
     
+    println(self.myAllergens)
     
     //change border color
     if !self.myAllergens .isEmpty {
-      self.view.layer.borderWidth = 11
+      self.view.layer.borderWidth = 15
       self.view.layer.borderColor = UIColor(red: 153, green: 0, blue: 0).CGColor
+      self.view.addSubview(maskView)
+      
+      self.warningLabel?.textColor = UIColor.redColor()
+      self.warningLabel?.alpha = 0.9
+      self.warningLabel?.text = "Allergen Detected"
+      self.warningLabel?.hidden = false
+      
+      self.maskView.hidden = false
+      self.maskView.backgroundColor = UIColor.redColor()
+      self.maskView.alpha = 0.2
     }
     else {
-      self.view.layer.borderWidth = 11
+      self.view.layer.borderWidth = 15
       self.view.layer.borderColor = UIColor(red: 0, green: 153, blue: 0).CGColor
+      self.view.addSubview(maskView)
+      
+      self.warningLabel?.textColor = UIColor.greenColor()
+      self.warningLabel?.alpha = 0.9
+      self.warningLabel?.text = "Allergen Free"
+      self.warningLabel?.hidden = false
+      
+      self.maskView.hidden = false
+      self.maskView.backgroundColor = UIColor.greenColor()
+      self.maskView.alpha = 0.2
     }
+    
   }
   
   

@@ -208,8 +208,6 @@
 	<string>treenuts</string>
 	<key>filler</key>
 	<string>gluten</string>
-	<key>flour</key>
-	<string>gluten</string>
 	<key>freeze dried tofu</key>
 	<string>soy</string>
 	<key>fu</key>
@@ -234,7 +232,7 @@
 	<string>milk</string>
 	<key>goat milk</key>
 	<string>milk</string>
-	<key>graham flour</key>
+	<key>graham</key>
 	<string>gluten</string>
 	<key>granary flour</key>
 	<string>gluten</string>
@@ -414,8 +412,6 @@
 	<string>treenuts</string>
 	<key>nuts</key>
 	<string>treenuts</string>
-	<key>oats</key>
-	<string>gluten</string>
 	<key>okara</key>
 	<string>soy</string>
 	<key>oriental wheat</key>

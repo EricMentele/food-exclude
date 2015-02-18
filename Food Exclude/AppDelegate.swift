@@ -6,7 +6,7 @@
 //  Copyright (c) 2015
 //David Rogers,
 //Vania Kurniawati,
-//Clint Akin,
+//Clint Akins,
 //Alexandra Norcross,
 //Eric Mentele. All rights reserved.
 //
