@@ -455,8 +455,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   //Function: Go to default User Profile.
   func gotoUserProfileDefault() {
+    
+    let vcUserProfiles = self.storyboard?.instantiateViewControllerWithIdentifier("NAV_USER_PROFILES") as UINavigationController
     let vcUserProfile = storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
     vcUserProfile.selectedUserProfileIndex = -1
-    self.presentViewController(vcUserProfile, animated: true, completion: nil)
+    
+    vcUserProfiles.pushViewController(vcUserProfile, animated: false)
+    self.presentViewController(vcUserProfiles, animated: true, completion: nil)
   } //end func
 }
