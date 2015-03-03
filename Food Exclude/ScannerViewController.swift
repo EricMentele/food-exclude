@@ -142,13 +142,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     //load allergen data
     if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
-      var myDict = NSDictionary(contentsOfFile: allergenData)
+      if let  myDict = NSDictionary(contentsOfFile: allergenData) {
       NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
         self.matches = [""]
         self.myMatches = [""]
-        self.allergenDerivatives = myDict as [String : String]
+        self.allergenDerivatives = myDict as Dictionary<String,String>
       })
-      self.allergenDerivatives = myDict as [String : String]
+      }
+      //self.allergenDerivatives = myDict as [String : String]
     }
 
     
@@ -339,11 +340,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     //reload allergenData
     if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
-      var myDict = NSDictionary(contentsOfFile: allergenData)
+      if let  myDict = NSDictionary(contentsOfFile: allergenData) {
       NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
         self.allergenDerivatives = myDict as [String : String]
       })
-      self.allergenDerivatives = myDict as [String : String]
+      }
+      //self.allergenDerivatives = myDict as [String : String]
     }
     //however this results in the original array still being passed - !
     
@@ -403,6 +405,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         var allergens = user.allergens
         for allergy in allergens {
           if allergy.sensitive == true {
+            println(allergy.name)
+            println(dictionaryOfAllergens[allergy.name])
             let match = dictionaryOfAllergens[allergy.name]
             if match == true {
               self.myAllergens.append(allergy)
