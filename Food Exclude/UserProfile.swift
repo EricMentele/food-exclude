@@ -42,7 +42,7 @@ class UserProfile: NSObject, NSCoding {
 //    self.allergens.append(Allergen(name: "fish", sensitive: false))
 //    self.allergens.append(Allergen(name: "shellfish", sensitive: false))
     self.allergens.append(Allergen(name: "treenuts", sensitive: false))
-//    self.allergens.append(Allergen(name: "peanuts", sensitive: false))
+    self.allergens.append(Allergen(name: "peanuts", sensitive: false))
     
     self.allergens.append(Allergen(name: "soy", sensitive: false))
 //    self.allergens.append(Allergen(name: "gluten", sensitive: false))
