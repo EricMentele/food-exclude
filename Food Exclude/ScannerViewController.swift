@@ -143,14 +143,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     //load allergen data
     if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
       if let  myDict = NSDictionary(contentsOfFile: allergenData) {
-      NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-        self.matches = [""]
-        self.myMatches = [""]
-        self.allergenDerivatives = myDict as Dictionary<String,String>
-      })
-      }
-      //self.allergenDerivatives = myDict as [String : String]
-    }
+        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+          self.matches = [""]
+          self.myMatches = [""]
+          self.allergenDerivatives = myDict as Dictionary<String,String>
+        }) //end closure
+      } //end if
+    } //end if
 
     
     var highlightViewRect = CGRectZero
@@ -341,12 +340,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     //reload allergenData
     if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
       if let  myDict = NSDictionary(contentsOfFile: allergenData) {
-      NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-        self.allergenDerivatives = myDict as [String : String]
-      })
-      }
-      //self.allergenDerivatives = myDict as [String : String]
-    }
+        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+          self.allergenDerivatives = myDict as [String : String]
+        }) //end closure
+      } //end if
+    } //end if
     //however this results in the original array still being passed - !
     
   }
@@ -373,25 +371,24 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
       }
     }
-    var matches: [String : String] = [:]
     
-      for (key, value) in self.allergenDerivatives {
-        if let match = ngrams[key] {
-          matches[key] = match
-        }
+    var matches: [String : String] = [:]
+    for (key, value) in self.allergenDerivatives {
+      if let match = ngrams[key] {
+        matches[key] = match
       }
+    }
     self.ngrams = [:]
     
-    println("!!!!!!!!!!!!!!matches are \(matches)!!!!!!!!\(matches.count)!!!")
     for (key, value) in matches {
-      //println(key, value)
       self.matches.append(key)
       self.allergenCategories.append(self.allergenDerivatives[key]!)
-      }
-    println(self.ingredientsList)
+    }
+
     println("Contains the following known allergen derivatives \(self.matches)")
     println("Contains allergens in the following categories \(self.allergenCategories)")
-  println(matches.count)
+    println(matches.count)
+    
     //load user profile data
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     self.userProfiles = appDelegate.loadUserProfilesFromArchive()!
