@@ -132,12 +132,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   }
   
   
-  func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
     
-   self.matches.removeAll(keepCapacity: false)
-   self.myMatches.removeAll(keepCapacity: false)
-    self.allergenCategories.removeAll(keepCapacity: false)
-      self.myAllergens.removeAll(keepCapacity: false);
+  self.matches.removeAll(keepCapacity: false)
+  self.myMatches.removeAll(keepCapacity: false)
+  self.allergenCategories.removeAll(keepCapacity: false)
+  self.myAllergens.removeAll(keepCapacity: false);
 
     
     //load allergen data
@@ -397,13 +397,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     //load allergens that active users have and put them in myAllergens
     for categories in self.allergenCategories {
+      //println("allergen category \(categories)")
       dictionaryOfAllergens[categories] = true
       for user in userProfiles {
         var allergens = user.allergens
         for allergy in allergens {
           if allergy.sensitive == true {
-            println(allergy.name)
-            println(dictionaryOfAllergens[allergy.name])
+            //println("allergy name \(allergy.name)")
+            //println(dictionaryOfAllergens[allergy.name])
             let match = dictionaryOfAllergens[allergy.name]
             if match == true {
               self.myAllergens.append(allergy)
