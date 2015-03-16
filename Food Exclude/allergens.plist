@@ -31,7 +31,7 @@
 	<key>anacardium occidentale</key>
 	<string>treenuts</string>
 	<key>apovitellin</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>arecaceae</key>
 	<string>treenuts</string>
 	<key>artificial nuts</key>
@@ -121,7 +121,7 @@
 	<key>chinquapin</key>
 	<string>treenuts</string>
 	<key>cholesterolfree egg substitute</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>club wheat</key>
 	<string>wheat/gluten</string>
 	<key>coconut</key>
@@ -169,7 +169,7 @@
 	<key>dried eggs</key>
 	<string></string>
 	<key>dried egg solids</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>dry milk powder</key>
 	<string>milk</string>
 	<key>dry milk solids</key>
@@ -191,11 +191,11 @@
 	<key>eggs</key>
 	<string>egg</string>
 	<key>egg beaters</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>egg nog</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>egg wash</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>egg white</key>
 	<string>egg</string>
 	<key>egg whites</key>
@@ -251,7 +251,7 @@
 	<key>ginko nuts</key>
 	<string>treenuts</string>
 	<key>globulin</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>goat cheese</key>
 	<string>milk</string>
 	<key>goat milk</key>
@@ -337,13 +337,13 @@
 	<key>litchi chinensis</key>
 	<string>treenuts</string>
 	<key>livetin</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>low-fat milk</key>
 	<string>milk</string>
 	<key>lychee nut</key>
 	<string>treenuts</string>
 	<key>lysozyme</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>macadamia</key>
 	<string>treenuts</string>
 	<key>macadamia nut</key>
@@ -385,11 +385,11 @@
 	<key>matzo semolina</key>
 	<string>wheat/gluten</string>
 	<key>mayonnaise</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>meringue</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>meringuepowder</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>meripro 711</key>
 	<string>wheat/gluten</string>
 	<key>milk</key>
@@ -447,19 +447,19 @@
 	<key>orzo pasta</key>
 	<string>wheat/gluten</string>
 	<key>ovalbumin</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>ovoglobulin</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>ovomucin</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>ovomucoid</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>ovotransferrin</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>ovovitelia</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>ovovitellin</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>palmae</key>
 	<string>treenuts</string>
 	<key>paneer</key>
@@ -517,7 +517,7 @@
 	<key>poulard wheat</key>
 	<string>wheat/gluten</string>
 	<key>powdered egg</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>pralines</key>
 	<string>treenuts</string>
 	<key>praline</key>
@@ -567,9 +567,9 @@
 	<key>shoyu sauce</key>
 	<string>soy</string>
 	<key>silicialbuminate</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>simplesse</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>skim milk</key>
 	<string>milk</string>
 	<key>small spelt</key>
@@ -669,7 +669,7 @@
 	<key>tofu</key>
 	<string>soy</string>
 	<key>trailblazer</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>triticale x triticosecale</key>
 	<string>wheat/gluten</string>
 	<key>triticum aestivum</key>
@@ -713,7 +713,7 @@
 	<key>vitellaria paradoxa</key>
 	<string>treenuts</string>
 	<key>vitellin</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>walnut</key>
 	<string>treenuts</string>
 	<key>wheat</key>
@@ -757,7 +757,7 @@
 	<key>whipped topping</key>
 	<string>milk</string>
 	<key>whole egg</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>whole milk</key>
 	<string>milk</string>
 	<key>whole-meal flour</key>
