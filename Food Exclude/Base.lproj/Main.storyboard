@@ -185,6 +185,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="Y4a-au-ysX"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="barcode" destination="JZl-Fp-d63" id="She-CE-8NX"/>
                         <outlet property="ingredientListView" destination="cRP-rW-2Am" id="3UL-Dh-mwz"/>
@@ -336,6 +337,7 @@
             <objects>
                 <navigationController storyboardIdentifier="NAV_USER_PROFILES" automaticallyAdjustsScrollViewInsets="NO" id="Guq-cE-v3L" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oj7-Gd-xN0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
