@@ -113,7 +113,7 @@
 	<key>cheese</key>
 	<string>milk</string>
 	<key>cheeses</key>
-	<string></string>
+	<string>milk</string>
 	<key>chestnut</key>
 	<string>treenuts</string>
 	<key>chilton</key>
@@ -165,9 +165,9 @@
 	<key>disodium wheatgermamido peg-2 sulfosuccinate</key>
 	<string>wheat/gluten</string>
 	<key>dried egg</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>dried eggs</key>
-	<string></string>
+	<string>eggs</string>
 	<key>dried egg solids</key>
 	<string>eggs</string>
 	<key>dry milk powder</key>
@@ -187,9 +187,9 @@
 	<key>starches</key>
 	<string>wheat/gluten</string>
 	<key>egg</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>eggs</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>egg beaters</key>
 	<string>eggs</string>
 	<key>egg nog</key>
@@ -197,13 +197,13 @@
 	<key>egg wash</key>
 	<string>eggs</string>
 	<key>egg white</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>egg whites</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>egg yolk</key>
-	<string>egg</string>
+	<string>eggs</string>
 	<key>egg yolks</key>
-	<string></string>
+	<string>eggs</string>
 	<key>einkorn</key>
 	<string>wheat/gluten</string>
 	<key>emmer</key>
@@ -226,6 +226,8 @@
 	<string>wheat/gluten</string>
 	<key>farro</key>
 	<string>wheat/gluten</string>
+	<key>fatsubstitutes</key>
+	<string>eggs</string>
 	<key>filbert</key>
 	<string>treenuts</string>
 	<key>filler</key>
@@ -501,7 +503,7 @@
 	<key>pistachio</key>
 	<string>treenuts</string>
 	<key>pistachios</key>
-	<string></string>
+	<string>treenuts</string>
 	<key>pistachio nut butter</key>
 	<string>treenuts</string>
 	<key>pistacia</key>
