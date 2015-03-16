@@ -14,6 +14,8 @@
 	<string>milk</string>
 	<key>almond</key>
 	<string>treenuts</string>
+	<key>almonds</key>
+	<string>treenuts</string>
 	<key>almond butter</key>
 	<string>treenuts</string>
 	<key>almond extract</key>
@@ -100,6 +102,8 @@
 	<string>milk</string>
 	<key>cashew</key>
 	<string>treenuts</string>
+	<key>cashews</key>
+	<string>treenuts</string>
 	<key>castanea</key>
 	<string>treenuts</string>
 	<key>castanea pumila</key>
@@ -108,6 +112,8 @@
 	<string>wheat/gluten</string>
 	<key>cheese</key>
 	<string>milk</string>
+	<key>cheeses</key>
+	<string></string>
 	<key>chestnut</key>
 	<string>treenuts</string>
 	<key>chilton</key>
@@ -119,6 +125,8 @@
 	<key>club wheat</key>
 	<string>wheat/gluten</string>
 	<key>coconut</key>
+	<string>treenuts</string>
+	<key>coconuts</key>
 	<string>treenuts</string>
 	<key>cocos nucifera</key>
 	<string>treenuts</string>
@@ -144,6 +152,8 @@
 	<string>wheat/gluten</string>
 	<key>curds</key>
 	<string>milk</string>
+	<key>curd</key>
+	<string>milk</string>
 	<key>custard</key>
 	<string>milk</string>
 	<key>delactosed whey</key>
@@ -156,6 +166,8 @@
 	<string>wheat/gluten</string>
 	<key>dried egg</key>
 	<string>egg</string>
+	<key>dried eggs</key>
+	<string></string>
 	<key>dried egg solids</key>
 	<string>egg</string>
 	<key>dry milk powder</key>
@@ -166,11 +178,17 @@
 	<string>wheat/gluten</string>
 	<key>edible coatings</key>
 	<string>wheat/gluten</string>
+	<key>edible coating</key>
+	<string></string>
 	<key>edible films</key>
 	<string>wheat/gluten</string>
 	<key>edible starch</key>
 	<string>wheat/gluten</string>
+	<key>starches</key>
+	<string>wheat/gluten</string>
 	<key>egg</key>
+	<string>egg</string>
+	<key>eggs</key>
 	<string>egg</string>
 	<key>egg beaters</key>
 	<string>egg</string>
@@ -180,8 +198,12 @@
 	<string>egg</string>
 	<key>egg white</key>
 	<string>egg</string>
+	<key>egg whites</key>
+	<string>egg</string>
 	<key>egg yolk</key>
 	<string>egg</string>
+	<key>egg yolks</key>
+	<string></string>
 	<key>einkorn</key>
 	<string>wheat/gluten</string>
 	<key>emmer</key>
@@ -204,8 +226,6 @@
 	<string>wheat/gluten</string>
 	<key>farro</key>
 	<string>wheat/gluten</string>
-	<key>fatsubstitutes</key>
-	<string>egg</string>
 	<key>filbert</key>
 	<string>treenuts</string>
 	<key>filler</key>
@@ -228,6 +248,8 @@
 	<string>treenuts</string>
 	<key>ginko nut</key>
 	<string>treenuts</string>
+	<key>ginko nuts</key>
+	<string>treenuts</string>
 	<key>globulin</key>
 	<string>egg</string>
 	<key>goat cheese</key>
@@ -245,6 +267,8 @@
 	<key>hard wheat</key>
 	<string>wheat/gluten</string>
 	<key>hazelnut</key>
+	<string>treenuts</string>
+	<key>hazelnuts</key>
 	<string>treenuts</string>
 	<key>hazelnut butter</key>
 	<string>treenuts</string>
@@ -384,6 +408,8 @@
 	<string>wheat/gluten</string>
 	<key>miso</key>
 	<string>soy</string>
+	<key>modified food starch</key>
+	<string>wheat/gluten</string>
 	<key>nangai nut</key>
 	<string>treenuts</string>
 	<key>nangai nuts</key>
@@ -446,6 +472,8 @@
 	<string>wheat/gluten</string>
 	<key>pecan</key>
 	<string>treenuts</string>
+	<key>pecans</key>
+	<string></string>
 	<key>persian wheat</key>
 	<string>wheat/gluten</string>
 	<key>perungayam</key>
@@ -472,6 +500,8 @@
 	<string>treenuts</string>
 	<key>pistachio</key>
 	<string>treenuts</string>
+	<key>pistachios</key>
+	<string></string>
 	<key>pistachio nut butter</key>
 	<string>treenuts</string>
 	<key>pistacia</key>
@@ -489,6 +519,8 @@
 	<key>powdered egg</key>
 	<string>egg</string>
 	<key>pralines</key>
+	<string>treenuts</string>
+	<key>praline</key>
 	<string>treenuts</string>
 	<key>proteaceae</key>
 	<string>treenuts</string>
