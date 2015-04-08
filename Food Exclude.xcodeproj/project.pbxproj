@@ -24,6 +24,7 @@
 		9C318A1E1A7C28990034794D /* cuttingboard-80.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C318A1D1A7C28990034794D /* cuttingboard-80.png */; };
 		9C318A201A7C29220034794D /* cuttingboard-87.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C318A1F1A7C29220034794D /* cuttingboard-87.png */; };
 		9C318A221A7C29850034794D /* cuttingboard-58.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C318A211A7C29850034794D /* cuttingboard-58.png */; };
+		9C46A25B1AD5D53E00CD9926 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40A4386B1A75973B00A24AA0 /* Info.plist */; };
 		9C54FFC91A7AFABD006C4BAB /* NutritionixAPI.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C54FFC81A7AFABD006C4BAB /* NutritionixAPI.png */; };
 		9C563DB31A78BEBD00EAC832 /* purr.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C563DB21A78BEBD00EAC832 /* purr.wav */; };
 		9C563DB51A78BEEB00EAC832 /* Hiss.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C563DB41A78BEEB00EAC832 /* Hiss.wav */; };
@@ -323,6 +324,7 @@
 				9C318A1A1A7C26EE0034794D /* cuttingboard-180.png in Resources */,
 				9C318A221A7C29850034794D /* cuttingboard-58.png in Resources */,
 				40A438721A75973B00A24AA0 /* Main.storyboard in Resources */,
+				9C46A25B1AD5D53E00CD9926 /* Info.plist in Resources */,
 				BAE056B71A7BFA5400BDF935 /* UserProfilesHeader.xib in Resources */,
 				9C318A181A7C16B10034794D /* cuttingboard-icon.jpg in Resources */,
 				9C318A1C1A7C27C80034794D /* cuttingboard-120.png in Resources */,

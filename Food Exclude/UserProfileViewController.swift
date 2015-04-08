@@ -145,7 +145,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
     } //end if
   } //end func
   
-  //Function: Handle event when Avatar button is selected.
+  //Function: Handle event when photo album button is selected.
   func avatarButtonPressed() {
     if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
       self.imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary

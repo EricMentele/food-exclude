@@ -19,10 +19,10 @@
                     <color key="shadowColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NutritionixAPI.png" translatesAutoresizingMaskIntoConstraints="NO" id="Sa0-Ga-wAB">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="NutritionixAPI.png" translatesAutoresizingMaskIntoConstraints="NO" id="Sa0-Ga-wAB">
                     <rect key="frame" x="165" y="418" width="150" height="35"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" text="Copyright (c) 2015 Eric Mentele, Vania Kurniawati, Alexandra Norcross, Clint Akins, David Rogers. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" misplaced="YES" text="Copyright (c) 2015 Eric Mentele, Vania Kurniawati, Alexandra Norcross, Clint Akins, David Rogers. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
                     <rect key="frame" x="20" y="350" width="441" height="52"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="441" id="CNe-5S-PWv"/>
