@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   //Function: Load user profile data from archive.
   func loadUserProfilesFromArchive() -> [UserProfile]? {
     //Documents/Archive path:
-    let pathDocuments = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+    let pathDocuments = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
     let pathArchive = pathDocuments + "/UserProfilesArchive"
     
     //Load data, if any, from archive.
@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   //Function: Save user profile data to archive.
   func saveUserProfilesToArchive(userProfiles: [UserProfile]) {
     //Documents/Archive path:
-    let pathDocuments = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+    let pathDocuments = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
     let pathArchive = pathDocuments + "/UserProfilesArchive"
     
     //Save data.

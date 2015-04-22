@@ -42,7 +42,7 @@ class Ingredients {
   var allergenSoy : String?
   var allergenGluten : String?
   var allergenList = [String?]()
-  let seperatedList = [String]()
+  var seperatedList = [String]()
   
   
   init(jsonDictionary : NSDictionary) {

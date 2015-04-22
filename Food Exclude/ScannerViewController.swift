@@ -39,9 +39,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   @IBOutlet weak var warningLabel = UILabel()
   
-  
-  
   var alertView : UIView!
+  
+  enum CrossSearchForAllergensResult {
+    case allergenPositive
+    case allergenNegative
+  } //end enum
   
   //this is adapted from http://www.bowst.com/mobile/simple-barcode-scanning-with-swift/
   let session : AVCaptureSession = AVCaptureSession()
@@ -88,7 +91,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     //color for the barcode reader line
     self.highlightView.layer.borderColor = UIColor.greenColor().CGColor
     self.highlightView.layer.borderWidth = 3
-//    self.view.addSubview(highlightView)
+    //    self.view.addSubview(highlightView)
     
     //dismissButton
     //    self.dismissButton.addTarget(self, action: "dismissButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
@@ -108,7 +111,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     output.metadataObjectTypes = output.availableMetadataObjectTypes
     
     //this is the scanning scene, setting the frame to the view.bounds will cover up other views
-    previewLayer = AVCaptureVideoPreviewLayer.layerWithSession(session) as AVCaptureVideoPreviewLayer
+    previewLayer = AVCaptureVideoPreviewLayer.layerWithSession(session) as! AVCaptureVideoPreviewLayer
     previewLayer.frame = CGRect(x: 0, y: 65, width: self.view.bounds.width, height: self.view.bounds.height * 0.6)
     previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
     self.view.layer.addSublayer(previewLayer)
@@ -121,7 +124,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   
   override func viewDidAppear(animated: Bool) {
     //go to default profile, if no profile exists
-    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     if let userProfilesFromArchive = appDelegate.loadUserProfilesFromArchive() as [UserProfile]? {
       if userProfilesFromArchive.isEmpty { //no users: direct to default profile
         gotoUserProfileDefault()
@@ -132,13 +135,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
   }
   
   
-func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+  func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
     
-  self.matches.removeAll(keepCapacity: false)
-  self.myMatches.removeAll(keepCapacity: false)
-  self.allergenCategories.removeAll(keepCapacity: false)
-  self.myAllergens.removeAll(keepCapacity: false);
-
+    self.matches.removeAll(keepCapacity: false)
+    self.myMatches.removeAll(keepCapacity: false)
+    self.allergenCategories.removeAll(keepCapacity: false)
+    self.myAllergens.removeAll(keepCapacity: false);
+    
     
     //load allergen data
     if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
@@ -146,11 +149,11 @@ func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects met
         NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
           self.matches = [""]
           self.myMatches = [""]
-          self.allergenDerivatives = myDict as Dictionary<String,String>
+          self.allergenDerivatives = myDict as! Dictionary<String,String>
         }) //end closure
       } //end if
     } //end if
-
+    
     
     var highlightViewRect = CGRectZero
     
@@ -174,11 +177,11 @@ func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects met
       for barcodeType in barCodeTypes {
         
         if metadata.type == barcodeType {
-          barCodeObject = self.previewLayer.transformedMetadataObjectForMetadataObject(metadata as AVMetadataMachineReadableCodeObject)
+          barCodeObject = self.previewLayer.transformedMetadataObjectForMetadataObject(metadata as! AVMetadataMachineReadableCodeObject)
           
           highlightViewRect = barCodeObject.bounds
           
-          detectionString = (metadata as AVMetadataMachineReadableCodeObject).stringValue
+          detectionString = (metadata as! AVMetadataMachineReadableCodeObject).stringValue
           
           self.session.stopRunning()
           
@@ -198,8 +201,8 @@ func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects met
         //self.session.stopRunning()
       }
       self.originIngredientsList = ""
-
-
+      
+      
       self.networkController.fetchIngredientListForUPC(self.barcodeScanned, completionHandler: { (ingredients, errorDescription) -> () in
         
         
@@ -212,30 +215,42 @@ func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects met
           }
           self.matches = [""]
           
-          self.crossSearchForAllergens()
+          let crossSearchResult = self.crossSearchForAllergens()
           self.barcode.text = self.list.itemName
           
+          //ingredients not available
           if self.originIngredientsList == "" {
-          
-          self.view.addSubview(self.ingredientListView)
-          self.view.layer.borderColor = UIColor.yellowColor().CGColor
-          self.view.addSubview(self.maskView)
-          self.maskView.hidden = false
-          self.maskView.alpha = 0.2
-          self.ingredientListView.hidden = false
-          self.ingredientListView.alpha = 0.95
-          self.ingredientTextView.text = "Ingredients for this item are not yet available, but may become available soon. Please try another item."
-          
+            
+            self.view.addSubview(self.ingredientListView)
+            self.view.layer.borderColor = UIColor.yellowColor().CGColor
+            self.view.addSubview(self.maskView)
+            self.maskView.hidden = false
+            self.maskView.alpha = 0.2
+            self.ingredientListView.hidden = false
+            self.ingredientListView.alpha = 0.95
+            self.ingredientTextView.text = "Ingredients for this item are not yet available, but may become available soon. Please try another item."
+            
+            //ingredients available; check cross search result
           } else {
             
             self.ingredientListView.hidden = true
             
-            }
-        }
+            if crossSearchResult == CrossSearchForAllergensResult.allergenNegative {
+              self.view.addSubview(self.ingredientListView)
+              self.view.addSubview(self.maskView)
+              self.maskView.hidden = false
+              self.maskView.alpha = 0.2
+              self.ingredientListView.hidden = false
+              self.ingredientListView.alpha = 0.95
+              self.ingredientTextView.text = "Please double check the ingredients label."
+            } //end if
+            
+          } //end if
+        } //end if
         
         if errorDescription != nil {
           let networkIssueAlert = UIAlertController(title: "Error", message: errorDescription, preferredStyle: .Alert)
-         
+          
           let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
           networkIssueAlert.addAction(cancelButton)
           self.presentViewController(networkIssueAlert, animated: true, completion: nil)
@@ -253,7 +268,7 @@ func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects met
   //MARK: Timed AlertView
   func displayAlertView() {
     if self.detectionString == nil {
-      self.alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as UIView
+      self.alertView = NSBundle.mainBundle().loadNibNamed("AlertView", owner: self, options: nil).first as! UIView
       alertView.center = self.view.center
       alertView.alpha = 0
       alertView.transform = CGAffineTransformMakeScale(0.01, 0.01)
@@ -289,16 +304,16 @@ func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects met
     
     if originIngredientsList == "" {
       ingredientTextView.text = "Ingredients for this item are not yet available, but may become available soon. Please try another item."
-     
+      
       
     } else if self.matches == [""] {
-
-
-        self.ingredientTextView.text = "\(originIngredientsList)  : Powered by Nutritionix API"
+      
+      
+      self.ingredientTextView.text = "\(originIngredientsList)  : Powered by Nutritionix API"
       
     } else {
       
-    
+      
       self.ingredientTextView.text = "\(originIngredientsList) May contain the allergen derivatives:\(self.matches) in the allergen category: \(self.allergenCategories)    : Powered by Nutritionix API"
       
     }
@@ -341,7 +356,7 @@ func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects met
     if let allergenData = NSBundle.mainBundle().pathForResource("allergens", ofType: "plist") {
       if let  myDict = NSDictionary(contentsOfFile: allergenData) {
         NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-          self.allergenDerivatives = myDict as [String : String]
+          self.allergenDerivatives = myDict as! [String : String]
         }) //end closure
       } //end if
     } //end if
@@ -352,7 +367,7 @@ func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects met
   //MARK: Cross-search ingredients list against allergen derivatives list
   var ngrams: [String: String] = [:]
   
-  func crossSearchForAllergens() {
+  func crossSearchForAllergens() -> CrossSearchForAllergensResult {
     
     println("crosssearch")
     //loop over the ingredients list for all allergen derivatives, put matches into self.matches
@@ -384,13 +399,13 @@ func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects met
       self.matches.append(key)
       self.allergenCategories.append(self.allergenDerivatives[key]!)
     }
-
+    
     println("Contains the following known allergen derivatives \(self.matches)")
     println("Contains allergens in the following categories \(self.allergenCategories)")
     println(matches.count)
     
     //load user profile data
-    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     self.userProfiles = appDelegate.loadUserProfilesFromArchive()!
     
     var dictionaryOfAllergens = [String : Bool]()
@@ -400,19 +415,21 @@ func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects met
       //println("allergen category \(categories)")
       dictionaryOfAllergens[categories] = true
       for user in userProfiles {
-        var allergens = user.allergens
-        for allergy in allergens {
-          if allergy.sensitive == true {
-            //println("allergy name \(allergy.name)")
-            //println(dictionaryOfAllergens[allergy.name])
-            let match = dictionaryOfAllergens[allergy.name]
-            if match == true {
-              self.myAllergens.append(allergy)
-            }
-          }
-        }
-      }
-    }
+        if user.includeProfile {
+          var allergens = user.allergens
+          for allergy in allergens {
+            if allergy.sensitive == true {
+              //println("allergy name \(allergy.name)")
+              //println(dictionaryOfAllergens[allergy.name])
+              let match = dictionaryOfAllergens[allergy.name]
+              if match == true {
+                self.myAllergens.append(allergy)
+              } //end if
+            } //end if
+          } //end for
+        } //end if
+      } //end for
+    } //end for
     
     println(self.myAllergens)
     
@@ -430,6 +447,8 @@ func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects met
       self.maskView.hidden = false
       self.maskView.backgroundColor = UIColor.redColor()
       self.maskView.alpha = 0.2
+      
+      return CrossSearchForAllergensResult.allergenPositive
     }
     else {
       self.view.layer.borderWidth = 15
@@ -444,6 +463,8 @@ func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects met
       self.maskView.hidden = false
       self.maskView.backgroundColor = UIColor.greenColor()
       self.maskView.alpha = 0.2
+      
+      return CrossSearchForAllergensResult.allergenNegative
     }
     
   }
@@ -451,15 +472,15 @@ func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects met
   
   //Function: Handle event when User Profiles button is pressed.
   func pressedButtonUserProfiles() {
-    let vcUserProfiles = self.storyboard?.instantiateViewControllerWithIdentifier("NAV_USER_PROFILES") as UINavigationController
+    let vcUserProfiles = self.storyboard?.instantiateViewControllerWithIdentifier("NAV_USER_PROFILES") as! UINavigationController
     self.presentViewController(vcUserProfiles, animated: true, completion: nil)
   }//end func
   
   //Function: Go to default User Profile.
   func gotoUserProfileDefault() {
     
-    let vcUserProfiles = self.storyboard?.instantiateViewControllerWithIdentifier("NAV_USER_PROFILES") as UINavigationController
-    let vcUserProfile = storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
+    let vcUserProfiles = self.storyboard?.instantiateViewControllerWithIdentifier("NAV_USER_PROFILES") as! UINavigationController
+    let vcUserProfile = storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as! UserProfileViewController
     vcUserProfile.selectedUserProfileIndex = -1
     
     vcUserProfiles.pushViewController(vcUserProfile, animated: false)
