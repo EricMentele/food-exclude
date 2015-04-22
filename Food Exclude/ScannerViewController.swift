@@ -415,19 +415,21 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
       //println("allergen category \(categories)")
       dictionaryOfAllergens[categories] = true
       for user in userProfiles {
-        var allergens = user.allergens
-        for allergy in allergens {
-          if allergy.sensitive == true {
-            //println("allergy name \(allergy.name)")
-            //println(dictionaryOfAllergens[allergy.name])
-            let match = dictionaryOfAllergens[allergy.name]
-            if match == true {
-              self.myAllergens.append(allergy)
-            }
-          }
-        }
-      }
-    }
+        if user.includeProfile {
+          var allergens = user.allergens
+          for allergy in allergens {
+            if allergy.sensitive == true {
+              //println("allergy name \(allergy.name)")
+              //println(dictionaryOfAllergens[allergy.name])
+              let match = dictionaryOfAllergens[allergy.name]
+              if match == true {
+                self.myAllergens.append(allergy)
+              } //end if
+            } //end if
+          } //end for
+        } //end if
+      } //end for
+    } //end for
     
     println(self.myAllergens)
     
