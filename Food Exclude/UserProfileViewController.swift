@@ -101,7 +101,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   //Function: Set table view cell content.
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     //Cell:
-    let cell = tableAllergens.dequeueReusableCellWithIdentifier("CELL_ALLERGEN") as AllergenCell
+    let cell = tableAllergens.dequeueReusableCellWithIdentifier("CELL_ALLERGEN") as! AllergenCell
     //Cell content:
     let userAllergen = selectedUserProfile!.allergens[indexPath.row]
     cell.labelAllergen.text = userAllergen.name
@@ -115,7 +115,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   //Function: Handle event when cell is selected.
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     //Edit cell.
-    let cell = tableView.cellForRowAtIndexPath(indexPath) as AllergenCell
+    let cell = tableView.cellForRowAtIndexPath(indexPath) as! AllergenCell
     cell.selected = false
     cell.switchIsAllergen.setOn(!cell.switchIsAllergen.on, animated: true)
     //Update user profile.
@@ -157,7 +157,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   
   //Function: Handle event when avatar image is selected.
   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-    let image = info[UIImagePickerControllerEditedImage] as UIImage
+    let image = info[UIImagePickerControllerEditedImage] as! UIImage
     self.avatarImageView.image = image
     imagePickerController.dismissViewControllerAnimated(true, completion: nil)
   }
@@ -171,7 +171,7 @@ class UserProfileViewController: UIViewController, UITextFieldDelegate, UITableV
   
   //Function: Save user profile.
   func saveUserProfile() {
-    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     //Add/Update selected user profile.
     var userProfiles = appDelegate.loadUserProfilesFromArchive() as [UserProfile]?
     if userProfiles != nil {

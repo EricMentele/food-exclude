@@ -53,7 +53,7 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
   //Function: Set up view controller.
   override func viewWillAppear(animated: Bool) {
     //User profile data: latest
-    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     userProfiles = appDelegate.loadUserProfilesFromArchive()
     //Reload table.
     tableUserProfiles.reloadData()
@@ -69,7 +69,7 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
   //Function: Set table cell content.
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     //Cell:
-    let cell = tableView.dequeueReusableCellWithIdentifier("CELL_USER_PROFILE", forIndexPath: indexPath) as UserProfileCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("CELL_USER_PROFILE", forIndexPath: indexPath) as! UserProfileCell
     
     //Cell contents:
     let currentUserProfile = userProfiles[indexPath.row] as UserProfile
@@ -102,7 +102,7 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     if editingStyle == UITableViewCellEditingStyle.Delete {
       //Update & Save data.
       userProfiles.removeAtIndex(indexPath.row)
-      let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+      let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
       appDelegate.saveUserProfilesToArchive(userProfiles)
       //Reload table.
       tableUserProfiles.reloadData()
@@ -113,7 +113,7 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
   
   //Function: Set table header.
   func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let header = NSBundle.mainBundle().loadNibNamed("UserProfilesHeader", owner: tableView, options: nil).first as UIView
+    let header = NSBundle.mainBundle().loadNibNamed("UserProfilesHeader", owner: tableView, options: nil).first as! UIView
     return header
   } //end func
   
@@ -126,7 +126,7 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
     //Selcted user profile:
     var selectedRow = indexPath.row
     //User profile view controller:
-    let vcUserProfile = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
+    let vcUserProfile = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as! UserProfileViewController
     vcUserProfile.selectedUserProfileIndex = selectedRow
     vcUserProfile.selectedUserProfile = userProfiles[selectedRow]
     //Present view controller.
@@ -138,7 +138,7 @@ class UserProfilesViewController: UIViewController, UITableViewDelegate, UITable
   //Function: Handle Add User Profile button pressed.
   func pressedButtonAddUserProfile() {
     //User profile view controller:
-    let vcUserProfile = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as UserProfileViewController
+    let vcUserProfile = self.storyboard?.instantiateViewControllerWithIdentifier("VC_USER_PROFILE") as! UserProfileViewController
     vcUserProfile.selectedUserProfileIndex = -1
     //Present next view controller.
     self.navigationController?.pushViewController(vcUserProfile, animated: true)

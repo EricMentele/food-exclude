@@ -39,7 +39,7 @@ class Allergen: NSObject, NSCoding {
   
   //Initialize: Load from archive.
   required init(coder aDecoder: NSCoder) {
-    self.name = aDecoder.decodeObjectForKey("name") as String
+    self.name = aDecoder.decodeObjectForKey("name") as! String
     self.sensitive = aDecoder.decodeBoolForKey("sensitive") as Bool
   } //end init
   

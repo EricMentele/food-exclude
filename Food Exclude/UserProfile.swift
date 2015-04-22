@@ -52,12 +52,12 @@ class UserProfile: NSObject, NSCoding {
   
   //Initialize: Load from archive.
   required init(coder aDecoder: NSCoder) {
-    self.name = aDecoder.decodeObjectForKey("name") as String
+    self.name = aDecoder.decodeObjectForKey("name") as! String
     if let decodedAvatar = aDecoder.decodeObjectForKey("avatar") as? NSData {
       self.avatar = UIImage(data: decodedAvatar)
     } //end if
     self.includeProfile = aDecoder.decodeBoolForKey("includeProfile") as Bool
-    self.allergens = aDecoder.decodeObjectForKey("allergens") as [Allergen]
+    self.allergens = aDecoder.decodeObjectForKey("allergens") as! [Allergen]
   } //end init
   
   //Function: Save to archive.
